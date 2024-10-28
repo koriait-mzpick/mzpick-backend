@@ -345,6 +345,7 @@ public class TravelServiceImplement implements TravelService {
         try {
             boolean user = userRepository.existsByUserId(userId);
             if(!user) return ResponseDto.noExistUserId();
+
             travelEntities = travelRepository.findByUserId(userId);
 
         if (travelEntities == null) return ResponseDto.noExistUserId();

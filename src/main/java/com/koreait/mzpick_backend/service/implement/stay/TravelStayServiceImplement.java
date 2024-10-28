@@ -393,6 +393,7 @@ public class TravelStayServiceImplement implements TravelStayService {
         try {
             boolean user = userRepository.existsByUserId(userId);
             if(!user) return ResponseDto.noExistUserId();
+
             travelStayEntities = travelStayRepository.findByUserId(userId);
 
         if (travelStayEntities == null) return ResponseDto.noExistUserId();

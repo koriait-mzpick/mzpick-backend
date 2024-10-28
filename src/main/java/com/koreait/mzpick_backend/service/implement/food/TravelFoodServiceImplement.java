@@ -384,6 +384,7 @@ public class TravelFoodServiceImplement implements TravelFoodService {
         List<TravelFoodEntity> travelFoodEntities = new ArrayList<>();
         try {
             boolean user = userRepository.existsByUserId(userId);
+
             if (!user) return ResponseDto.noExistUserId();
             travelFoodEntities = travelFoodRepository.findByUserId(userId);
 
