@@ -13,6 +13,7 @@ import com.koreait.mzpick_backend.entity.cafe.resultSet.GetTravelCafeHallOfFameP
 @Repository
 public interface TravelCafeRepository extends JpaRepository<TravelCafeEntity, Integer> {
     TravelCafeEntity findByTravelCafeNumber(Integer travelcafeNumber);
+    List<TravelCafeEntity> findByUserId(String userId);
 
        // ! 5개의 게시글 을 출력하고 Param을 이용한 페이지네이션 구현 //
     @Query(value=

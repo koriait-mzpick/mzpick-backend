@@ -22,7 +22,6 @@ import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeStayList
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveStayListResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayListResponseDto;
-import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
 import com.koreait.mzpick_backend.entity.stay.TravelStayCategoryEntity;
 import com.koreait.mzpick_backend.entity.stay.TravelStayEntity;
 import com.koreait.mzpick_backend.entity.stay.TravelStayHashtagEntity;
@@ -390,13 +389,14 @@ public class TravelStayServiceImplement implements TravelStayService {
 
     @Override
     public ResponseEntity<? super GetMyPageBoardStayListResponseDto> myPageBoardStayList(String userId) {
-        List<FashionEntity> fashionEntities  = new ArrayList<>();
+        List<TravelStayEntity> travelStayEntities  = new ArrayList<>();
         try {
             boolean user = userRepository.existsByUserId(userId);
             if(!user) return ResponseDto.noExistUserId();
-            fashionEntities = fashionRepository.findByUserId(userId);
 
-        if (fashionEntities == null) return ResponseDto.noExistUserId();
+            travelStayEntities = travelStayRepository.findByUserId(userId);
+
+        if (travelStayEntities == null) return ResponseDto.noExistUserId();
 
 
 
@@ -404,7 +404,7 @@ public class TravelStayServiceImplement implements TravelStayService {
         exception.printStackTrace();
         return ResponseDto.databaseError();
     }
-    return GetMyPageBoardStayListResponseDto.success(fashionEntities);
+    return GetMyPageBoardStayListResponseDto.success(travelStayEntities);
     }
 
 }

@@ -9,7 +9,7 @@ import com.koreait.mzpick_backend.common.object.mypage.board.MyPageBoardTravel;
 import com.koreait.mzpick_backend.dto.response.ResponseCode;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.ResponseMessage;
-import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
+import com.koreait.mzpick_backend.entity.travel.TravelEntity;
 
 import lombok.Getter;
 
@@ -18,13 +18,13 @@ public class GetMyPageBoardTravelListResponseDto extends ResponseDto {
     
      private List<MyPageBoardTravel> myPageBoardTravels;
 
-    private GetMyPageBoardTravelListResponseDto(List<FashionEntity> fashionEntities) {
+    private GetMyPageBoardTravelListResponseDto(List<TravelEntity> travelEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        this.myPageBoardTravels = MyPageBoardTravel.getMyPageBoardTravelList(fashionEntities);
+        this.myPageBoardTravels = MyPageBoardTravel.getMyPageBoardList(travelEntities);
     }
 
-    public static ResponseEntity<GetMyPageBoardTravelListResponseDto> success(List<FashionEntity> fashionEntities) {
-        GetMyPageBoardTravelListResponseDto responseBody = new GetMyPageBoardTravelListResponseDto(fashionEntities);
+    public static ResponseEntity<GetMyPageBoardTravelListResponseDto> success(List<TravelEntity> travelEntities) {
+        GetMyPageBoardTravelListResponseDto responseBody = new GetMyPageBoardTravelListResponseDto(travelEntities);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
     

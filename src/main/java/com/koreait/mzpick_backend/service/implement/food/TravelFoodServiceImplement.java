@@ -374,21 +374,20 @@ public class TravelFoodServiceImplement implements TravelFoodService {
 
     @Override
     public ResponseEntity<? super GetMyPageBoardFoodListResponseDto> myPageBoardFoodList(String userId) {
-        List<FashionEntity> fashionEntities = new ArrayList<>();
+        List<TravelFoodEntity> travelFoodEntities = new ArrayList<>();
         try {
             boolean user = userRepository.existsByUserId(userId);
-            if (!user)
-                return ResponseDto.noExistUserId();
-            fashionEntities = fashionRepository.findByUserId(userId);
 
-            if (fashionEntities == null)
-                return ResponseDto.noExistUserId();
+            if (!user) return ResponseDto.noExistUserId();
+            travelFoodEntities = travelFoodRepository.findByUserId(userId);
+
+            if (travelFoodEntities == null) return ResponseDto.noExistUserId();
 
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetMyPageBoardFoodListResponseDto.success(fashionEntities);
+        return GetMyPageBoardFoodListResponseDto.success(travelFoodEntities);
     }
 
     @Override

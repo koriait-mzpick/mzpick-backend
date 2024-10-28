@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
+import com.koreait.mzpick_backend.entity.food.TravelFoodEntity;
 
 import lombok.Getter;
 @Getter
@@ -15,18 +15,18 @@ public class MyPageBoardFood {
     private String userId;
     private LocalDate mypageBoardDate;
 
-    public MyPageBoardFood(FashionEntity fashionEntity) {
-        this.userId = fashionEntity.getUserId();
-        this.mypageBoardNumber = fashionEntity.getFashionNumber();
-        this.mypageBoardTitle = fashionEntity.getFashionTitle();
-        this.mypageBoardDate = fashionEntity.getFashionDate();
+    public MyPageBoardFood(TravelFoodEntity travelFoodEntity) {
+        this.userId = travelFoodEntity.getUserId();
+        this.mypageBoardNumber = travelFoodEntity.getTravelFoodNumber();
+        this.mypageBoardTitle = travelFoodEntity.getTravelFoodTitle();
+        this.mypageBoardDate = travelFoodEntity.getTravelFoodDate();
     }
 
-    public static List<MyPageBoardFood> getMyPageBoardFoodList(List<FashionEntity> fashionEntities) {
+    public static List<MyPageBoardFood> getMyPageBoardFoodList(List<TravelFoodEntity> travelFoodEntities) {
         List<MyPageBoardFood> myPageBoardFoods = new ArrayList<>();
 
-        for (FashionEntity fashionEntity: fashionEntities) {
-            MyPageBoardFood myPageBoardFood = new MyPageBoardFood(fashionEntity);
+        for (TravelFoodEntity travelFoodEntity: travelFoodEntities) {
+            MyPageBoardFood myPageBoardFood = new MyPageBoardFood(travelFoodEntity);
             myPageBoardFoods.add(myPageBoardFood);
         }
         return myPageBoardFoods;
