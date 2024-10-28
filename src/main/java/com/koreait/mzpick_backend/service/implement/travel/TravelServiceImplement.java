@@ -22,7 +22,6 @@ import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeTravelLi
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelListResponseDto;
-import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelHashtagEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelLikeEntity;
@@ -342,15 +341,14 @@ public class TravelServiceImplement implements TravelService {
 
     @Override
     public ResponseEntity<? super GetMyPageBoardTravelListResponseDto> myPageBoardTravelList(String userId) {
-        
-
-        List<FashionEntity> fashionEntities  = new ArrayList<>();
+        List<TravelEntity> travelEntities  = new ArrayList<>();
         try {
             boolean user = userRepository.existsByUserId(userId);
             if(!user) return ResponseDto.noExistUserId();
-            // fashionEntities = fashionRepository.findByUserId(userId);
 
-        if (fashionEntities == null) return ResponseDto.noExistUserId();
+            travelEntities = travelRepository.findByUserId(userId);
+
+        if (travelEntities == null) return ResponseDto.noExistUserId();
 
 
 
@@ -358,7 +356,7 @@ public class TravelServiceImplement implements TravelService {
         exception.printStackTrace();
         return ResponseDto.databaseError();
     }
-    return GetMyPageBoardTravelListResponseDto.success(fashionEntities);
+    return GetMyPageBoardTravelListResponseDto.success(travelEntities);
     }
 
     public ResponseEntity<? super GetMyPageLikeTravelListResponseDto> myPageLikeTravelList(String userId) {
