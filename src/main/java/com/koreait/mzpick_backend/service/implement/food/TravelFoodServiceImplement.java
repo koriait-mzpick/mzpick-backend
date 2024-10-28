@@ -386,7 +386,7 @@ public class TravelFoodServiceImplement implements TravelFoodService {
             boolean user = userRepository.existsByUserId(userId);
             if (!user)
                 return ResponseDto.noExistUserId();
-            fashionEntities = fashionRepository.findByUserId(userId);
+            // fashionEntities = fashionRepository.findByUserId(userId);
 
             if (fashionEntities == null)
                 return ResponseDto.noExistUserId();
