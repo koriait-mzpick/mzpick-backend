@@ -19,6 +19,7 @@ import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelCafeHallOfFameResponseDto;
+import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveCafeListResponseDto;
 import com.koreait.mzpick_backend.entity.cafe.TravelCafeCategoryEntity;
@@ -54,7 +55,7 @@ public class TravelCafeServiceImplement implements TravelCafeService {
     private final TravelCafeCategoryRepository travelCafeCategoryRepository;
     private final UserRepository userRepository;
 
-    //Get 여행지 게시글 리스트 불러오기 //
+    // Get 여행지 게시글 리스트 불러오기 //
     @Override
     public ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(Integer page) {
         List<TravelCafe> travelCafes = new ArrayList<>();
@@ -63,12 +64,19 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             List<TravelCafeEntity> travelCafeEntities = travelCafeRepository.findByPaging(paging);
             for (TravelCafeEntity travelCafeEntity : travelCafeEntities) {
                 Integer travelCafeNumber = travelCafeEntity.getTravelCafeNumber();
-                List<TravelCafeHashtagEntity> travelCafeHashtagEntities = travelCafeHashtagRepository.findByTravelCafeNumber(travelCafeNumber);
-                List<TravelCafePhotoEntity> travelCafePhotoEntities = travelCafePhotoRepository.findByTravelCafeNumber(travelCafeNumber);
-                List<TravelCafeCategoryEntity> travelCafeCategoryEntities = travelCafeCategoryRepository.findByTravelCafeNumber(travelCafeNumber);
-                List<TravelCafeLikeEntity> travelCafeLikeEntities = travelCafeLikeRepository.findByTravelCafeNumber(travelCafeNumber);
-                List<TravelCafeSaveEntity> travelCafeSaveEntities = travelCafeSaveRepository.findByTravelCafeNumber(travelCafeNumber);
-                TravelCafe travelCafe = new TravelCafe(travelCafeEntity, travelCafePhotoEntities, travelCafeHashtagEntities, travelCafeCategoryEntities, travelCafeLikeEntities, travelCafeSaveEntities);
+                List<TravelCafeHashtagEntity> travelCafeHashtagEntities = travelCafeHashtagRepository
+                        .findByTravelCafeNumber(travelCafeNumber);
+                List<TravelCafePhotoEntity> travelCafePhotoEntities = travelCafePhotoRepository
+                        .findByTravelCafeNumber(travelCafeNumber);
+                List<TravelCafeCategoryEntity> travelCafeCategoryEntities = travelCafeCategoryRepository
+                        .findByTravelCafeNumber(travelCafeNumber);
+                List<TravelCafeLikeEntity> travelCafeLikeEntities = travelCafeLikeRepository
+                        .findByTravelCafeNumber(travelCafeNumber);
+                List<TravelCafeSaveEntity> travelCafeSaveEntities = travelCafeSaveRepository
+                        .findByTravelCafeNumber(travelCafeNumber);
+                TravelCafe travelCafe = new TravelCafe(travelCafeEntity, travelCafePhotoEntities,
+                        travelCafeHashtagEntities, travelCafeCategoryEntities, travelCafeLikeEntities,
+                        travelCafeSaveEntities);
                 travelCafes.add(travelCafe);
             }
         } catch (Exception exception) {
@@ -79,21 +87,29 @@ public class TravelCafeServiceImplement implements TravelCafeService {
         return GetTravelCafeListResponseDto.success(travelCafes);
     }
 
-    //Get 해당 여행 게시글 상세보기 //
+    // Get 해당 여행 게시글 상세보기 //
     @Override
     public ResponseEntity<? super GetTravelCafeDetailResponseDto> getTravelCafe(Integer travelCafeNumber) {
-        TravelCafeDetail travelCafeDetail =  null;
+        TravelCafeDetail travelCafeDetail = null;
         try {
             TravelCafeEntity travelCafeEntity = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
-            if (travelCafeEntity == null) return ResponseDto.noExistBoard();
+            if (travelCafeEntity == null)
+                return ResponseDto.noExistBoard();
 
-            List<TravelCafeHashtagEntity> travelCafeHashtagEntities = travelCafeHashtagRepository.findByTravelCafeNumber(travelCafeNumber);
-            List<TravelCafePhotoEntity> travelCafePhotoEntities = travelCafePhotoRepository.findByTravelCafeNumber(travelCafeNumber);
-            List<TravelCafeLikeEntity> travelCafeLikeEntities = travelCafeLikeRepository.findByTravelCafeNumber(travelCafeNumber);
-            List<TravelCafeSaveEntity> travelCafeSaveEntities = travelCafeSaveRepository.findByTravelCafeNumber(travelCafeNumber);
-            List<TravelCafeCategoryEntity> travelCafeCategoryEntities = travelCafeCategoryRepository.findByTravelCafeNumber(travelCafeNumber);
-            travelCafeDetail =  new TravelCafeDetail(travelCafeEntity, travelCafePhotoEntities, travelCafeHashtagEntities, travelCafeLikeEntities, travelCafeSaveEntities, travelCafeCategoryEntities);
-            
+            List<TravelCafeHashtagEntity> travelCafeHashtagEntities = travelCafeHashtagRepository
+                    .findByTravelCafeNumber(travelCafeNumber);
+            List<TravelCafePhotoEntity> travelCafePhotoEntities = travelCafePhotoRepository
+                    .findByTravelCafeNumber(travelCafeNumber);
+            List<TravelCafeLikeEntity> travelCafeLikeEntities = travelCafeLikeRepository
+                    .findByTravelCafeNumber(travelCafeNumber);
+            List<TravelCafeSaveEntity> travelCafeSaveEntities = travelCafeSaveRepository
+                    .findByTravelCafeNumber(travelCafeNumber);
+            List<TravelCafeCategoryEntity> travelCafeCategoryEntities = travelCafeCategoryRepository
+                    .findByTravelCafeNumber(travelCafeNumber);
+            travelCafeDetail = new TravelCafeDetail(travelCafeEntity, travelCafePhotoEntities,
+                    travelCafeHashtagEntities, travelCafeLikeEntities, travelCafeSaveEntities,
+                    travelCafeCategoryEntities);
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -101,7 +117,7 @@ public class TravelCafeServiceImplement implements TravelCafeService {
         return GetTravelCafeDetailResponseDto.success(travelCafeDetail);
     }
 
-    //Post 여행지 게시글 작성하기 //
+    // Post 여행지 게시글 작성하기 //
     @Override
     public ResponseEntity<ResponseDto> postTravelCafe(PostTravelCafeRequestDto dto, String userId) {
         try {
@@ -113,7 +129,8 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             List<String> travelCafeHashtagContentList = dto.getTravelCafeHashtagContentList();
             List<TravelCafeHashtagEntity> travelCafeHashtagEntities = new ArrayList<>();
             for (String travelCafeHashtagContent : travelCafeHashtagContentList) {
-                TravelCafeHashtagEntity travelCafeHashtagEntity = new TravelCafeHashtagEntity(travelCafeNumber, travelCafeHashtagContent);
+                TravelCafeHashtagEntity travelCafeHashtagEntity = new TravelCafeHashtagEntity(travelCafeNumber,
+                        travelCafeHashtagContent);
                 travelCafeHashtagEntities.add(travelCafeHashtagEntity);
             }
             travelCafeHashtagRepository.saveAll(travelCafeHashtagEntities);
@@ -121,7 +138,8 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             List<String> travelCafePhotoList = dto.getTravelCafePhotoList();
             List<TravelCafePhotoEntity> travelCafePhotoEntities = new ArrayList<>();
             for (String travelCafePhotoLink : travelCafePhotoList) {
-                TravelCafePhotoEntity travelCafePhotoEntity = new TravelCafePhotoEntity(travelCafeNumber, travelCafePhotoLink);
+                TravelCafePhotoEntity travelCafePhotoEntity = new TravelCafePhotoEntity(travelCafeNumber,
+                        travelCafePhotoLink);
                 travelCafePhotoEntities.add(travelCafePhotoEntity);
             }
             travelCafePhotoRepository.saveAll(travelCafePhotoEntities);
@@ -129,7 +147,8 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             List<String> travelCafeCategoryList = dto.getTravelCafeCategoryList();
             List<TravelCafeCategoryEntity> travelCafeCategoryEntities = new ArrayList<>();
             for (String travelCafeCategory : travelCafeCategoryList) {
-                TravelCafeCategoryEntity travelCafeCategoryEntity = new TravelCafeCategoryEntity(travelCafeNumber, travelCafeCategory);
+                TravelCafeCategoryEntity travelCafeCategoryEntity = new TravelCafeCategoryEntity(travelCafeNumber,
+                        travelCafeCategory);
                 travelCafeCategoryEntities.add(travelCafeCategoryEntity);
             }
             travelCafeCategoryRepository.saveAll(travelCafeCategoryEntities);
@@ -141,15 +160,17 @@ public class TravelCafeServiceImplement implements TravelCafeService {
         return ResponseDto.success();
     }
 
-    //Delete 해당 여행지 게시판 삭제하기 //
+    // Delete 해당 여행지 게시판 삭제하기 //
     @Override
     public ResponseEntity<ResponseDto> deleteTravelCafe(Integer travelCafeNumber, String userId) {
         try {
             TravelCafeEntity travelCafeEntity = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
-            if (travelCafeEntity == null) return ResponseDto.noExistBoard();
+            if (travelCafeEntity == null)
+                return ResponseDto.noExistBoard();
             String user = travelCafeEntity.getUserId();
             boolean isUser = user.equals(userId);
-            if (!isUser) return ResponseDto.noPermission();
+            if (!isUser)
+                return ResponseDto.noPermission();
 
             // travelHashtagRepository.deleteByTravelNumber(travelNumber);
             // travelPhotoRepository.deleteByTravelNumber(travelNumber);
@@ -163,16 +184,19 @@ public class TravelCafeServiceImplement implements TravelCafeService {
         return ResponseDto.success();
     }
 
-    //patch 해당 여행지 게시글 수정하기 //
+    // patch 해당 여행지 게시글 수정하기 //
     @Override
-    public ResponseEntity<ResponseDto> patchTravelCafe(PatchTravelCafeRequestDto dto, Integer travelCafeNumber, String userId) {
+    public ResponseEntity<ResponseDto> patchTravelCafe(PatchTravelCafeRequestDto dto, Integer travelCafeNumber,
+            String userId) {
         try {
             TravelCafeEntity travelCafeEntity = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
-            if (travelCafeEntity == null) return ResponseDto.noExistBoard();
+            if (travelCafeEntity == null)
+                return ResponseDto.noExistBoard();
 
             String user = travelCafeEntity.getUserId();
             boolean isUser = user.equals(userId);
-            if (!isUser) return ResponseDto.noPermission();
+            if (!isUser)
+                return ResponseDto.noPermission();
 
             travelCafeHashtagRepository.deleteByTravelCafeNumber(travelCafeNumber);
             travelCafePhotoRepository.deleteByTravelCafeNumber(travelCafeNumber);
@@ -182,7 +206,8 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             List<String> travelCafeHashtagContentList = dto.getTravelCafeHashtagContentList();
             List<TravelCafeHashtagEntity> travelCafeHashtagEntities = new ArrayList<>();
             for (String travelCafeHashtagContent : travelCafeHashtagContentList) {
-                TravelCafeHashtagEntity travelCafeHashtagEntity = new TravelCafeHashtagEntity(travelCafeNumber, travelCafeHashtagContent);
+                TravelCafeHashtagEntity travelCafeHashtagEntity = new TravelCafeHashtagEntity(travelCafeNumber,
+                        travelCafeHashtagContent);
                 travelCafeHashtagEntities.add(travelCafeHashtagEntity);
             }
             travelCafeHashtagRepository.saveAll(travelCafeHashtagEntities);
@@ -190,16 +215,17 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             List<String> travelCafePhotoList = dto.getTravelCafePhotoList();
             List<TravelCafePhotoEntity> travelCafePhotoEntities = new ArrayList<>();
             for (String travelCafePhotoLink : travelCafePhotoList) {
-                TravelCafePhotoEntity travelCafePhotoEntity = new TravelCafePhotoEntity(travelCafeNumber, travelCafePhotoLink);
+                TravelCafePhotoEntity travelCafePhotoEntity = new TravelCafePhotoEntity(travelCafeNumber,
+                        travelCafePhotoLink);
                 travelCafePhotoEntities.add(travelCafePhotoEntity);
             }
             travelCafePhotoRepository.saveAll(travelCafePhotoEntities);
 
-
             List<String> travelCafeCategoryList = dto.getTravelCafeCategoryList();
             List<TravelCafeCategoryEntity> travelCafeCategoryEntities = new ArrayList<>();
             for (String travelCafeCategory : travelCafeCategoryList) {
-                TravelCafeCategoryEntity travelCafeCategoryEntity = new TravelCafeCategoryEntity(travelCafeNumber, travelCafeCategory);
+                TravelCafeCategoryEntity travelCafeCategoryEntity = new TravelCafeCategoryEntity(travelCafeNumber,
+                        travelCafeCategory);
                 travelCafeCategoryEntities.add(travelCafeCategoryEntity);
             }
             travelCafeCategoryRepository.saveAll(travelCafeCategoryEntities);
@@ -218,20 +244,21 @@ public class TravelCafeServiceImplement implements TravelCafeService {
 
         try {
             TravelCafeEntity travelCafeEntity = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
-            if (travelCafeEntity == null) return ResponseDto.noExistBoard();
+            if (travelCafeEntity == null)
+                return ResponseDto.noExistBoard();
 
             boolean existedUser = userRepository.existsByUserId(userId);
-            if (!existedUser) return ResponseDto.noExistUserId();
+            if (!existedUser)
+                return ResponseDto.noExistUserId();
 
             boolean isLike = travelCafeLikeRepository.existsByUserIdAndTravelCafeNumber(userId, travelCafeNumber);
 
             TravelCafeLikeEntity travelCafeLikeEntity = new TravelCafeLikeEntity(travelCafeNumber, userId);
 
-            if(isLike){
+            if (isLike) {
                 travelCafeLikeRepository.delete(travelCafeLikeEntity);
                 travelCafeEntity.downLikeCount();
-            }
-            else{
+            } else {
                 travelCafeLikeRepository.save(travelCafeLikeEntity);
                 travelCafeEntity.upLikeCount();
             }
@@ -245,16 +272,18 @@ public class TravelCafeServiceImplement implements TravelCafeService {
 
         return ResponseDto.success();
     }
-    //put 해당 여행지 게시글 조회수 업 시키기 //
+
+    // put 해당 여행지 게시글 조회수 업 시키기 //
     @Override
     public ResponseEntity<ResponseDto> upTravelCafeViewCount(Integer travelCafeNumber) {
         try {
             TravelCafeEntity travelCafeEntity = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
-            if(travelCafeEntity == null) return ResponseDto.noExistBoard();
+            if (travelCafeEntity == null)
+                return ResponseDto.noExistBoard();
 
             travelCafeEntity.upViewCount();
             travelCafeRepository.save(travelCafeEntity);
-            
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -266,10 +295,12 @@ public class TravelCafeServiceImplement implements TravelCafeService {
     public ResponseEntity<ResponseDto> putSave(Integer travelCafeNumber, String userId) {
         try {
             TravelCafeEntity travelCafeEntity = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
-            if (travelCafeEntity == null) return ResponseDto.noExistBoard();
+            if (travelCafeEntity == null)
+                return ResponseDto.noExistBoard();
 
             boolean existedUser = userRepository.existsByUserId(userId);
-            if (!existedUser) return ResponseDto.noExistUserId();
+            if (!existedUser)
+                return ResponseDto.noExistUserId();
 
             boolean isSave = travelCafeSaveRepository.existsByUserIdAndTravelCafeNumber(userId, travelCafeNumber);
 
@@ -297,10 +328,10 @@ public class TravelCafeServiceImplement implements TravelCafeService {
     public ResponseEntity<? super GetTravelCafeHallOfFameResponseDto> travelCafeHallOfFame() {
         List<GetTravelCafeHallOfFamePhotoListResultSet> resultSets = new ArrayList<>();
         try {
-            
+
             String pattern = "yyyy-MM-dd";
 
-            //현재 날짜
+            // 현재 날짜
             Date now = Calendar.getInstance().getTime();
             SimpleDateFormat nowDateFormat = new SimpleDateFormat(pattern);
             String nowDate = nowDateFormat.format(now);
@@ -310,8 +341,8 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
             SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern);
             Calendar calendar = Calendar.getInstance();
-            
-            //지난주 날짜 구하기
+
+            // 지난주 날짜 구하기
             calendar.setTime(now);
             calendar.add(Calendar.DATE, -7);
 
@@ -321,15 +352,16 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             // 만료 주차 구하기 코드
             calendar.setTime(lastWeek);
 
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
             String startDate = simpleDateFormat1.format(calendar.getTime());
-            
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
             String endDate = simpleDateFormat2.format(calendar.getTime());
 
             resultSets = travelCafeRepository.getTravelHallOfFamePhotoList(startDate, endDate);
-            if(resultSets.isEmpty()) return ResponseDto.noExistBoard();
-            
+            if (resultSets.isEmpty())
+                return ResponseDto.noExistBoard();
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -342,15 +374,19 @@ public class TravelCafeServiceImplement implements TravelCafeService {
         List<MyPageSaveCafe> myPageCafeSaveList = new ArrayList<>();
         try {
             boolean existedUser = userRepository.existsByUserId(userId);
-            if (!existedUser) return ResponseDto.noExistUserId();
+            if (!existedUser)
+                return ResponseDto.noExistUserId();
 
             List<TravelCafeSaveEntity> travelCafeSaveEntities = travelCafeSaveRepository.findByUserId(userId);
             for (TravelCafeSaveEntity travelCafeSaveEntity : travelCafeSaveEntities) {
                 Integer travelCafeNumber = travelCafeSaveEntity.getTravelCafeNumber();
                 TravelCafeEntity travelCafeEntity = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
-                List<TravelCafePhotoEntity> travelCafePhotoEntitys = travelCafePhotoRepository.findByTravelCafeNumber(travelCafeNumber);
-                List<TravelCafeHashtagEntity> travelCafeHashtagEntitys = travelCafeHashtagRepository.findByTravelCafeNumber(travelCafeNumber);
-                MyPageSaveCafe myPageSaveCafe = new MyPageSaveCafe(travelCafeEntity, travelCafePhotoEntitys, travelCafeHashtagEntitys);
+                List<TravelCafePhotoEntity> travelCafePhotoEntitys = travelCafePhotoRepository
+                        .findByTravelCafeNumber(travelCafeNumber);
+                List<TravelCafeHashtagEntity> travelCafeHashtagEntitys = travelCafeHashtagRepository
+                        .findByTravelCafeNumber(travelCafeNumber);
+                MyPageSaveCafe myPageSaveCafe = new MyPageSaveCafe(travelCafeEntity, travelCafePhotoEntitys,
+                        travelCafeHashtagEntitys);
                 myPageCafeSaveList.add(myPageSaveCafe);
             }
 
@@ -384,5 +420,23 @@ public class TravelCafeServiceImplement implements TravelCafeService {
         }
         return GetMyPageLikeCafeListResponseDto.success(myPageLikeCafes);
     }
-}
 
+    @Override
+    public ResponseEntity<? super GetMyPageBoardCafeListResponseDto> myPageBoardCafeList(String userId) {
+        List<TravelCafeEntity> travelCafeEntities = new ArrayList<>();
+        try {
+            boolean user = userRepository.existsByUserId(userId);
+            if (!user)
+                return ResponseDto.noExistUserId();
+            travelCafeEntities = travelCafeRepository.findByUserId(userId);
+
+            if (travelCafeEntities == null)
+                return ResponseDto.noExistUserId();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetMyPageBoardCafeListResponseDto.success(travelCafeEntities);
+    }
+}

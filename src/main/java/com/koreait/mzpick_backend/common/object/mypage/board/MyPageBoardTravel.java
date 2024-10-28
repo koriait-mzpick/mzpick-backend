@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
+import com.koreait.mzpick_backend.entity.travel.TravelEntity;
 
 import lombok.Getter;
 @Getter
@@ -15,21 +15,21 @@ public class MyPageBoardTravel {
     private String userId;
     private LocalDate mypageBoardDate;
 
-    public MyPageBoardTravel(FashionEntity fashionEntity) {
-        this.userId = fashionEntity.getUserId();
-        this.mypageBoardNumber = fashionEntity.getFashionNumber();
-        this.mypageBoardTitle = fashionEntity.getFashionTitle();
-        this.mypageBoardDate = fashionEntity.getFashionDate();
+    public MyPageBoardTravel(TravelEntity travelEntity) {
+        this.userId = travelEntity.getUserId();
+        this.mypageBoardNumber = travelEntity.getTravelNumber();
+        this.mypageBoardTitle = travelEntity.getTravelTitle();
+        this.mypageBoardDate = travelEntity.getTravelDate();
     }
 
-    public static List<MyPageBoardTravel> getMyPageBoardTravelList(List<FashionEntity> fashionEntities) {
-        List<MyPageBoardTravel> myPageBoardTravels = new ArrayList<>();
+    public static List<MyPageBoardTravel> getMyPageBoardList(List<TravelEntity> travelEntities) {
+        List<MyPageBoardTravel> myPageBoards = new ArrayList<>();
 
-        for (FashionEntity fashionEntity: fashionEntities) {
-            MyPageBoardTravel myPageBoardTravel = new MyPageBoardTravel(fashionEntity);
-            myPageBoardTravels.add(myPageBoardTravel);
+        for (TravelEntity travelEntity: travelEntities) {
+            MyPageBoardTravel myPageBoard = new MyPageBoardTravel(travelEntity);
+            myPageBoards.add(myPageBoard);
         }
-        return myPageBoardTravels;
+        return myPageBoards;
     }
 
 

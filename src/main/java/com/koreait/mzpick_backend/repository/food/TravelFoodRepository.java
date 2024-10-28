@@ -14,6 +14,7 @@ import com.koreait.mzpick_backend.entity.food.resultSet.GetTravelFoodHallOfFameP
 @Repository
 public interface TravelFoodRepository extends JpaRepository<TravelFoodEntity, Integer> {
     TravelFoodEntity findByTravelFoodNumber (Integer travelFoodNumber);
+    List<TravelFoodEntity> findByUserId (String userId);
 
    // ! 5개의 게시글 을 출력하고 Param을 이용한 페이지네이션 구현 //
     @Query(value=

@@ -14,6 +14,7 @@ import com.koreait.mzpick_backend.entity.stay.resultSet.GetTravelStayHallOfFameP
 @Repository
 public interface TravelStayRepository extends JpaRepository<TravelStayEntity, Integer> {
     TravelStayEntity findByTravelStayNumber(Integer travelStayNumber);
+    List<TravelStayEntity> findByUserId(String userId);
 
      // ! 5개의 게시글 을 출력하고 Param을 이용한 페이지네이션 구현 //
     @Query(value=
