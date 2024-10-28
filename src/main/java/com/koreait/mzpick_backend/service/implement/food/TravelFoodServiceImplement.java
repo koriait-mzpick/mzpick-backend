@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.koreait.mzpick_backend.common.object.food.TravelFood;
 import com.koreait.mzpick_backend.common.object.food.TravelFoodDetail;
-import com.koreait.mzpick_backend.common.object.mypage.like.MyPageLikeCafe;
 import com.koreait.mzpick_backend.common.object.mypage.like.MyPageLikeFood;
 import com.koreait.mzpick_backend.common.object.mypage.save.MyPageSaveFood;
 import com.koreait.mzpick_backend.dto.request.food.PatchTravelFoodRequestDto;
@@ -21,13 +20,8 @@ import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodDetailResponseD
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodListResponseDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelFoodHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFoodListResponseDto;
-import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeFoodListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveFoodListResponseDto;
-import com.koreait.mzpick_backend.entity.cafe.TravelCafeEntity;
-import com.koreait.mzpick_backend.entity.cafe.TravelCafeHashtagEntity;
-import com.koreait.mzpick_backend.entity.cafe.TravelCafeLikeEntity;
-import com.koreait.mzpick_backend.entity.cafe.TravelCafePhotoEntity;
 import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
 import com.koreait.mzpick_backend.entity.food.TravelFoodEntity;
 import com.koreait.mzpick_backend.entity.food.TravelFoodHashtagEntity;
@@ -35,7 +29,6 @@ import com.koreait.mzpick_backend.entity.food.TravelFoodLikeEntity;
 import com.koreait.mzpick_backend.entity.food.TravelFoodPhotoEntity;
 import com.koreait.mzpick_backend.entity.food.TravelFoodSaveEntity;
 import com.koreait.mzpick_backend.entity.food.resultSet.GetTravelFoodHallOfFamePhotoListResultSet;
-import com.koreait.mzpick_backend.repository.fashion.FashionRepository;
 import com.koreait.mzpick_backend.repository.food.TravelFoodCommentRepository;
 import com.koreait.mzpick_backend.repository.food.TravelFoodHashtagRepository;
 import com.koreait.mzpick_backend.repository.food.TravelFoodLikeRepository;
@@ -381,21 +374,20 @@ public class TravelFoodServiceImplement implements TravelFoodService {
 
     @Override
     public ResponseEntity<? super GetMyPageBoardFoodListResponseDto> myPageBoardFoodList(String userId) {
-        List<FashionEntity> fashionEntities = new ArrayList<>();
+        List<TravelFoodEntity> travelFoodEntities = new ArrayList<>();
         try {
             boolean user = userRepository.existsByUserId(userId);
-            if (!user)
-                return ResponseDto.noExistUserId();
-            // fashionEntities = fashionRepository.findByUserId(userId);
 
-            if (fashionEntities == null)
-                return ResponseDto.noExistUserId();
+            if (!user) return ResponseDto.noExistUserId();
+            travelFoodEntities = travelFoodRepository.findByUserId(userId);
+
+            if (travelFoodEntities == null) return ResponseDto.noExistUserId();
 
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetMyPageBoardFoodListResponseDto.success(fashionEntities);
+        return GetMyPageBoardFoodListResponseDto.success(travelFoodEntities);
     }
 
     @Override

@@ -22,7 +22,7 @@ public interface keywordRepository extends JpaRepository<KeywordEntity, Integer>
         "WHERE keyword_date BETWEEN :startDate AND :endDate " +
         "GROUP BY keyword_content " +
         "ORDER BY count DESC " +
-        "LIMIT 10",
+        "LIMIT 20",
     nativeQuery=true
     )
     // resultset받아와서 코드 완성
