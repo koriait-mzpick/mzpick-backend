@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
+import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFashionListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFoodListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardStayListResponseDto;
@@ -131,6 +132,16 @@ public class mypageController {
         ) {
                 ResponseEntity<? super GetMyPageBoardFoodListResponseDto> response = travelFoodService
                                 .myPageBoardFoodList(userId);
+                return response;
+        }
+
+
+        @GetMapping("/write-cafe")
+        public ResponseEntity<? super GetMyPageBoardCafeListResponseDto> myPageBoardCafeList(
+                        @AuthenticationPrincipal String userId
+        ) {
+                ResponseEntity<? super GetMyPageBoardCafeListResponseDto> response = travelCafeService
+                                .myPageBoardCafeList(userId);
                 return response;
         }
 
