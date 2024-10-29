@@ -24,7 +24,6 @@ repositories {
 }
 
 dependencies {
-    // implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	//유해검색어 필터링 라이브러리
 	//https://github.com/VaneProject/bad-word-filtering/tree/master
 	implementation 'io.github.vaneproject:badwordfiltering:1.0.0'
@@ -56,6 +55,4 @@ dependencies {
 
 	// nurigo tel auth number
 	implementation group: 'net.nurigo', name: 'sdk', version: '4.3.0'
-
-
 }
