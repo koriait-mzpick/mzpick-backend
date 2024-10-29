@@ -64,7 +64,7 @@ public class mypageController {
                 return response;
         }
 
-        @GetMapping("/travel-save")
+        @GetMapping("/save-travel")
         public ResponseEntity<? super GetMyPageSaveTravelListResponseDto> myPageTravelSaveList(
                         @AuthenticationPrincipal String userId) {
                 ResponseEntity<? super GetMyPageSaveTravelListResponseDto> response = travelService
@@ -72,7 +72,7 @@ public class mypageController {
                 return response;
         }
 
-        @GetMapping("/cafe-save")
+        @GetMapping("/save-cafe")
         public ResponseEntity<? super GetMyPageSaveCafeListResponseDto> myPageCafeSaveList(
                         @AuthenticationPrincipal String userId) {
                 ResponseEntity<? super GetMyPageSaveCafeListResponseDto> response = travelCafeService
@@ -80,7 +80,7 @@ public class mypageController {
                 return response;
         }
 
-        @GetMapping("/food-save")
+        @GetMapping("/save-food")
         public ResponseEntity<? super GetMyPageSaveFoodListResponseDto> myPageFoodSaveList(
                         @AuthenticationPrincipal String userId) {
                 ResponseEntity<? super GetMyPageSaveFoodListResponseDto> response = travelFoodService
@@ -88,7 +88,7 @@ public class mypageController {
                 return response;
         }
 
-        @GetMapping("/stay-save")
+        @GetMapping("/save-stay")
         public ResponseEntity<? super GetMyPageSaveStayListResponseDto> myPageStaySaveList(
                         @AuthenticationPrincipal String userId) {
                 ResponseEntity<? super GetMyPageSaveStayListResponseDto> response = travelStayService
@@ -96,7 +96,7 @@ public class mypageController {
                 return response;
         }
 
-        @GetMapping("/fashion-save")
+        @GetMapping("/save-fashion")
         public ResponseEntity<? super GetMyPageSaveFashionListResponseDto> myPageFashionSaveList(
                         @AuthenticationPrincipal String userId) {
                 ResponseEntity<? super GetMyPageSaveFashionListResponseDto> response = fashionService
