@@ -55,5 +55,4 @@ dependencies {
 
 	// nurigo tel auth number
 	implementation group: 'net.nurigo', name: 'sdk', version: '4.3.0'
-
 }
