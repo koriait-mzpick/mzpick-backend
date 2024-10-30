@@ -16,6 +16,8 @@ import lombok.Getter;
 public class TravelFoodDetail {
     private Integer travelFoodNumber;
     private String travelFoodTitle;
+    private String travelLocathion;
+    private String userId;
     private List<String> travelFoodPhotoList;
     private List<String> travelFoodHashtagList;
     private List<String> travelFoodLikeUserList;
@@ -41,6 +43,8 @@ public class TravelFoodDetail {
 
         this.travelFoodNumber = travelFoodEntity.getTravelFoodNumber();
         this.travelFoodTitle = travelFoodEntity.getTravelFoodTitle();
+        this.travelLocathion = travelFoodEntity.getTravelLocation();
+        this.userId = travelFoodEntity.getUserId();
         this.travelFoodPhotoList = travelFoodPhotoList;
         this.travelFoodHashtagList = travelFoodHashtagList;
         this.travelFoodLikeUserList = travelFoodLikeUserList;

@@ -16,6 +16,8 @@ import lombok.Getter;
 @Getter
 public class TravelCafeDetail {
     private Integer travelCafeNumber;
+    private String travelLocathion;
+    private String userId;
     private String travelCafeTitle;
     private List<String> travelCafeCategoryList;
     private List<String> travelCafePhotoList;
@@ -46,6 +48,8 @@ public class TravelCafeDetail {
 
         this.travelCafeNumber = travelCafeEntity.getTravelCafeNumber();
         this.travelCafeTitle = travelCafeEntity.getTravelCafeTitle();
+        this.travelLocathion = travelCafeEntity.getTravelLocation();
+        this.userId = travelCafeEntity.getUserId();
         this.travelCafeCategoryList = travelCafeCategoryList;
         this.travelCafeHashtagList = travelCafeHashtagList;
         this.travelCafePhotoList = travelCafePhotoList;

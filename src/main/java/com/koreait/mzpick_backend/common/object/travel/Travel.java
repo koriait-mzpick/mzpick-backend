@@ -17,6 +17,7 @@ import lombok.Getter;
 public class Travel {
     private Integer travelNumber;
     private String userId;
+    private String travelLocathion;
     private String travelPhoto;
     private List<String> travelHashtagList;
     private List<String> travelLikeUserList;
@@ -42,6 +43,7 @@ public class Travel {
 
         this.travelNumber = travelEntity.getTravelNumber();
         this.userId = travelEntity.getUserId();
+        this.travelLocathion = travelEntity.getTravelLocation();
         this.travelPhoto = travelPhotoList.get(0);
         this.travelHashtagList = travelHashtagList;
         this.travelLikeUserList = travelLikeUserList;
@@ -63,4 +65,3 @@ public class Travel {
         return travels;
     }
 }
-
