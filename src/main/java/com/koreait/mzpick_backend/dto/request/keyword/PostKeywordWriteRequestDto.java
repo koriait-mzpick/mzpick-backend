@@ -14,7 +14,4 @@ public class PostKeywordWriteRequestDto {
     @NotBlank
     private String keywordContent;
     private LocalDate keywordDate;
-
-    
-
 }

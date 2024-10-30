@@ -15,11 +15,13 @@ import lombok.Getter;
 @Getter
 public class TravelDetail {
     private Integer travelNumber;
+    private String userId;
+    private String travelLocathion;
     private String travelTitle;
     private List<String> travelPhotoList;
     private List<String> travelHashtagList;
-    private List<String> travelLikeList;
-    private List<String> travelSaveList;
+    private List<String> travelLikeUserList;
+    private List<String> travelSaveUserList;
     private Integer travelViewCount;
     private Integer travelLikeCount;
     private Integer travelSaveCount;
@@ -41,12 +43,14 @@ public class TravelDetail {
 
         this.travelNumber = travelEntity.getTravelNumber();
         this.travelTitle = travelEntity.getTravelTitle();
+        this.travelLocathion = travelEntity.getTravelLocation();
+        this.userId = travelEntity.getUserId();
         this.travelPhotoList = travelPhotoList;
         this.travelHashtagList = travelHashtagList;
-        this.travelLikeList = travelLikeUserList;
-        this.travelSaveList = travelSaveUserList;
-        this.travelSaveCount = travelSaveList.size();
-        this.travelLikeCount = travelLikeList.size();
+        this.travelLikeUserList = travelLikeUserList;
+        this.travelSaveUserList = travelSaveUserList;
+        this.travelSaveCount = travelSaveUserList.size();
+        this.travelLikeCount = travelLikeUserList.size();
         this.travelViewCount = travelEntity.getTravelViewCount();
         this.travelDate = travelEntity.getTravelDate();
     }

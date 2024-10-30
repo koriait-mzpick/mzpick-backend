@@ -110,19 +110,19 @@ public class voteController {
     }
 
     @DeleteMapping("/fashion/{fashionVoteNumber}")
-    public ResponseEntity<ResponseDto> deleteTravel(
+    public ResponseEntity<ResponseDto> deleteFashionVote(
             @PathVariable("fashionVoteNumber") Integer fashionVoteNumber,
             @AuthenticationPrincipal String userId) {
         ResponseEntity<ResponseDto> response = fashionVoteService.deleteFashionVote(fashionVoteNumber, userId);
         return response;
     }
 
-    @PutMapping("/fashion/vote-click/{fashoinVoteNumber}/{selectNumber}")
+    @PutMapping("/fashion/vote-click/{fashionVoteNumber}/{selectNumber}")
     public ResponseEntity<ResponseDto> putclickVote(
-            @PathVariable("fashoinVoteNumber") Integer fashoinVoteNumber,
+            @PathVariable("fashoinVoteNumber") Integer fashionVoteNumber,
             @PathVariable("selectNumber") Integer selectNumber,
             @AuthenticationPrincipal String userId) {
-        ResponseEntity<ResponseDto> response = fashionVoteService.clickVote(fashoinVoteNumber,selectNumber, userId);
+        ResponseEntity<ResponseDto> response = fashionVoteService.clickVote(fashionVoteNumber,selectNumber, userId);
         return response;
     }
 
