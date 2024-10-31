@@ -18,7 +18,7 @@ public interface FashionRepository extends JpaRepository<FashionEntity, Integer>
     @Query(value=
     "SELECT * FROM fashion " +
     "ORDER BY fashion_date DESC " + 
-    "LIMIT :paging, 5", 
+    "LIMIT :paging, 8", 
     nativeQuery=true)
     List<FashionEntity> findByPaging(@Param("paging") Integer paging);
 

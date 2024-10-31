@@ -20,7 +20,7 @@ public interface TravelStayRepository extends JpaRepository<TravelStayEntity, In
     @Query(value=
     "SELECT * FROM travel_stay " +
     "ORDER BY travel_stay_date DESC " + 
-    "LIMIT :paging, 5", 
+    "LIMIT :paging, 8", 
     nativeQuery=true)
     List<TravelStayEntity> findByPaging(@Param("paging") Integer paging);
 
