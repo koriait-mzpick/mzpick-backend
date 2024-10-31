@@ -16,6 +16,8 @@ import lombok.Getter;
 @Getter
 public class TravelStay {
     private Integer traveStayNumber;
+    private String userId;
+    private String travelLocation;
     private String travelStayPhoto;
     private List<String> travelStayHashtag;
     private List<String> travelStayCategory;
@@ -52,6 +54,8 @@ public class TravelStay {
 
         this.traveStayNumber = travelStayEntity.getTravelStayNumber();
         this.travelStayPhoto = travelStayPhoto.get(0);
+        this.travelLocation = travelStayEntity.getTravelLocation();
+        this.userId = travelStayEntity.getUserId();
         this.travelStayHashtag = travelStayHashtag;
         this.travelStayCategory = travelStayCategory;
         this.travelStayLikeUserList = travelStayLikeUserList;

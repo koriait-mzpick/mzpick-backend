@@ -115,7 +115,7 @@ public class FashionController {
     }
 
     @PutMapping("/save/{fashionNumber}")
-    public ResponseEntity<ResponseDto> postSave(
+    public ResponseEntity<ResponseDto> putSave(
         @PathVariable("fashionNumber")Integer fashionNumber,
         @AuthenticationPrincipal String userId
     ) {

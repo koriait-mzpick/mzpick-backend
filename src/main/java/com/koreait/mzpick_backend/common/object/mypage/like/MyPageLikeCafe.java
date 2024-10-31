@@ -16,7 +16,7 @@ public class MyPageLikeCafe {
     private String mypagePhotoList;
     private List<String> mypageHashTagList;
     private String userId;
-    private LocalDate mypageBoarDate;
+    private LocalDate mypageBoardDate;
     
 
     public MyPageLikeCafe(TravelCafeEntity travelCafeEntity, List<TravelCafePhotoEntity> travelCafePhotoEntities, List<TravelCafeHashtagEntity> travelCafeHashtagEntities) {
@@ -32,7 +32,7 @@ public class MyPageLikeCafe {
         this.mypageBoardNumber = travelCafeEntity.getTravelCafeNumber();
         this.mypagePhotoList = myPagePhotoList.get(0);
         this.mypageHashTagList = myPageHashtagList;
-        this.mypageBoarDate = travelCafeEntity.getTravelCafeDate();
+        this.mypageBoardDate = travelCafeEntity.getTravelCafeDate();
     }
 
     public static List<MyPageLikeCafe> getMyPageLikeCafeList(List<TravelCafeEntity> travelCafeEntities, List<TravelCafePhotoEntity> travelCafePhotoEntities, List<TravelCafeHashtagEntity> travelCafeHashtagEntities) {
