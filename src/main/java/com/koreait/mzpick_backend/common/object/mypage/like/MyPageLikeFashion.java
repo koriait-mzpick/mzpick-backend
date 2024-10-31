@@ -17,7 +17,7 @@ public class MyPageLikeFashion {
     private String mypagePhotoList;
     private List<String> mypageHashTagList;
     private String userId;
-    private LocalDate mypageBoarDate;
+    private LocalDate mypageBoardDate;
 
     public MyPageLikeFashion(FashionEntity fashionEntity, List<FashionPhotoEntity> fashionPhotoEntities, List<FashionHashtagEntity> fashionHashtagEntities) {
 
@@ -34,7 +34,7 @@ public class MyPageLikeFashion {
         this.mypageBoardNumber = fashionEntity.getFashionNumber();
         this.mypagePhotoList = myPagePhotoList.get(0);
         this.mypageHashTagList = myPageHashtagList;
-        this.mypageBoarDate = fashionEntity.getFashionDate();
+        this.mypageBoardDate = fashionEntity.getFashionDate();
     }
 
     public static List<MyPageLikeFashion> getMyPageLikeFashionList(List<FashionEntity> fashionEntities, List<FashionPhotoEntity> fashionPhotoEntities, List<FashionHashtagEntity> fashionHashtagEntities) {

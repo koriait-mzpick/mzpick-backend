@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.koreait.mzpick_backend.entity.stay.TravelStayEntity;
 import com.koreait.mzpick_backend.entity.stay.TravelStayHashtagEntity;
 import com.koreait.mzpick_backend.entity.stay.TravelStayPhotoEntity;
@@ -17,7 +16,7 @@ public class MyPageLikeStay {
     private String mypagePhotoList;
     private List<String> mypageHashTagList;
     private String userId;
-    private LocalDate mypageBoarDate;
+    private LocalDate mypageBoardDate;
 
     public MyPageLikeStay(TravelStayEntity travelStayEntity, List<TravelStayPhotoEntity> travelStayPhotoEntities, List<TravelStayHashtagEntity> travelStayHashtagEntities) {
 
@@ -35,7 +34,7 @@ public class MyPageLikeStay {
         this.mypageBoardNumber = travelStayEntity.getTravelStayNumber();
         this.mypagePhotoList = myPagePhotoList.get(0);
         this.mypageHashTagList = myPageHashtagList;
-        this.mypageBoarDate = travelStayEntity.getTravelStayDate();
+        this.mypageBoardDate = travelStayEntity.getTravelStayDate();
     }
 
     public static List<MyPageLikeStay> getMyPageLikeStayList(List<TravelStayEntity> travelStayEntities, List<TravelStayPhotoEntity> travelStayPhotoEntities, List<TravelStayHashtagEntity> travelStayHashtagEntities) {
