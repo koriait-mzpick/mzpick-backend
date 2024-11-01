@@ -23,7 +23,7 @@ public class TravelCafe {
     private String travelCafePhoto;
     private List<String> travelCafeHashtagList;
     private List<String> travelCafeLikeUserList;
-    private List<String> travelCafeSaveUSerList;
+    private List<String> travelCafeSaveUserList;
     private Integer travelCafeLikeCount;
     private Integer travelCafeSaveCount;
     private Integer travelCafeView;
@@ -42,8 +42,8 @@ public class TravelCafe {
         List<String> travelCafeLikeUserList = new ArrayList<>();
         for (TravelCafeLikeEntity travelCafeLikeEntity: travelCafeLikeEntities) travelCafeLikeUserList.add(travelCafeLikeEntity.getUserId());
 
-        List<String> travelCafeSaveUSerList = new ArrayList<>();
-        for (TravelCafeSaveEntity travelCafeSaveEntity: travelCafeSaveEntities) travelCafeSaveUSerList.add(travelCafeSaveEntity.getUserId());
+        List<String> travelCafeSaveUserList = new ArrayList<>();
+        for (TravelCafeSaveEntity travelCafeSaveEntity: travelCafeSaveEntities) travelCafeSaveUserList.add(travelCafeSaveEntity.getUserId());
 
         this.traveCafeNumber = travelCafeEntity.getTravelCafeNumber();
         this.travelCafePhoto = travelCafePhotoList.get(0);
@@ -52,7 +52,7 @@ public class TravelCafe {
         this.travelCafeHashtagList = travelCafeHashtagList;
         this.travelCafeCategoryList = travelCafeCategoryList;
         this.travelCafeLikeUserList = travelCafeLikeUserList;
-        this.travelCafeSaveUSerList = travelCafeSaveUSerList;
+        this.travelCafeSaveUserList = travelCafeSaveUserList;
         this.travelCafeLikeCount = travelCafeEntity.getTravelCafeLikeCount();
         this.travelCafeSaveCount = travelCafeEntity.getTravelCafeSaveCount();
         this.travelCafeView = travelCafeEntity.getTravelCafeViewCount();

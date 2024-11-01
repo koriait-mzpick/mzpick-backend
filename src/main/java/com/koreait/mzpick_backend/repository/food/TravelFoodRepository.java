@@ -20,7 +20,7 @@ public interface TravelFoodRepository extends JpaRepository<TravelFoodEntity, In
     @Query(value=
     "SELECT * FROM travel_food " +
     "ORDER BY travel_food_date DESC " + 
-    "LIMIT :paging, 5", 
+    "LIMIT :paging, 8", 
     nativeQuery=true)
     List<TravelFoodEntity> findByPaging(@Param("paging") Integer paging);
 

@@ -21,7 +21,7 @@ public interface TravelRepository extends JpaRepository<TravelEntity, Integer>{
     @Query(value=
     "SELECT * FROM travel " +
     "ORDER BY travel_date DESC " + 
-    "LIMIT :paging, 5", 
+    "LIMIT :paging, 8", 
     nativeQuery=true)
     List<TravelEntity> findByPaging(@Param("paging") Integer paging);
 

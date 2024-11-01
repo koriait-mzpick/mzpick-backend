@@ -23,7 +23,7 @@ public class TravelCafeDetail {
     private List<String> travelCafePhotoList;
     private List<String> travelCafeHashtagList;
     private List<String> travelCafeLikeUserList;
-    private List<String> travelCafeSaveUSerList;
+    private List<String> travelCafeSaveUserList;
     private Integer travelCafeLikeCount;
     private Integer travelCafeSaveCount;
     private Integer travelCafeView;
@@ -40,8 +40,8 @@ public class TravelCafeDetail {
         List<String> travelCafeLikeUserList = new ArrayList<>();
         for (TravelCafeLikeEntity travelCafeLikeEntity: travelCafeLikeEntities) travelCafeLikeUserList.add(travelCafeLikeEntity.getUserId());
 
-        List<String> travelCafeSaveUSerList = new ArrayList<>();
-        for (TravelCafeSaveEntity travelCafeSaveEntity: travelCafeSaveEntities) travelCafeSaveUSerList.add(travelCafeSaveEntity.getUserId());
+        List<String> travelCafeSaveUserList = new ArrayList<>();
+        for (TravelCafeSaveEntity travelCafeSaveEntity: travelCafeSaveEntities) travelCafeSaveUserList.add(travelCafeSaveEntity.getUserId());
 
         List<String> travelCafeCategoryList = new ArrayList<>();
         for (TravelCafeCategoryEntity TravelCafeCategoryEntity: travelCafeCategoryEntities) travelCafeCategoryList.add(TravelCafeCategoryEntity.getTravelCafeCategoryContent());
@@ -54,9 +54,9 @@ public class TravelCafeDetail {
         this.travelCafeHashtagList = travelCafeHashtagList;
         this.travelCafePhotoList = travelCafePhotoList;
         this.travelCafeLikeUserList = travelCafeLikeUserList;
-        this.travelCafeSaveUSerList = travelCafeSaveUSerList;
+        this.travelCafeSaveUserList = travelCafeSaveUserList;
         this.travelCafeLikeCount = travelCafeLikeUserList.size();
-        this.travelCafeSaveCount = travelCafeSaveUSerList.size();
+        this.travelCafeSaveCount = travelCafeSaveUserList.size();
         this.travelCafeView = travelCafeEntity.getTravelCafeViewCount();
         this.travelCafeDate = travelCafeEntity.getTravelCafeDate();
     }

@@ -19,7 +19,7 @@ public interface TravelCafeRepository extends JpaRepository<TravelCafeEntity, In
     @Query(value=
     "SELECT * FROM travel_cafe " +
     "ORDER BY travel_cafe_date DESC " + 
-    "LIMIT :paging, 5", 
+    "LIMIT :paging, 8", 
     nativeQuery=true)
     List<TravelCafeEntity> findByPaging(@Param("paging") Integer paging);
 
