@@ -18,11 +18,11 @@ import com.koreait.mzpick_backend.dto.request.food.PostTravelFoodRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodListResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelFoodHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFoodListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeFoodListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveFoodListResponseDto;
-import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
 import com.koreait.mzpick_backend.entity.food.TravelFoodEntity;
 import com.koreait.mzpick_backend.entity.food.TravelFoodHashtagEntity;
 import com.koreait.mzpick_backend.entity.food.TravelFoodLikeEntity;
@@ -412,6 +412,14 @@ public class TravelFoodServiceImplement implements TravelFoodService {
             return ResponseDto.databaseError();
         }
         return GetMyPageLikeFoodListResponseDto.success(myPageLikeFoods);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelFoodTotalCountResponsDto> travelFoodTotalCount() {
+        long count = travelFoodRepository.count();
+        System.out.println(count);
+        // return null;
+        return GetTravelFoodTotalCountResponsDto.success(count);
     }
 
     

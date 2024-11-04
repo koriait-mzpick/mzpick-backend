@@ -20,6 +20,7 @@ import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionListResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.fashion.FashionCommentService;
 import com.koreait.mzpick_backend.service.fashion.FashionService;
 import com.koreait.mzpick_backend.service.vote.FashionVoteService;
@@ -48,6 +49,13 @@ public class FashionController {
         ResponseEntity<? super GetFashionDetailResponseDto> resposne = fashionService.getFashion(fashionNumber);
         return resposne;
     }
+
+    @GetMapping("/totalCount")
+    public ResponseEntity<? super GetFashionTotalCountResponsDto> getFashionTotalCount(){
+        ResponseEntity<? super GetFashionTotalCountResponsDto> response = fashionService.getFashionTotalCount();
+        return response;
+    }
+    
 
     @PostMapping(value = { "", "/" })
     public ResponseEntity<ResponseDto> postFashion(

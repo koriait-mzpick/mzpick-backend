@@ -7,6 +7,7 @@ import com.koreait.mzpick_backend.dto.request.cafe.PostTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeListResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelCafeHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeCafeListResponseDto;
@@ -17,6 +18,8 @@ public interface TravelCafeService {
     ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(Integer page);
 
     ResponseEntity<? super GetTravelCafeDetailResponseDto> getTravelCafe(Integer travelCafeNumber);
+
+    ResponseEntity<? super GetTravelCafeTotalCountResponsDto> getTravelCafeTotalCount();
 
     ResponseEntity<ResponseDto> postTravelCafe(PostTravelCafeRequestDto dto, String userId);
 

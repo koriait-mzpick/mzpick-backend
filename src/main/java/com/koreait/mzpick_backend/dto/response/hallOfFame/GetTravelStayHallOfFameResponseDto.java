@@ -14,11 +14,13 @@ import lombok.Getter;
 
 @Getter
 public class GetTravelStayHallOfFameResponseDto extends ResponseDto{
-    private GetTravelStayHallOfFamePhotoListResultSet resultSet;
+    private Integer travelNumber;
+    private String photoLink;
 
     public GetTravelStayHallOfFameResponseDto(List<GetTravelStayHallOfFamePhotoListResultSet> resultSet) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        this.resultSet = resultSet.get(0);
+        this.travelNumber = resultSet.get(0).getTravelNumber();
+        this.photoLink = resultSet.get(0).getPhotoLink();
     }
 
     public static ResponseEntity<GetTravelStayHallOfFameResponseDto> success(List<GetTravelStayHallOfFamePhotoListResultSet> resultSet){

@@ -17,10 +17,10 @@ import com.koreait.mzpick_backend.dto.request.stay.PatchTravelStayRequestDto;
 import com.koreait.mzpick_backend.dto.request.stay.PostTravelStayCommentRequestDto;
 import com.koreait.mzpick_backend.dto.request.stay.PostTravelStayRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
-import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelStayHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayListResponseDto;
+import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.stay.TravelStayCommentService;
 import com.koreait.mzpick_backend.service.stay.TravelStayService;
 
@@ -48,6 +48,12 @@ public class TravelStayController {
         ResponseEntity<? super GetTravelStayDetailResponseDto> resposne = travelStayService
                 .getTravelStay(travelStayNumber);
         return resposne;
+    }
+
+    @GetMapping("/totalCount")
+    public ResponseEntity<? super GetTravelStayTotalCountResponsDto> getTravelStayTotalCount(){
+        ResponseEntity<? super GetTravelStayTotalCountResponsDto> response = travelStayService.travelStayTotalCount();
+        return response;
     }
 
     // controller 여행 게시판 작성하기 //

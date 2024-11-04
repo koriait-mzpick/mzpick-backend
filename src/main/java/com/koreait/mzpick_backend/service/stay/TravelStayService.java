@@ -11,12 +11,15 @@ import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeStayList
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveStayListResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayListResponseDto;
+import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayTotalCountResponsDto;
 
 //service 여행지 서비스 //
 public interface TravelStayService {
     ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(Integer page);
 
     ResponseEntity<? super GetTravelStayDetailResponseDto> getTravelStay(Integer travelStayNumber);
+    
+    ResponseEntity<? super GetTravelStayTotalCountResponsDto> travelStayTotalCount();
 
     ResponseEntity<ResponseDto> postTravelStay(PostTravelStayRequestDto dto, String userId);
 
