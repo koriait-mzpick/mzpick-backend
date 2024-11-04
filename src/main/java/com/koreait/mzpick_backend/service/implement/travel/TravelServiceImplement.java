@@ -55,6 +55,8 @@ public class TravelServiceImplement implements TravelService {
     public ResponseEntity<? super GetTravelListResponseDto> getTravelList(Integer page) {
         List<Travel> travels = new ArrayList<>();
 
+        System.out.println("aaaa");
+
         try {
             Integer paging = 5 * (page - 1);
             List<TravelEntity> travelEntities = travelRepository.findByPaging(paging);

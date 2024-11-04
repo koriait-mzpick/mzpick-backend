@@ -45,7 +45,7 @@ public class Travel {
         this.travelNumber = travelEntity.getTravelNumber();
         this.userId = travelEntity.getUserId();
         this.travelLocation = travelEntity.getTravelLocation();
-        this.travelPhoto = travelPhotoList.get(0);
+        this.travelPhoto = travelPhotoList.size() != 0 ? travelPhotoList.get(0) : null;
         this.travelHashtagList = travelHashtagList;
         this.travelLikeUserList = travelLikeUserList;
         this.travelSaveUserList = travelSaveUserList;
