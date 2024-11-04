@@ -61,7 +61,7 @@ public class TravelCafeServiceImplement implements TravelCafeService {
     public ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(Integer page) {
         List<TravelCafe> travelCafes = new ArrayList<>();
         try {
-            Integer paging = 5 * (page - 1);
+            Integer paging = 8 * (page - 1);
             List<TravelCafeEntity> travelCafeEntities = travelCafeRepository.findByPaging(paging);
             for (TravelCafeEntity travelCafeEntity : travelCafeEntities) {
                 Integer travelCafeNumber = travelCafeEntity.getTravelCafeNumber();

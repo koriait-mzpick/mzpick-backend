@@ -59,7 +59,7 @@ public class TravelServiceImplement implements TravelService {
         System.out.println("aaaa");
 
         try {
-            Integer paging = 5 * (page - 1);
+            Integer paging = 8 * (page - 1);
             List<TravelEntity> travelEntities = travelRepository.findByPaging(paging);
             for (TravelEntity travelEntity : travelEntities) {
                 Integer travelNumber = travelEntity.getTravelNumber();
