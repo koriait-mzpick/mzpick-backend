@@ -114,6 +114,7 @@ public class TravelStayServiceImplement implements TravelStayService {
 
             List<String> travelStayHashtagContentList = dto.getTravelStayHashtagContentList();
             List<TravelStayHashtagEntity> travelStayHashtagEntities = new ArrayList<>();
+            
             for (String travelStayHashtagContent : travelStayHashtagContentList) {
                 TravelStayHashtagEntity travelStayHashtagEntity = new TravelStayHashtagEntity(travelStayNumber, travelStayHashtagContent);
                 travelStayHashtagEntities.add(travelStayHashtagEntity);

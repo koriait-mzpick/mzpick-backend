@@ -1,6 +1,7 @@
 package com.koreait.mzpick_backend.common.object.mypage.like;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class MyPageLikeFood {
     private String mypagePhotoList;
     private List<String> mypageHashTagList;
     private String userId;
-    private LocalDate mypageBoardDate;
+    private LocalDateTime mypageBoardDate;
 
     public MyPageLikeFood(TravelFoodEntity travelFoodEntity, List<TravelFoodPhotoEntity> travelFoodPhotoEntities, List<TravelFoodHashtagEntity> travelFoodHashtagEntities) {
 

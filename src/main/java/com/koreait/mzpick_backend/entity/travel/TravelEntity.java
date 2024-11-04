@@ -1,9 +1,10 @@
 package com.koreait.mzpick_backend.entity.travel;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.koreait.mzpick_backend.dto.request.travel.PatchTravelRequestDto;
 import com.koreait.mzpick_backend.dto.request.travel.PostTravelRequestDto;
+import com.koreait.mzpick_backend.util.CustomDatetime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class TravelEntity {
     private String travelLocation;
     private String travelContent;
     private Integer travelViewCount;
-    private LocalDate travelDate;
+    private LocalDateTime travelDate;
     private Integer travelLikeCount;
     private Integer travelSaveCount;
 
@@ -41,7 +42,7 @@ public class TravelEntity {
         this.travelTitle = dto.getTravelTitle();
         this.travelLocation = dto.getTravelLocation();
         this.travelContent = dto.getTravelContent();
-        this.travelDate = LocalDate.now();
+        this.travelDate = CustomDatetime.getLocalDatetime();
         this.travelViewCount = 0;
         this.travelLikeCount = 0;
         this.travelSaveCount = 0;
@@ -52,7 +53,7 @@ public class TravelEntity {
         this.travelTitle = dto.getTravelTitle();
         this.travelLocation = dto.getTravelLocation();
         this.travelContent = dto.getTravelContent();
-        this.travelDate = LocalDate.now();
+        this.travelDate = CustomDatetime.getLocalDatetime();
     }
 
     public void upLikeCount(){

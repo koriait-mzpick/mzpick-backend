@@ -1,9 +1,10 @@
 package com.koreait.mzpick_backend.entity.cafe;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.koreait.mzpick_backend.dto.request.cafe.PatchTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.request.cafe.PostTravelCafeRequestDto;
+import com.koreait.mzpick_backend.util.CustomDatetime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class TravelCafeEntity {
     private Integer travelCafeLikeCount;
     private Integer travelCafeSaveCount;
     private Integer travelCafeViewCount;
-    private LocalDate travelCafeDate;
+    private LocalDateTime travelCafeDate;
 
     public TravelCafeEntity(PostTravelCafeRequestDto dto, String userId){
         this.userId = userId;
@@ -42,7 +43,7 @@ public class TravelCafeEntity {
         this.travelCafeViewCount = 0;
         this.travelCafeLikeCount = 0;
         this.travelCafeSaveCount = 0;
-        this.travelCafeDate = LocalDate.now();
+        this.travelCafeDate = CustomDatetime.getLocalDatetime();
     }
 
     public void patch(PatchTravelCafeRequestDto dto, String userId){
@@ -50,8 +51,9 @@ public class TravelCafeEntity {
         this.travelCafeTitle = dto.getTravelCafeTitle();
         this.travelLocation = dto.getTraveLocation();
         this.travelCafeContent = dto.getTravelCafeContent();
-        this.travelCafeDate = LocalDate.now();
+        this.travelCafeDate = CustomDatetime.getLocalDatetime();
     }
+    
 
     public void upLikeCount(){
         this.travelCafeLikeCount ++;
