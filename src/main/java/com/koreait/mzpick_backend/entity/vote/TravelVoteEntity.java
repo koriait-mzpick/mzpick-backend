@@ -1,8 +1,9 @@
 package com.koreait.mzpick_backend.entity.vote;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.koreait.mzpick_backend.dto.request.vote.PostTravelVoteRequestDto;
+import com.koreait.mzpick_backend.util.CustomDatetime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,7 +38,7 @@ public class TravelVoteEntity {
     private String travelVoteChoice1;
     @Column(name="travel_vote_choice_2")
     private String travelVoteChoice2;
-    private LocalDate travelVoteDate;
+    private LocalDateTime travelVoteDate;
 
 
     public TravelVoteEntity(PostTravelVoteRequestDto dto, String userId){
@@ -47,6 +48,6 @@ public class TravelVoteEntity {
         this.travelVotePhoto2 = dto.getTravelVotePhoto2();
         this.travelVoteChoice1 = dto.getTravelVoteChoice1();
         this.travelVoteChoice2 = dto.getTravelVoteChoice2();
-        this.travelVoteDate = LocalDate.now();
+        this.travelVoteDate = CustomDatetime.getLocalDatetime();
     }
 }

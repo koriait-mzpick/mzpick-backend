@@ -1,5 +1,6 @@
 package com.koreait.mzpick_backend.common.object.vote;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class TravelVote {
     private String travelVoteChoice2;
     private List<String> travelVoteChoiceUserList;
     private List<String> travelVoteChoiceContentList;
-    private LocalDate travelVoteDate;
+    private LocalDateTime travelVoteDate;
 
     public TravelVote(TravelVoteEntity travelVoteEntity, List<TravelVoteResultEntity> travelVoteResultEntitys ){
         List<String> travelVoteChoiceUserList = new ArrayList<>();

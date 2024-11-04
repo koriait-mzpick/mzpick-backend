@@ -1,6 +1,7 @@
 package com.koreait.mzpick_backend.common.object.mypage.save;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class MyPageSaveCafe {
     private Integer travelCafeNumber;
     private String travelCafePhoto;
     private List<String> travelCafeHashtagList;
-    private LocalDate travelCafeDate;
+    private LocalDateTime travelCafeDate;
 
     public MyPageSaveCafe(TravelCafeEntity travelCafeEntity, List<TravelCafePhotoEntity> travelCafePhotoEntities, List<TravelCafeHashtagEntity> travelCafeHashtagEntities) {
         List<String> travelCafePhotoList = new ArrayList<>();

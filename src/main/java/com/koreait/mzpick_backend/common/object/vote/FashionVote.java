@@ -2,6 +2,7 @@ package com.koreait.mzpick_backend.common.object.vote;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class FashionVote {
     private String fashionVoteChoice2;
     private List<String> fashionVoteChoiceUserList;
     private List<String> fashionVoteChoiceContentList;
-    private LocalDate fashionVoteDate;
+    private LocalDateTime fashionVoteDate;
 
     public FashionVote (FashionVoteEntity fashionVoteEntity, List<FashionVoteResultEntity> fashionVoteResultEntitys){
         List<String> fashionvotechoiceUserList = new ArrayList<>();

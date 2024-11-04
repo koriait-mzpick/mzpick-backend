@@ -1,6 +1,7 @@
 package com.koreait.mzpick_backend.common.object.mypage.save;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class MyPageSaveFashion {
     private Integer FashionNumber;
     private String FashionPhoto;
     private List<String> FashionHashtagList;
-    private LocalDate FashionDate;
+    private LocalDateTime FashionDate;
 
     public MyPageSaveFashion(FashionEntity FashionEntity, List<FashionPhotoEntity> FashionPhotoEntities, List<FashionHashtagEntity> FashionHashtagEntities) {
         List<String> FashionPhotoList = new ArrayList<>();
