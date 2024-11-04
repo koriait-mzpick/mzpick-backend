@@ -58,7 +58,7 @@ public class TravelFoodServiceImplement implements TravelFoodService {
     public ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(Integer page) {
         List<TravelFood> travelFoods = new ArrayList<>();
         try {
-            Integer paging = 5 * (page - 1);
+            Integer paging = 8 * (page - 1);
             List<TravelFoodEntity> travelFoodEntities = travelFoodRepository.findByPaging(paging);
             for (TravelFoodEntity travelFoodEntity : travelFoodEntities) {
                 Integer travelFoodNumber = travelFoodEntity.getTravelFoodNumber();

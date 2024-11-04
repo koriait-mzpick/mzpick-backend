@@ -19,7 +19,6 @@ import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionListResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionTotalCountResponsDto;
-import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetFashionHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFashionListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeFashionListResponseDto;
@@ -58,7 +57,7 @@ public class FashionServiceImplement implements FashionService {
         List<Fashion> Fashions = new ArrayList<>();
 
         try {
-            Integer paging = 5 * (page - 1);
+            Integer paging = 8 * (page - 1);
             List<FashionEntity> fashionEntities = fashionRepository.findByPaging(paging);
             for (FashionEntity fashionEntity : fashionEntities) {
                 Integer fashionNumber = fashionEntity.getFashionNumber();

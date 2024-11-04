@@ -61,7 +61,7 @@ public class TravelStayServiceImplement implements TravelStayService {
     public ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(Integer page) {
         List<TravelStay> travelStays = new ArrayList<>();
         try {
-            Integer paging = 5 * (page - 1);
+            Integer paging = 8 * (page - 1);
             List<TravelStayEntity> travelStayEntities = travelStayRepository.findByPaging(paging);
             for (TravelStayEntity travelStayEntity : travelStayEntities) {
                 Integer travelStayNumber = travelStayEntity.getTravelStayNumber();
