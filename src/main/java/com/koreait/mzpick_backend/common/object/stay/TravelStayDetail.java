@@ -1,6 +1,7 @@
 package com.koreait.mzpick_backend.common.object.stay;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class TravelStayDetail {
     private Integer travelStayViewCount;
     private Integer travelStayLikeCount;
     private Integer travelStaySaveCount;
-    private LocalDate travelStayDate;
+    private LocalDateTime travelStayDate;
 
     public TravelStayDetail(TravelStayEntity travelStayEntity, List<TravelStayPhotoEntity> travelStayPhotoEntities, List<TravelStayHashtagEntity> travelStayHashtagEntities, List<TravelStayLikeEntity> travelStayLikeEntities, List<TravelStaySaveEntity> travelStaySaveEntities, List<TravelStayCategoryEntity> travelStayCategoryEntities){
 

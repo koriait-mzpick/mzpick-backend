@@ -1,6 +1,7 @@
 package com.koreait.mzpick_backend.common.object.mypage.board;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class MyPageBoardTravel {
     private Integer mypageBoardNumber;
     private String mypageBoardTitle;
     private String userId;
-    private LocalDate mypageBoardDate;
+    private LocalDateTime mypageBoardDate;
 
     public MyPageBoardTravel(TravelEntity travelEntity) {
         this.userId = travelEntity.getUserId();

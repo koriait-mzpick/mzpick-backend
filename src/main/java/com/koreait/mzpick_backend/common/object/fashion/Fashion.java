@@ -1,6 +1,7 @@
 package com.koreait.mzpick_backend.common.object.fashion;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Fashion {
     private Integer fashionLikeCount;
     private Integer totalPrice;
     private Integer fashionViewCount;
-    private LocalDate fashionDate;
+    private LocalDateTime fashionDate;
 
     public Fashion(FashionEntity fashionEntity, List<FashionPhotoEntity> fashionPhotoEntities, List<FashionHashtagEntity> fashionHashtagEntities, List<FashionLikeEntity> fashionLikeEntities, List<FashionSaveEntity> fashionSaveEntities) {
 

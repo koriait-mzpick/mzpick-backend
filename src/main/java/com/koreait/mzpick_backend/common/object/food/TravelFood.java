@@ -2,6 +2,7 @@ package com.koreait.mzpick_backend.common.object.food;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class TravelFood {
     private Integer travelFoodLikeCount;
     private Integer travelFoodSaveCount;
     private Integer travelFoodViewCount;
-    private LocalDate travelFoodDate;
+    private LocalDateTime travelFoodDate;
 
     public TravelFood (TravelFoodEntity travelFoodEntity, List<TravelFoodPhotoEntity> travelFoodPhotoEntities, List<TravelFoodHashtagEntity> travelFoodHashtagEntities, List<TravelFoodLikeEntity> travelFoodLikeEntities, List<TravelFoodSaveEntity> travelFoodSaveEntities ) {
         List<String> travelFoodPhotoList = new ArrayList<>();

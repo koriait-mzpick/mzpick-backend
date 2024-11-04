@@ -1,6 +1,7 @@
 package com.koreait.mzpick_backend.common.object.cafe;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class TravelCafeDetail {
     private Integer travelCafeLikeCount;
     private Integer travelCafeSaveCount;
     private Integer travelCafeView;
-    private LocalDate travelCafeDate;
+    private LocalDateTime travelCafeDate;
 
     public TravelCafeDetail(TravelCafeEntity travelCafeEntity, List<TravelCafePhotoEntity> travelCafePhotoEntities, List<TravelCafeHashtagEntity> travelCafeHashtagEntities, List<TravelCafeLikeEntity> travelCafeLikeEntities, List<TravelCafeSaveEntity> travelCafeSaveEntities, List<TravelCafeCategoryEntity> travelCafeCategoryEntities){
 

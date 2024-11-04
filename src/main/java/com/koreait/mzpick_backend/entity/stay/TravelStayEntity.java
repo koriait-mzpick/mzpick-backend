@@ -1,9 +1,10 @@
 package com.koreait.mzpick_backend.entity.stay;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.koreait.mzpick_backend.dto.request.stay.PatchTravelStayRequestDto;
 import com.koreait.mzpick_backend.dto.request.stay.PostTravelStayRequestDto;
+import com.koreait.mzpick_backend.util.CustomDatetime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,14 +34,14 @@ public class TravelStayEntity {
     private Integer travelStayLikeCount;
     private Integer travelStayViewCount;
     private Integer travelStaySaveCount;
-    private LocalDate travelStayDate;
+    private LocalDateTime travelStayDate;
 
         public TravelStayEntity(PostTravelStayRequestDto dto, String userId){
         this.userId = userId;
         this.travelStayTitle = dto.getTravelStayTitle();
         this.travelLocation = dto.getTravelLocation();
         this.travelStayContent = dto.getTravelStayContent();
-        this.travelStayDate = LocalDate.now();
+        this.travelStayDate = CustomDatetime.getLocalDatetime();
         this.travelStayViewCount = 0;
         this.travelStayLikeCount = 0;
         this.travelStaySaveCount = 0;
@@ -51,7 +52,7 @@ public class TravelStayEntity {
         this.travelStayTitle = dto.getTravelStayTitle();
         this.travelLocation = dto.getTravelLocation();
         this.travelStayContent = dto.getTravelStayContent();
-        this.travelStayDate = LocalDate.now();
+        this.travelStayDate = CustomDatetime.getLocalDatetime();
     }
 
     public void upLikeCount(){
