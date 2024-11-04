@@ -11,19 +11,17 @@ import org.springframework.stereotype.Service;
 
 import com.koreait.mzpick_backend.common.object.fashion.Fashion;
 import com.koreait.mzpick_backend.common.object.fashion.FashionDetail;
-import com.koreait.mzpick_backend.common.object.mypage.save.MyPageSaveFashion;
-import com.koreait.mzpick_backend.common.object.mypage.board.MyPageBoardTravel;
 import com.koreait.mzpick_backend.common.object.mypage.like.MyPageLikeFashion;
+import com.koreait.mzpick_backend.common.object.mypage.save.MyPageSaveFashion;
 import com.koreait.mzpick_backend.dto.request.fashion.PatchFashionRequestDto;
 import com.koreait.mzpick_backend.dto.request.fashion.PostFashionRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionListResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionTotalCountResponsDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetFashionHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFashionListResponseDto;
-import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFoodListResponseDto;
-import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardStayListResponseDto;
-import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeFashionListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveFashionListResponseDto;
 import com.koreait.mzpick_backend.entity.fashion.FashionEntity;
@@ -390,5 +388,13 @@ public class FashionServiceImplement implements FashionService {
     }
     return GetMyPageLikeFashionListResponseDto.success(myPageLikeFashions);
 
+    }
+
+    @Override
+    public ResponseEntity<? super GetFashionTotalCountResponsDto> getFashionTotalCount() {
+        long count = fashionRepository.count();
+        System.out.println(count);
+        // return null;
+        return GetFashionTotalCountResponsDto.success(count);
     }
 }

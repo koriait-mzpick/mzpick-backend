@@ -22,6 +22,7 @@ import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeStayList
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveStayListResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayListResponseDto;
+import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayTotalCountResponsDto;
 import com.koreait.mzpick_backend.entity.stay.TravelStayCategoryEntity;
 import com.koreait.mzpick_backend.entity.stay.TravelStayEntity;
 import com.koreait.mzpick_backend.entity.stay.TravelStayHashtagEntity;
@@ -53,10 +54,9 @@ public class TravelStayServiceImplement implements TravelStayService {
     private final TravelStayLikeRepository travelStayLikeRepository;
     private final TravelStaySaveRepository travelStaySaveRepository;
     private final TravelStayCategoryRepository travelStayCategoryRepository;
-    private final UserRepository userRepository ;
-    
+    private final UserRepository userRepository;
 
-    //Get 여행지 게시글 리스트 불러오기 //
+    // Get 여행지 게시글 리스트 불러오기 //
     @Override
     public ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(Integer page) {
         List<TravelStay> travelStays = new ArrayList<>();
@@ -65,12 +65,19 @@ public class TravelStayServiceImplement implements TravelStayService {
             List<TravelStayEntity> travelStayEntities = travelStayRepository.findByPaging(paging);
             for (TravelStayEntity travelStayEntity : travelStayEntities) {
                 Integer travelStayNumber = travelStayEntity.getTravelStayNumber();
-                List<TravelStayHashtagEntity> travelStayHashtagEntities = travelStayHashtagRepository.findByTravelStayNumber(travelStayNumber);
-                List<TravelStayPhotoEntity> travelStayPhotoEntities = travelStayPhotoRepository.findByTravelStayNumber(travelStayNumber);
-                List<TravelStayCategoryEntity> travelStayCategoryEntities = travelStayCategoryRepository.findByTravelStayNumber(travelStayNumber);
-                List<TravelStayLikeEntity> travelStayLikeEntities = travelStayLikeRepository.findByTravelStayNumber(travelStayNumber);
-                List<TravelStaySaveEntity> travelStaySaveEntities = travelStaySaveRepository.findByTravelStayNumber(travelStayNumber);
-                TravelStay travelStay = new TravelStay(travelStayEntity, travelStayPhotoEntities, travelStayHashtagEntities, travelStayCategoryEntities, travelStayLikeEntities, travelStaySaveEntities);
+                List<TravelStayHashtagEntity> travelStayHashtagEntities = travelStayHashtagRepository
+                        .findByTravelStayNumber(travelStayNumber);
+                List<TravelStayPhotoEntity> travelStayPhotoEntities = travelStayPhotoRepository
+                        .findByTravelStayNumber(travelStayNumber);
+                List<TravelStayCategoryEntity> travelStayCategoryEntities = travelStayCategoryRepository
+                        .findByTravelStayNumber(travelStayNumber);
+                List<TravelStayLikeEntity> travelStayLikeEntities = travelStayLikeRepository
+                        .findByTravelStayNumber(travelStayNumber);
+                List<TravelStaySaveEntity> travelStaySaveEntities = travelStaySaveRepository
+                        .findByTravelStayNumber(travelStayNumber);
+                TravelStay travelStay = new TravelStay(travelStayEntity, travelStayPhotoEntities,
+                        travelStayHashtagEntities, travelStayCategoryEntities, travelStayLikeEntities,
+                        travelStaySaveEntities);
                 travelStays.add(travelStay);
             }
         } catch (Exception exception) {
@@ -81,21 +88,29 @@ public class TravelStayServiceImplement implements TravelStayService {
         return GetTravelStayListResponseDto.success(travelStays);
     }
 
-    //Get 해당 여행 게시글 상세보기 //
+    // Get 해당 여행 게시글 상세보기 //
     @Override
     public ResponseEntity<? super GetTravelStayDetailResponseDto> getTravelStay(Integer travelStayNumber) {
-        TravelStayDetail travelStayDetail =  null;
+        TravelStayDetail travelStayDetail = null;
         try {
             TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(travelStayNumber);
-            if (travelStayEntity == null) return ResponseDto.noExistBoard();
+            if (travelStayEntity == null)
+                return ResponseDto.noExistBoard();
 
-            List<TravelStayHashtagEntity> travelStayHashtagEntities = travelStayHashtagRepository.findByTravelStayNumber(travelStayNumber);
-            List<TravelStayPhotoEntity> travelStayPhotoEntities = travelStayPhotoRepository.findByTravelStayNumber(travelStayNumber);
-            List<TravelStayLikeEntity> travelStayLikeEntities = travelStayLikeRepository.findByTravelStayNumber(travelStayNumber);
-            List<TravelStaySaveEntity> travelStaySaveEntities = travelStaySaveRepository.findByTravelStayNumber(travelStayNumber);
-            List<TravelStayCategoryEntity> travelStayCategoryEntities = travelStayCategoryRepository.findByTravelStayNumber(travelStayNumber);
-            travelStayDetail =  new TravelStayDetail(travelStayEntity, travelStayPhotoEntities, travelStayHashtagEntities, travelStayLikeEntities, travelStaySaveEntities, travelStayCategoryEntities);
-            
+            List<TravelStayHashtagEntity> travelStayHashtagEntities = travelStayHashtagRepository
+                    .findByTravelStayNumber(travelStayNumber);
+            List<TravelStayPhotoEntity> travelStayPhotoEntities = travelStayPhotoRepository
+                    .findByTravelStayNumber(travelStayNumber);
+            List<TravelStayLikeEntity> travelStayLikeEntities = travelStayLikeRepository
+                    .findByTravelStayNumber(travelStayNumber);
+            List<TravelStaySaveEntity> travelStaySaveEntities = travelStaySaveRepository
+                    .findByTravelStayNumber(travelStayNumber);
+            List<TravelStayCategoryEntity> travelStayCategoryEntities = travelStayCategoryRepository
+                    .findByTravelStayNumber(travelStayNumber);
+            travelStayDetail = new TravelStayDetail(travelStayEntity, travelStayPhotoEntities,
+                    travelStayHashtagEntities, travelStayLikeEntities, travelStaySaveEntities,
+                    travelStayCategoryEntities);
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -103,7 +118,7 @@ public class TravelStayServiceImplement implements TravelStayService {
         return GetTravelStayDetailResponseDto.success(travelStayDetail);
     }
 
-    //Post 여행지 게시글 작성하기 //
+    // Post 여행지 게시글 작성하기 //
     @Override
     public ResponseEntity<ResponseDto> postTravelStay(PostTravelStayRequestDto dto, String userId) {
         try {
@@ -114,9 +129,10 @@ public class TravelStayServiceImplement implements TravelStayService {
 
             List<String> travelStayHashtagContentList = dto.getTravelStayHashtagContentList();
             List<TravelStayHashtagEntity> travelStayHashtagEntities = new ArrayList<>();
-            
+
             for (String travelStayHashtagContent : travelStayHashtagContentList) {
-                TravelStayHashtagEntity travelStayHashtagEntity = new TravelStayHashtagEntity(travelStayNumber, travelStayHashtagContent);
+                TravelStayHashtagEntity travelStayHashtagEntity = new TravelStayHashtagEntity(travelStayNumber,
+                        travelStayHashtagContent);
                 travelStayHashtagEntities.add(travelStayHashtagEntity);
             }
             travelStayHashtagRepository.saveAll(travelStayHashtagEntities);
@@ -124,7 +140,8 @@ public class TravelStayServiceImplement implements TravelStayService {
             List<String> travelStayPhotoList = dto.getTravelStayPhotoList();
             List<TravelStayPhotoEntity> travelStayPhotoEntities = new ArrayList<>();
             for (String travelStayPhotoLink : travelStayPhotoList) {
-                TravelStayPhotoEntity travelStayPhotoEntity = new TravelStayPhotoEntity(travelStayNumber, travelStayPhotoLink);
+                TravelStayPhotoEntity travelStayPhotoEntity = new TravelStayPhotoEntity(travelStayNumber,
+                        travelStayPhotoLink);
                 travelStayPhotoEntities.add(travelStayPhotoEntity);
             }
             travelStayPhotoRepository.saveAll(travelStayPhotoEntities);
@@ -132,7 +149,8 @@ public class TravelStayServiceImplement implements TravelStayService {
             List<String> travelStayCategoryList = dto.getTravelStayCategoryList();
             List<TravelStayCategoryEntity> travelStayCategoryEntities = new ArrayList<>();
             for (String travelStayCategory : travelStayCategoryList) {
-                TravelStayCategoryEntity travelStayCategoryEntity = new TravelStayCategoryEntity(travelStayNumber, travelStayCategory);
+                TravelStayCategoryEntity travelStayCategoryEntity = new TravelStayCategoryEntity(travelStayNumber,
+                        travelStayCategory);
                 travelStayCategoryEntities.add(travelStayCategoryEntity);
             }
             travelStayCategoryRepository.saveAll(travelStayCategoryEntities);
@@ -144,15 +162,17 @@ public class TravelStayServiceImplement implements TravelStayService {
         return ResponseDto.success();
     }
 
-    //Delete 해당 여행지 게시판 삭제하기 //
+    // Delete 해당 여행지 게시판 삭제하기 //
     @Override
     public ResponseEntity<ResponseDto> deleteTravelStay(Integer travelStayNumber, String userId) {
         try {
             TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(travelStayNumber);
-            if (travelStayEntity == null) return ResponseDto.noExistBoard();
+            if (travelStayEntity == null)
+                return ResponseDto.noExistBoard();
             String user = travelStayEntity.getUserId();
             boolean isUser = user.equals(userId);
-            if (!isUser) return ResponseDto.noPermission();
+            if (!isUser)
+                return ResponseDto.noPermission();
 
             // travelHashtagRepository.deleteByTravelNumber(travelNumber);
             // travelPhotoRepository.deleteByTravelNumber(travelNumber);
@@ -166,16 +186,19 @@ public class TravelStayServiceImplement implements TravelStayService {
         return ResponseDto.success();
     }
 
-    //patch 해당 여행지 게시글 수정하기 //
+    // patch 해당 여행지 게시글 수정하기 //
     @Override
-    public ResponseEntity<ResponseDto> patchTravelStay(PatchTravelStayRequestDto dto, Integer travelStayNumber, String userId) {
+    public ResponseEntity<ResponseDto> patchTravelStay(PatchTravelStayRequestDto dto, Integer travelStayNumber,
+            String userId) {
         try {
             TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(travelStayNumber);
-            if (travelStayEntity == null) return ResponseDto.noExistBoard();
+            if (travelStayEntity == null)
+                return ResponseDto.noExistBoard();
 
             String user = travelStayEntity.getUserId();
             boolean isUser = user.equals(userId);
-            if (!isUser) return ResponseDto.noPermission();
+            if (!isUser)
+                return ResponseDto.noPermission();
 
             travelStayHashtagRepository.deleteByTravelStayNumber(travelStayNumber);
             travelStayPhotoRepository.deleteByTravelStayNumber(travelStayNumber);
@@ -185,7 +208,8 @@ public class TravelStayServiceImplement implements TravelStayService {
             List<String> travelStayHashtagContentList = dto.getTravelStayHashtagContentList();
             List<TravelStayHashtagEntity> travelStayHashtagEntities = new ArrayList<>();
             for (String travelStayHashtagContent : travelStayHashtagContentList) {
-                TravelStayHashtagEntity travelStayHashtagEntity = new TravelStayHashtagEntity(travelStayNumber, travelStayHashtagContent);
+                TravelStayHashtagEntity travelStayHashtagEntity = new TravelStayHashtagEntity(travelStayNumber,
+                        travelStayHashtagContent);
                 travelStayHashtagEntities.add(travelStayHashtagEntity);
             }
             travelStayHashtagRepository.saveAll(travelStayHashtagEntities);
@@ -193,16 +217,17 @@ public class TravelStayServiceImplement implements TravelStayService {
             List<String> travelStayPhotoList = dto.getTravelStayPhotoList();
             List<TravelStayPhotoEntity> travelStayPhotoEntities = new ArrayList<>();
             for (String travelStayPhotoLink : travelStayPhotoList) {
-                TravelStayPhotoEntity travelStayPhotoEntity = new TravelStayPhotoEntity(travelStayNumber, travelStayPhotoLink);
+                TravelStayPhotoEntity travelStayPhotoEntity = new TravelStayPhotoEntity(travelStayNumber,
+                        travelStayPhotoLink);
                 travelStayPhotoEntities.add(travelStayPhotoEntity);
             }
             travelStayPhotoRepository.saveAll(travelStayPhotoEntities);
 
-
             List<String> travelStayCategoryList = dto.getTravelStayCategoryList();
             List<TravelStayCategoryEntity> travelStayCategoryEntities = new ArrayList<>();
             for (String travelStayCategory : travelStayCategoryList) {
-                TravelStayCategoryEntity travelStayCategoryEntity = new TravelStayCategoryEntity(travelStayNumber, travelStayCategory);
+                TravelStayCategoryEntity travelStayCategoryEntity = new TravelStayCategoryEntity(travelStayNumber,
+                        travelStayCategory);
                 travelStayCategoryEntities.add(travelStayCategoryEntity);
             }
             travelStayCategoryRepository.saveAll(travelStayCategoryEntities);
@@ -221,20 +246,21 @@ public class TravelStayServiceImplement implements TravelStayService {
 
         try {
             TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(travelStayNumber);
-            if (travelStayEntity == null) return ResponseDto.noExistBoard();
+            if (travelStayEntity == null)
+                return ResponseDto.noExistBoard();
 
             boolean existedUser = userRepository.existsByUserId(userId);
-            if (!existedUser) return ResponseDto.noExistUserId();
+            if (!existedUser)
+                return ResponseDto.noExistUserId();
 
             boolean isLike = travelStayLikeRepository.existsByUserIdAndTravelStayNumber(userId, travelStayNumber);
 
             TravelStayLikeEntity travelStayLikeEntity = new TravelStayLikeEntity(travelStayNumber, userId);
 
-            if(isLike){
+            if (isLike) {
                 travelStayLikeRepository.delete(travelStayLikeEntity);
                 travelStayEntity.downLikeCount();
-            }
-            else{
+            } else {
                 travelStayLikeRepository.save(travelStayLikeEntity);
                 travelStayEntity.upLikeCount();
             }
@@ -253,10 +279,12 @@ public class TravelStayServiceImplement implements TravelStayService {
     public ResponseEntity<ResponseDto> putSave(Integer travelStayNumber, String userId) {
         try {
             TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(travelStayNumber);
-            if (travelStayEntity == null) return ResponseDto.noExistBoard();
+            if (travelStayEntity == null)
+                return ResponseDto.noExistBoard();
 
             boolean existedUser = userRepository.existsByUserId(userId);
-            if (!existedUser) return ResponseDto.noExistUserId();
+            if (!existedUser)
+                return ResponseDto.noExistUserId();
 
             boolean isSave = travelStaySaveRepository.existsByUserIdAndTravelStayNumber(userId, travelStayNumber);
 
@@ -279,17 +307,18 @@ public class TravelStayServiceImplement implements TravelStayService {
 
         return ResponseDto.success();
     }
-    
-    //put 해당 여행지 게시글 조회수 업 시키기 //
+
+    // put 해당 여행지 게시글 조회수 업 시키기 //
     @Override
     public ResponseEntity<ResponseDto> upTravelStayViewCount(Integer travelStayNumber) {
         try {
             TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(travelStayNumber);
-            if(travelStayEntity == null) return ResponseDto.noExistBoard();
+            if (travelStayEntity == null)
+                return ResponseDto.noExistBoard();
 
             travelStayEntity.upViewCount();
             travelStayRepository.save(travelStayEntity);
-            
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -301,10 +330,10 @@ public class TravelStayServiceImplement implements TravelStayService {
     public ResponseEntity<? super GetTravelStayHallOfFameResponseDto> travelStayHallOfFame() {
         List<GetTravelStayHallOfFamePhotoListResultSet> resultSets = new ArrayList<>();
         try {
-            
+
             String pattern = "yyyy-MM-dd";
 
-            //현재 날짜
+            // 현재 날짜
             Date now = Calendar.getInstance().getTime();
             SimpleDateFormat nowDateFormat = new SimpleDateFormat(pattern);
             String nowDate = nowDateFormat.format(now);
@@ -314,8 +343,8 @@ public class TravelStayServiceImplement implements TravelStayService {
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
             SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern);
             Calendar calendar = Calendar.getInstance();
-            
-            //지난주 날짜 구하기
+
+            // 지난주 날짜 구하기
             calendar.setTime(now);
             calendar.add(Calendar.DATE, -7);
 
@@ -325,15 +354,16 @@ public class TravelStayServiceImplement implements TravelStayService {
             // 만료 주차 구하기 코드
             calendar.setTime(lastWeek);
 
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
             String startDate = simpleDateFormat1.format(calendar.getTime());
-            
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
             String endDate = simpleDateFormat2.format(calendar.getTime());
 
             resultSets = travelStayRepository.getTravelHallOfFamePhotoList(startDate, endDate);
-            if(resultSets.isEmpty()) return ResponseDto.noExistBoard();
-            
+            if (resultSets.isEmpty())
+                return ResponseDto.noExistBoard();
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -346,15 +376,19 @@ public class TravelStayServiceImplement implements TravelStayService {
         List<MyPageSaveStay> myPageStaySaveList = new ArrayList<>();
         try {
             boolean existedUser = userRepository.existsByUserId(userId);
-            if (!existedUser) return ResponseDto.noExistUserId();
+            if (!existedUser)
+                return ResponseDto.noExistUserId();
 
             List<TravelStaySaveEntity> travelStaySaveEntities = travelStaySaveRepository.findByUserId(userId);
             for (TravelStaySaveEntity travelStaySaveEntity : travelStaySaveEntities) {
                 Integer travelStayNumber = travelStaySaveEntity.getTravelStayNumber();
                 TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(travelStayNumber);
-                List<TravelStayPhotoEntity> travelStayPhotoEntitys = travelStayPhotoRepository.findByTravelStayNumber(travelStayNumber);
-                List<TravelStayHashtagEntity> travelStayHashtagEntitys = travelStayHashtagRepository.findByTravelStayNumber(travelStayNumber);
-                MyPageSaveStay myPageSaveStay = new MyPageSaveStay(travelStayEntity, travelStayPhotoEntitys, travelStayHashtagEntitys);
+                List<TravelStayPhotoEntity> travelStayPhotoEntitys = travelStayPhotoRepository
+                        .findByTravelStayNumber(travelStayNumber);
+                List<TravelStayHashtagEntity> travelStayHashtagEntitys = travelStayHashtagRepository
+                        .findByTravelStayNumber(travelStayNumber);
+                MyPageSaveStay myPageSaveStay = new MyPageSaveStay(travelStayEntity, travelStayPhotoEntitys,
+                        travelStayHashtagEntitys);
                 myPageStaySaveList.add(myPageSaveStay);
             }
 
@@ -367,45 +401,55 @@ public class TravelStayServiceImplement implements TravelStayService {
 
     @Override
     public ResponseEntity<? super GetMyPageLikeStayListResponseDto> myPageLikeStayList(String userId) {
-        
+
         List<MyPageLikeStay> myPageLikeStays = new ArrayList<>();
         try {
             List<TravelStayLikeEntity> travelStayLikeEntities = travelStayLikeRepository.findByUserId(userId);
-            for(TravelStayLikeEntity travelStayLikeEntity : travelStayLikeEntities){
+            for (TravelStayLikeEntity travelStayLikeEntity : travelStayLikeEntities) {
                 Integer stayNumber = travelStayLikeEntity.getTravelStayNumber();
                 TravelStayEntity travelStayEntity = travelStayRepository.findByTravelStayNumber(stayNumber);
-                List<TravelStayPhotoEntity> travelStayPhotoEntities = travelStayPhotoRepository.findByTravelStayNumber(stayNumber);
-                List<TravelStayHashtagEntity> travelStayHashtagEntities = travelStayHashtagRepository.findByTravelStayNumber(stayNumber);
-                MyPageLikeStay myPageLikeStay = new MyPageLikeStay(travelStayEntity, travelStayPhotoEntities, travelStayHashtagEntities);
+                List<TravelStayPhotoEntity> travelStayPhotoEntities = travelStayPhotoRepository
+                        .findByTravelStayNumber(stayNumber);
+                List<TravelStayHashtagEntity> travelStayHashtagEntities = travelStayHashtagRepository
+                        .findByTravelStayNumber(stayNumber);
+                MyPageLikeStay myPageLikeStay = new MyPageLikeStay(travelStayEntity, travelStayPhotoEntities,
+                        travelStayHashtagEntities);
                 myPageLikeStays.add(myPageLikeStay);
             }
 
-            
-    } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-    }
-    return GetMyPageLikeStayListResponseDto.success(myPageLikeStays);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetMyPageLikeStayListResponseDto.success(myPageLikeStays);
     }
 
     @Override
     public ResponseEntity<? super GetMyPageBoardStayListResponseDto> myPageBoardStayList(String userId) {
-        List<TravelStayEntity> travelStayEntities  = new ArrayList<>();
+        List<TravelStayEntity> travelStayEntities = new ArrayList<>();
         try {
             boolean user = userRepository.existsByUserId(userId);
-            if(!user) return ResponseDto.noExistUserId();
+            if (!user)
+                return ResponseDto.noExistUserId();
 
             travelStayEntities = travelStayRepository.findByUserId(userId);
 
-        if (travelStayEntities == null) return ResponseDto.noExistUserId();
+            if (travelStayEntities == null)
+                return ResponseDto.noExistUserId();
 
-
-
-    } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetMyPageBoardStayListResponseDto.success(travelStayEntities);
     }
-    return GetMyPageBoardStayListResponseDto.success(travelStayEntities);
+
+    @Override
+    public ResponseEntity<? super GetTravelStayTotalCountResponsDto> travelStayTotalCount() {
+        long count = travelStayRepository.count();
+        System.out.println(count);
+        // return null;
+        return GetTravelStayTotalCountResponsDto.success(count);
     }
 
 }

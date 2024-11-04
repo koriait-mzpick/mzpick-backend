@@ -22,6 +22,7 @@ import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeTravelLi
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelListResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelTotalCountResponsDto;
 import com.koreait.mzpick_backend.entity.travel.TravelEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelHashtagEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelLikeEntity;
@@ -382,4 +383,11 @@ public class TravelServiceImplement implements TravelService {
     return GetMyPageLikeTravelListResponseDto.success(myPageTravelLikeList);
     }
 
+    @Override
+    public ResponseEntity<? super GetTravelTotalCountResponsDto> travelTotalCount() {
+        long count = travelRepository.count();
+        System.out.println(count);
+        // return null;
+        return GetTravelTotalCountResponsDto.success(count);
+    }
 }

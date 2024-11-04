@@ -18,6 +18,7 @@ import com.koreait.mzpick_backend.dto.request.cafe.PostTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeListResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelCafeHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeCafeListResponseDto;
@@ -438,5 +439,13 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             return ResponseDto.databaseError();
         }
         return GetMyPageBoardCafeListResponseDto.success(travelCafeEntities);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelCafeTotalCountResponsDto> getTravelCafeTotalCount() {
+        long count = travelCafeRepository.count();
+        System.out.println(count);
+        // return null;
+        return GetTravelCafeTotalCountResponsDto.success(count);
     }
 }
