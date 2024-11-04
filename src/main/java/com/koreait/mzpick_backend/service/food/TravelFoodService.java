@@ -7,12 +7,10 @@ import com.koreait.mzpick_backend.dto.request.food.PostTravelFoodRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodListResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelFoodHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFoodListResponseDto;
-import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeCafeListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeFoodListResponseDto;
-import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeStayListResponseDto;
-import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveFoodListResponseDto;
 
 //service 여행지 서비스 //
@@ -20,6 +18,8 @@ public interface TravelFoodService {
     ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(Integer page);
 
     ResponseEntity<? super GetTravelFoodDetailResponseDto> getTravelFood(Integer travelNumber);
+    
+    ResponseEntity<? super GetTravelFoodTotalCountResponsDto> travelFoodTotalCount();
 
     ResponseEntity<ResponseDto> postTravelFood(PostTravelFoodRequestDto dto, String userId);
 

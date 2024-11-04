@@ -20,7 +20,7 @@ import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeListResponseDto;
-import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelCafeHallOfFameResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.cafe.TravelCafeCommentService;
 import com.koreait.mzpick_backend.service.cafe.TravelCafeService;
 
@@ -49,6 +49,12 @@ public class TravelCafeController {
         ResponseEntity<? super GetTravelCafeDetailResponseDto> resposne = travelCafeService
                 .getTravelCafe(travelCafeNumber);
         return resposne;
+    }
+
+    @GetMapping("/totalCount")
+    public ResponseEntity<? super GetTravelCafeTotalCountResponsDto> getTravelCafeTotalCount(){
+        ResponseEntity<? super GetTravelCafeTotalCountResponsDto> response = travelCafeService.getTravelCafeTotalCount();
+        return response;
     }
 
     // controller 여행 게시판 작성하기 //

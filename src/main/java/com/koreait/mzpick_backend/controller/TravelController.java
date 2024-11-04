@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.controller;
 
-import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveTravelListResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +20,7 @@ import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelListResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.travel.TravelCommentService;
 import com.koreait.mzpick_backend.service.travel.TravelService;
 
@@ -48,6 +48,13 @@ public class TravelController {
         ResponseEntity<? super GetTravelDetailResponseDto> resposne = travelService.getTravel(travelNumber);
         return resposne;
     }
+
+    @GetMapping("/totalCount")
+    public ResponseEntity<? super GetTravelTotalCountResponsDto> getTravelTotalCount(){
+        ResponseEntity<? super GetTravelTotalCountResponsDto> response = travelService.travelTotalCount();
+        return response;
+    }
+    
 
     // controller 여행 게시판 작성하기 //
     @PostMapping(value = { "", "/" })
