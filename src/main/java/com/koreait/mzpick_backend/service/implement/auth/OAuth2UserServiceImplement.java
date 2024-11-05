@@ -32,6 +32,7 @@ public class OAuth2UserServiceImplement extends DefaultOAuth2UserService {
         UserEntity userEntity = userRepository.findBySnsIdAndJoinPath(snsId, registration);
         CustomOAuth2User customOAuth2User = null;
 
+
         if(userEntity == null){
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("snsId", snsId);
