@@ -52,19 +52,20 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/v1/auth/**", "/oauth2/callback/*", "/file/*", "/").permitAll()
                 .requestMatchers(HttpMethod.GET,
                         "/api/v1/travel/**",
-                        "api/v1/cafe/**",
-                        "api/v1/fashion/**",
+                        "/api/v1/cafe/**",
+                        "/api/v1/fashion/**",
                         "/api/v1/food/**",
-                        "api/v1/stay/**",
-                        "api/v1/keyword/**",
-                        "api/v1/vote/**",
-                        "api/v1/hall-of-fame/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/v1/travel/view/*", "/api/v1/cafe/view/*","api/v1/food/view/*","api/v1/stay/view/*","/api/v1/fashion/view/*").permitAll()
+                        "/api/v1/stay/**",
+                        "/api/v1/keyword/**",
+                        "/api/v1/vote/**",
+                        "/api/v1/hall-of-fame/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/v1/travel/view/*", "/api/v1/cafe/view/*","/api/v1/food/view/*","/api/v1/stay/view/*","/api/v1/fashion/view/*").permitAll()
                 .anyRequest().authenticated())
             .exceptionHandling(exception -> exception
                 .authenticationEntryPoint(new AuthenticationFailEntryPoint()))
+
             .oauth2Login(oauth2 -> oauth2
-                .redirectionEndpoint(endpoint -> endpoint.baseUri("oauth2/callback/*"))
+                .redirectionEndpoint(endpoint -> endpoint.baseUri("/oauth2/callback/*"))
                 .authorizationEndpoint(endpoint -> endpoint
                     .baseUri("/api/v1/auth/sns-sign-in"))
                 .userInfoEndpoint(endpoint -> endpoint.userService(oAuth2Service))
