@@ -63,6 +63,7 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated())
             .exceptionHandling(exception -> exception
                 .authenticationEntryPoint(new AuthenticationFailEntryPoint()))
+                
             .oauth2Login(oauth2 -> oauth2
                 .redirectionEndpoint(endpoint -> endpoint.baseUri("oauth2/callback/*"))
                 .authorizationEndpoint(endpoint -> endpoint
