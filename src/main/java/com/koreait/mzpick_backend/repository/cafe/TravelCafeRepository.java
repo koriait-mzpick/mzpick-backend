@@ -18,10 +18,13 @@ public interface TravelCafeRepository extends JpaRepository<TravelCafeEntity, In
        // ! 5개의 게시글 을 출력하고 Param을 이용한 페이지네이션 구현 //
     @Query(value=
     "SELECT * FROM travel_cafe " +
+    "WHERE travel_location LIKE %:searchLocation% " +
+    "AND travel_cafe_number IN (SELECT DISTINCT travel_cafe_number FROM travel_cafe_hashtag WHERE travel_cafe_hashtag_content LIKE %:hashtag%)" +
+
     "ORDER BY travel_cafe_date DESC " + 
     "LIMIT :paging, 8", 
     nativeQuery=true)
-    List<TravelCafeEntity> findByPaging(@Param("paging") Integer paging);
+    List<TravelCafeEntity> findByPaging(@Param("paging") Integer paging, @Param("searchLocation") String searchLocation, @Param("hashtag") String hashtag);
 
     @Query(
     value=

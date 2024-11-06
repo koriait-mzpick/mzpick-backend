@@ -36,8 +36,12 @@ public class TravelStayController {
 
     // controller 여행게시판 리스트 불러오기//
     @GetMapping(value = { "", "/" })
-    public ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(@RequestParam("page") Integer page) {
-        ResponseEntity<? super GetTravelStayListResponseDto> resposne = travelStayService.getTravelStayList(page);
+    public ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(
+        @RequestParam("page") Integer page,
+        @RequestParam(name="searchLocation", defaultValue="") String searchLocation,
+        @RequestParam(name="hashtag",defaultValue="") String hashtag   
+        ) {
+        ResponseEntity<? super GetTravelStayListResponseDto> resposne = travelStayService.getTravelStayList(page, searchLocation,hashtag);
         return resposne;
     }
 

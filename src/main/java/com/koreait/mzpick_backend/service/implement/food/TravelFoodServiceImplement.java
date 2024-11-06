@@ -55,11 +55,11 @@ public class TravelFoodServiceImplement implements TravelFoodService {
 
     // Get 여행지 게시글 리스트 불러오기 //
     @Override
-    public ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(Integer page) {
+    public ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(Integer page, String searchLocation, String hashtag) {
         List<TravelFood> travelFoods = new ArrayList<>();
         try {
             Integer paging = 8 * (page - 1);
-            List<TravelFoodEntity> travelFoodEntities = travelFoodRepository.findByPaging(paging);
+            List<TravelFoodEntity> travelFoodEntities = travelFoodRepository.findByPaging(paging, searchLocation, hashtag);
             for (TravelFoodEntity travelFoodEntity : travelFoodEntities) {
                 Integer travelFoodNumber = travelFoodEntity.getTravelFoodNumber();
                 List<TravelFoodHashtagEntity> travelFoodHashtagEntities = travelFoodHashtagRepository

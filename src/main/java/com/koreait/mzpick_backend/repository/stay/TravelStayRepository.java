@@ -19,10 +19,12 @@ public interface TravelStayRepository extends JpaRepository<TravelStayEntity, In
      // ! 5개의 게시글 을 출력하고 Param을 이용한 페이지네이션 구현 //
     @Query(value=
     "SELECT * FROM travel_stay " +
+    "WHERE travel_location LIKE %:searchLocation% " +
+    "AND travel_stay_number IN (SELECT DISTINCT travel_stay_number FROM travel_stay_hashtag WHERE travel_stay_hashtag_content LIKE %:hashtag%)" +
     "ORDER BY travel_stay_date DESC " + 
     "LIMIT :paging, 8", 
     nativeQuery=true)
-    List<TravelStayEntity> findByPaging(@Param("paging") Integer paging);
+    List<TravelStayEntity> findByPaging(@Param("paging") Integer paging, @Param("searchLocation") String searchLocation, @Param("hashtag") String hashtag);
 
     @Query(
     value=

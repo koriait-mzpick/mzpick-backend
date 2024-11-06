@@ -15,7 +15,7 @@ import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayTotalCountRespo
 
 //service 여행지 서비스 //
 public interface TravelStayService {
-    ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(Integer page);
+    ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(Integer page, String searchLocation, String hashtag);
 
     ResponseEntity<? super GetTravelStayDetailResponseDto> getTravelStay(Integer travelStayNumber);
     
