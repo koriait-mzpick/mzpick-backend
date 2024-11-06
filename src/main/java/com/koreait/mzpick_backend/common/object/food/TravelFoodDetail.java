@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.food;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ public class TravelFoodDetail {
     private Integer travelFoodLikeCount;
     private Integer travelFoodSaveCount;
     private Integer travelFoodViewCount;
+    private String travelFoodContent;
     private LocalDateTime travelFoodDate;
 
     public TravelFoodDetail(TravelFoodEntity travelFoodEntity, List<TravelFoodPhotoEntity> travelFoodPhotoEntities, List<TravelFoodHashtagEntity> travelFoodHashtagEntities, List<TravelFoodLikeEntity> travelFoodLikeEntities, List<TravelFoodSaveEntity> travelFoodSaveEntities){
@@ -54,6 +54,8 @@ public class TravelFoodDetail {
         this.travelFoodSaveCount = travelFoodSaveUserList.size();
         this.travelFoodViewCount = travelFoodEntity.getTravelFoodViewCount();
         this.travelFoodDate = travelFoodEntity.getTravelFoodDate();
+        this.travelFoodContent = travelFoodEntity.getTravelFoodContent();
+
     }
 }
 
