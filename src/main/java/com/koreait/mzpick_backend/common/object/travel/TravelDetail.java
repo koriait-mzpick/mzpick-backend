@@ -26,6 +26,7 @@ public class TravelDetail {
     private Integer travelViewCount;
     private Integer travelLikeCount;
     private Integer travelSaveCount;
+    private String travelContent;
     private LocalDateTime travelDate;
 
     public TravelDetail(TravelEntity travelEntity, List<TravelPhotoEntity> travelPhotoEntities, List<TravelHashtagEntity> travelHashtagEntities, List<TravelLikeEntity> travelLikeEntities, List<TravelSaveEntity> travelSaveEntities){
@@ -54,6 +55,7 @@ public class TravelDetail {
         this.travelLikeCount = travelLikeUserList.size();
         this.travelViewCount = travelEntity.getTravelViewCount();
         this.travelDate = travelEntity.getTravelDate();
+        this.travelContent = travelEntity.getTravelContent();
     }
 }
 
