@@ -58,11 +58,11 @@ public class TravelStayServiceImplement implements TravelStayService {
 
     // Get 여행지 게시글 리스트 불러오기 //
     @Override
-    public ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(Integer page) {
+    public ResponseEntity<? super GetTravelStayListResponseDto> getTravelStayList(Integer page, String searchLocation, String hashtag) {
         List<TravelStay> travelStays = new ArrayList<>();
         try {
             Integer paging = 8 * (page - 1);
-            List<TravelStayEntity> travelStayEntities = travelStayRepository.findByPaging(paging);
+            List<TravelStayEntity> travelStayEntities = travelStayRepository.findByPaging(paging, searchLocation, hashtag);
             for (TravelStayEntity travelStayEntity : travelStayEntities) {
                 Integer travelStayNumber = travelStayEntity.getTravelStayNumber();
                 List<TravelStayHashtagEntity> travelStayHashtagEntities = travelStayHashtagRepository

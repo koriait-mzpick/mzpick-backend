@@ -40,8 +40,12 @@ public class TravelFoodController {
 
 // controller 여행게시판 리스트 불러오기//
     @GetMapping(value = { "", "/" })
-    public ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(@RequestParam("page") Integer page) {
-        ResponseEntity<? super GetTravelFoodListResponseDto> resposne = travelFoodService.getTravelFoodList(page);
+    public ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(
+        @RequestParam("page") Integer page,
+        @RequestParam(name="searchLocation", defaultValue="") String searchLocation,
+        @RequestParam(name="hashtag",defaultValue="") String hashtag 
+        ) {
+        ResponseEntity<? super GetTravelFoodListResponseDto> resposne = travelFoodService.getTravelFoodList(page ,searchLocation, hashtag);
         return resposne;
     }
 

@@ -53,12 +53,12 @@ public class FashionServiceImplement implements FashionService {
     private final UserRepository userRepository;
 
     @Override
-    public ResponseEntity<? super GetFashionListResponseDto> getFashionList(Integer page) {
+    public ResponseEntity<? super GetFashionListResponseDto> getFashionList(Integer page, String hashtag) {
         List<Fashion> Fashions = new ArrayList<>();
 
         try {
             Integer paging = 8 * (page - 1);
-            List<FashionEntity> fashionEntities = fashionRepository.findByPaging(paging);
+            List<FashionEntity> fashionEntities = fashionRepository.findByPaging(paging, hashtag);
             for (FashionEntity fashionEntity : fashionEntities) {
                 Integer fashionNumber = fashionEntity.getFashionNumber();
                 List<FashionHashtagEntity> fashionHashtagEntities = fashionHashtagRepository

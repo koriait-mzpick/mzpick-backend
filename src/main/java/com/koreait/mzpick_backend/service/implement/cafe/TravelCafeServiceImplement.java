@@ -58,11 +58,11 @@ public class TravelCafeServiceImplement implements TravelCafeService {
 
     // Get 여행지 게시글 리스트 불러오기 //
     @Override
-    public ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(Integer page) {
+    public ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(Integer page, String searchLocation, String hashtag) {
         List<TravelCafe> travelCafes = new ArrayList<>();
         try {
             Integer paging = 8 * (page - 1);
-            List<TravelCafeEntity> travelCafeEntities = travelCafeRepository.findByPaging(paging);
+            List<TravelCafeEntity> travelCafeEntities = travelCafeRepository.findByPaging(paging, searchLocation, hashtag);
             for (TravelCafeEntity travelCafeEntity : travelCafeEntities) {
                 Integer travelCafeNumber = travelCafeEntity.getTravelCafeNumber();
                 List<TravelCafeHashtagEntity> travelCafeHashtagEntities = travelCafeHashtagRepository

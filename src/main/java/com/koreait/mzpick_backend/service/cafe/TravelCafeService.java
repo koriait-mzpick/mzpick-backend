@@ -15,7 +15,7 @@ import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveCafeList
 
 //service 여행지 서비스 //
 public interface TravelCafeService {
-    ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(Integer page);
+    ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(Integer page, String searchLocation, String hashtag);
 
     ResponseEntity<? super GetTravelCafeDetailResponseDto> getTravelCafe(Integer travelCafeNumber);
 

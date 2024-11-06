@@ -38,8 +38,11 @@ public class FashionController {
     
 
     @GetMapping(value = { "", "/" })
-    public ResponseEntity<? super GetFashionListResponseDto> getFashionList(@RequestParam("page") Integer page) {
-        ResponseEntity<? super GetFashionListResponseDto> resposne = fashionService.getFashionList(page);
+    public ResponseEntity<? super GetFashionListResponseDto> getFashionList(
+        @RequestParam("page") Integer page,
+        @RequestParam(name="hashtag",defaultValue="") String hashtag
+        ) {
+        ResponseEntity<? super GetFashionListResponseDto> resposne = fashionService.getFashionList(page, hashtag);
         return resposne;
     }
 

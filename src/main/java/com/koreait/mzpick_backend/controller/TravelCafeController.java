@@ -36,8 +36,11 @@ public class TravelCafeController {
 
     // controller 여행게시판 리스트 불러오기//
     @GetMapping(value = { "", "/" })
-    public ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(@RequestParam("page") Integer page) {
-        ResponseEntity<? super GetTravelCafeListResponseDto> resposne = travelCafeService.getTravelCafeList(page);
+    public ResponseEntity<? super GetTravelCafeListResponseDto> getTravelCafeList(
+    @RequestParam("page") Integer page,
+    @RequestParam(name="searchLocation", defaultValue="") String searchLocation,
+    @RequestParam(name="hashtag",defaultValue="") String hashtag) {
+        ResponseEntity<? super GetTravelCafeListResponseDto> resposne = travelCafeService.getTravelCafeList(page, searchLocation, hashtag);
         return resposne;
     }
 

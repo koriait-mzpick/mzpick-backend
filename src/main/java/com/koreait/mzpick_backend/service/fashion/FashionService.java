@@ -14,7 +14,7 @@ import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeFashionL
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveFashionListResponseDto;
 
 public interface FashionService {
-    ResponseEntity<? super GetFashionListResponseDto> getFashionList(Integer page);
+    ResponseEntity<? super GetFashionListResponseDto> getFashionList(Integer page, String hashtag);
 
     ResponseEntity<? super GetFashionDetailResponseDto> getFashion(Integer fashionNumber);
     

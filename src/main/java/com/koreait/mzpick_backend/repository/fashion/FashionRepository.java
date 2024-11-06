@@ -17,10 +17,11 @@ public interface FashionRepository extends JpaRepository<FashionEntity, Integer>
     // ! 5개의 게시글 을 출력하고 Param을 이용한 페이지네이션 구현 //
     @Query(value=
     "SELECT * FROM fashion " +
+    "AND fashion_number IN (SELECT DISTINCT fashion_number FROM fashion_hashtag WHERE fashion_content LIKE %:hashtag%)" +
     "ORDER BY fashion_date DESC " + 
     "LIMIT :paging, 8", 
     nativeQuery=true)
-    List<FashionEntity> findByPaging(@Param("paging") Integer paging);
+    List<FashionEntity> findByPaging(@Param("paging") Integer paging, @Param("hashtag")String hashtag);
 
     @Query(
     value=

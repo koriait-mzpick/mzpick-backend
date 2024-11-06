@@ -15,7 +15,7 @@ import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveFoodList
 
 //service 여행지 서비스 //
 public interface TravelFoodService {
-    ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(Integer page);
+    ResponseEntity<? super GetTravelFoodListResponseDto> getTravelFoodList(Integer page, String searchLocation, String hashtag);
 
     ResponseEntity<? super GetTravelFoodDetailResponseDto> getTravelFood(Integer travelNumber);
     

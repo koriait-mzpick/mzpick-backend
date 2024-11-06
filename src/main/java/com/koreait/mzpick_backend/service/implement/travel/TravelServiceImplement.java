@@ -53,14 +53,14 @@ public class TravelServiceImplement implements TravelService {
 
     //Get 여행지 게시글 리스트 불러오기 //
     @Override
-    public ResponseEntity<? super GetTravelListResponseDto> getTravelList(Integer page) {
+    public ResponseEntity<? super GetTravelListResponseDto> getTravelList(Integer page, String searchLocation, String hashtag) {
         List<Travel> travels = new ArrayList<>();
 
         System.out.println("aaaa");
 
         try {
             Integer paging = 8 * (page - 1);
-            List<TravelEntity> travelEntities = travelRepository.findByPaging(paging);
+            List<TravelEntity> travelEntities = travelRepository.findByPaging(paging, searchLocation,hashtag);
             for (TravelEntity travelEntity : travelEntities) {
                 Integer travelNumber = travelEntity.getTravelNumber();
                 List<TravelHashtagEntity> travelHashtagEntities = travelHashtagRepository.findByTravelNumber(travelNumber);
