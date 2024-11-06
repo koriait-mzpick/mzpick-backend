@@ -20,7 +20,7 @@ public interface TravelStayRepository extends JpaRepository<TravelStayEntity, In
     @Query(value=
     "SELECT * FROM travel_stay " +
     "WHERE travel_location LIKE %:searchLocation% " +
-    "AND travel_stay_number IN (SELECT DISTINCT travel_stay_number FROM travel_stay_hashtag WHERE travel_stay_hashtag_content LIKE %:hashtag%)" +
+    "AND travel_stay_number IN (SELECT DISTINCT travel_stay_number FROM travel_stay_hashtag WHERE travel_stay_hashtag_content LIKE %:hashtag%) " +
     "ORDER BY travel_stay_date DESC " + 
     "LIMIT :paging, 8", 
     nativeQuery=true)
