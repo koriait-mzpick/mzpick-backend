@@ -20,7 +20,7 @@ public interface TravelFoodRepository extends JpaRepository<TravelFoodEntity, In
     @Query(value=
     "SELECT * FROM travel_food " +
     "WHERE travel_location LIKE %:searchLocation% " +
-    "AND travel_food_number IN (SELECT DISTINCT travel_food_number FROM travel_food_hashtag WHERE travel_food_hashtag_content LIKE %:hashtag%)" +
+    "AND travel_food_number IN (SELECT DISTINCT travel_food_number FROM travel_food_hashtag WHERE travel_food_hashtag_content LIKE %:hashtag%) " +
     "ORDER BY travel_food_date DESC " + 
     "LIMIT :paging, 8", 
     nativeQuery=true)

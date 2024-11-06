@@ -21,7 +21,7 @@ public interface TravelRepository extends JpaRepository<TravelEntity, Integer>{
     @Query(value=
     "SELECT * FROM travel " +
     "WHERE travel_location LIKE %:searchLocation% " +
-    "AND travel_number IN (SELECT DISTINCT travel_number FROM travel_hashtag WHERE travel_hashtag_content LIKE %:hashtag%)" +
+    "AND travel_number IN (SELECT DISTINCT travel_number FROM travel_hashtag WHERE travel_hashtag_content LIKE %:hashtag%) " +
     "ORDER BY travel_date DESC " + 
     "LIMIT :paging, 8", 
     nativeQuery=true)

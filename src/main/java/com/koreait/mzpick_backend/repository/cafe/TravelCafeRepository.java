@@ -19,7 +19,7 @@ public interface TravelCafeRepository extends JpaRepository<TravelCafeEntity, In
     @Query(value=
     "SELECT * FROM travel_cafe " +
     "WHERE travel_location LIKE %:searchLocation% " +
-    "AND travel_cafe_number IN (SELECT DISTINCT travel_cafe_number FROM travel_cafe_hashtag WHERE travel_cafe_hashtag_content LIKE %:hashtag%)" +
+    "AND travel_cafe_number IN (SELECT DISTINCT travel_cafe_number FROM travel_cafe_hashtag WHERE travel_cafe_hashtag_content LIKE %:hashtag%) " +
 
     "ORDER BY travel_cafe_date DESC " + 
     "LIMIT :paging, 8", 
