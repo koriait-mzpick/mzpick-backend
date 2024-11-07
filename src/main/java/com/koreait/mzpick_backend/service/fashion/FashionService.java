@@ -6,7 +6,9 @@ import com.koreait.mzpick_backend.dto.request.fashion.PatchFashionRequestDto;
 import com.koreait.mzpick_backend.dto.request.fashion.PostFashionRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionLikeResponeDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionListResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetFashionHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFashionListResponseDto;
@@ -26,7 +28,11 @@ public interface FashionService {
 
     ResponseEntity<ResponseDto> deleteFashion(Integer fashionNumber, String userId);
 
+    ResponseEntity<? super GetFashionLikeResponeDto> getLike(Integer fashionNumber);
+
     ResponseEntity<ResponseDto> putLike(Integer fashionNumber, String userId);
+
+    ResponseEntity<? super GetFashionSaveResponseDto> getSave(Integer fashionNumber);
 
     ResponseEntity<ResponseDto> putSave(Integer fashionNumber, String userId);
 

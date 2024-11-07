@@ -444,8 +444,7 @@ public class TravelCafeServiceImplement implements TravelCafeService {
     @Override
     public ResponseEntity<? super GetTravelCafeTotalCountResponsDto> getTravelCafeTotalCount() {
         long count = travelCafeRepository.count();
-        System.out.println(count);
-        // return null;
+
         return GetTravelCafeTotalCountResponsDto.success(count);
     }
 }

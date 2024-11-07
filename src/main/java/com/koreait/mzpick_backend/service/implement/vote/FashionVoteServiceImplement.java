@@ -57,11 +57,9 @@ public class FashionVoteServiceImplement implements FashionVoteService {
         FashionVote fashionVotes = null;
         try {
             FashionVoteEntity fashionVoteEntity = fashionVoteRepository.findByFashionVoteNumber(fashionVoteNumber);
-            if (fashionVoteEntity == null)
-                return ResponseDto.noExistBoard();
+            if (fashionVoteEntity == null) return ResponseDto.noExistBoard();
 
-            List<FashionVoteResultEntity> fashionVoteResultEntitys = fashionVoteResultRepository
-                    .findByFashionVoteNumber(fashionVoteNumber);
+            List<FashionVoteResultEntity> fashionVoteResultEntitys = fashionVoteResultRepository.findByFashionVoteNumber(fashionVoteNumber);
             fashionVotes = new FashionVote(fashionVoteEntity, fashionVoteResultEntitys);
 
         } catch (Exception exception) {

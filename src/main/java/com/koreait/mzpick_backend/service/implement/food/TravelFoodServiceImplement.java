@@ -417,8 +417,7 @@ public class TravelFoodServiceImplement implements TravelFoodService {
     @Override
     public ResponseEntity<? super GetTravelFoodTotalCountResponsDto> travelFoodTotalCount() {
         long count = travelFoodRepository.count();
-        System.out.println(count);
-        // return null;
+
         return GetTravelFoodTotalCountResponsDto.success(count);
     }
 

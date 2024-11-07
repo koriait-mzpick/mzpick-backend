@@ -17,7 +17,9 @@ import com.koreait.mzpick_backend.dto.request.fashion.PatchFashionRequestDto;
 import com.koreait.mzpick_backend.dto.request.fashion.PostFashionRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionLikeResponeDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionListResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetFashionHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFashionListResponseDto;
@@ -319,7 +321,6 @@ public class FashionServiceImplement implements FashionService {
         return GetFashionHallOfFameResponseDto.success(resultSets);
     }
 
-
     // 마이페이지 게시글 리스트 가져오기
     @Override
     public ResponseEntity<? super GetMyPageSaveFashionListResponseDto> userSaveFashion(String userId) {
@@ -338,7 +339,7 @@ public class FashionServiceImplement implements FashionService {
                         .findByFashionNumber(fashionNumber);
                 List<FashionHashtagEntity> fashionHashtagEntitys = fashionHashtagRepository
                         .findByFashionNumber(fashionNumber);
-                        MyPageSaveFashion myPageSaveFashion = new MyPageSaveFashion(fashionEntity, fashionPhotoEntitys,
+                MyPageSaveFashion myPageSaveFashion = new MyPageSaveFashion(fashionEntity, fashionPhotoEntitys,
                         fashionHashtagEntitys);
                 myPageSaveFashions.add(myPageSaveFashion);
             }
@@ -352,18 +353,20 @@ public class FashionServiceImplement implements FashionService {
 
     @Override
     public ResponseEntity<? super GetMyPageBoardFashionListResponseDto> myPageBoardFashionList(String userId) {
-        List<FashionEntity> fashionEntities  = new ArrayList<>();
+        List<FashionEntity> fashionEntities = new ArrayList<>();
         try {
             boolean user = userRepository.existsByUserId(userId);
-            if(!user) return ResponseDto.noExistUserId();
+            if (!user)
+                return ResponseDto.noExistUserId();
             fashionEntities = fashionRepository.findByUserId(userId);
 
-        if (fashionEntities == null) return ResponseDto.noExistUserId();
-    } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-    }
-    return GetMyPageBoardFashionListResponseDto.success(fashionEntities);
+            if (fashionEntities == null)
+                return ResponseDto.noExistUserId();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetMyPageBoardFashionListResponseDto.success(fashionEntities);
     }
 
     @Override
@@ -371,29 +374,64 @@ public class FashionServiceImplement implements FashionService {
         List<MyPageLikeFashion> myPageLikeFashions = new ArrayList<>();
         try {
             List<FashionLikeEntity> fashionLikeEntities = fashionLikeRepository.findByUserId(userId);
-            for(FashionLikeEntity fashionLikeEntity : fashionLikeEntities){
+            for (FashionLikeEntity fashionLikeEntity : fashionLikeEntities) {
                 Integer fashionNumber = fashionLikeEntity.getFashionNumber();
                 FashionEntity fashionEntity = fashionRepository.findByFashionNumber(fashionNumber);
-                List<FashionPhotoEntity> fashionPhotoEntities = fashionPhotoRepository.findByFashionNumber(fashionNumber);
-                List<FashionHashtagEntity> fashionHashtagEntities = fashionHashtagRepository.findByFashionNumber(fashionNumber);
-                MyPageLikeFashion myPageLikeFashion = new MyPageLikeFashion(fashionEntity, fashionPhotoEntities, fashionHashtagEntities);
+                List<FashionPhotoEntity> fashionPhotoEntities = fashionPhotoRepository
+                        .findByFashionNumber(fashionNumber);
+                List<FashionHashtagEntity> fashionHashtagEntities = fashionHashtagRepository
+                        .findByFashionNumber(fashionNumber);
+                MyPageLikeFashion myPageLikeFashion = new MyPageLikeFashion(fashionEntity, fashionPhotoEntities,
+                        fashionHashtagEntities);
                 myPageLikeFashions.add(myPageLikeFashion);
             }
 
-            
-    } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-    }
-    return GetMyPageLikeFashionListResponseDto.success(myPageLikeFashions);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetMyPageLikeFashionListResponseDto.success(myPageLikeFashions);
 
     }
 
     @Override
     public ResponseEntity<? super GetFashionTotalCountResponsDto> getFashionTotalCount() {
         long count = fashionRepository.count();
-        System.out.println(count);
-        // return null;
         return GetFashionTotalCountResponsDto.success(count);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetFashionLikeResponeDto> getLike(Integer fashionNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            FashionEntity isBoard = fashionRepository.findByFashionNumber(fashionNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<FashionLikeEntity> fashionLikeEntities = fashionLikeRepository.findByFashionNumber(fashionNumber);
+            for(FashionLikeEntity fashionLikeEntity : fashionLikeEntities){
+                userIdList.add(fashionLikeEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetFashionLikeResponeDto.success(fashionNumber, userIdList);
+    }
+
+    @Override
+    public ResponseEntity<? super GetFashionSaveResponseDto> getSave(Integer fashionNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            FashionEntity isBoard = fashionRepository.findByFashionNumber(fashionNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<FashionSaveEntity> fashionSaveEntities = fashionSaveRepository.findByFashionNumber(fashionNumber);
+            for(FashionSaveEntity fashionSaveEntity : fashionSaveEntities){
+                userIdList.add(fashionSaveEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetFashionSaveResponseDto.success(fashionNumber, userIdList);
     }
 }
