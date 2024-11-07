@@ -55,9 +55,6 @@ public class TravelServiceImplement implements TravelService {
     @Override
     public ResponseEntity<? super GetTravelListResponseDto> getTravelList(Integer page, String searchLocation, String hashtag) {
         List<Travel> travels = new ArrayList<>();
-
-        System.out.println("aaaa");
-
         try {
             Integer paging = 8 * (page - 1);
             List<TravelEntity> travelEntities = travelRepository.findByPaging(paging, searchLocation,hashtag);
@@ -386,8 +383,6 @@ public class TravelServiceImplement implements TravelService {
     @Override
     public ResponseEntity<? super GetTravelTotalCountResponsDto> travelTotalCount() {
         long count = travelRepository.count();
-        System.out.println(count);
-        // return null;
         return GetTravelTotalCountResponsDto.success(count);
     }
 }

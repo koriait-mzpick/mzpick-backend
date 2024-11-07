@@ -447,8 +447,7 @@ public class TravelStayServiceImplement implements TravelStayService {
     @Override
     public ResponseEntity<? super GetTravelStayTotalCountResponsDto> travelStayTotalCount() {
         long count = travelStayRepository.count();
-        System.out.println(count);
-        // return null;
+
         return GetTravelStayTotalCountResponsDto.success(count);
     }
 

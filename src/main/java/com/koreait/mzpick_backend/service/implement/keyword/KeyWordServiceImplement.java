@@ -56,9 +56,7 @@ public class KeyWordServiceImplement implements KeywordService{
             
             calendar.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
             String endDate = simpleDateFormat2.format(calendar.getTime());
-            System.out.println("nowDate: " + nowDate);
-            System.out.println("startDate: " + startDate);
-            System.out.println("endDate: " + endDate);
+
             getKeywordResultsets = keywordRepository.getLanking(startDate, endDate);
 
 
@@ -97,12 +95,10 @@ public class KeyWordServiceImplement implements KeywordService{
             
             calendar.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
             String endDate = simpleDateFormat2.format(calendar.getTime());
-            System.out.println("nowDate: " + nowDate);
-            System.out.println("startDate: " + startDate);
-            System.out.println("endDate: " + endDate);
+
 
             getKeywordUserResultSets = keywordRepository.getUser(userId, startDate, endDate);
-            System.out.println(getKeywordUserResultSets);
+
             if(getKeywordUserResultSets.getUserCount() > 2) return ResponseDto.noKeywordUserCount();
             
             BadWordFiltering badWordFiltering = new BadWordFiltering();

@@ -19,7 +19,9 @@ import com.koreait.mzpick_backend.dto.request.fashion.PostFashionRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionLikeResponeDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionListResponseDto;
+import com.koreait.mzpick_backend.dto.response.fashion.GetFashionSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.fashion.GetFashionTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.fashion.FashionCommentService;
 import com.koreait.mzpick_backend.service.fashion.FashionService;
@@ -117,11 +119,24 @@ public class FashionController {
         return response;
     }
 
+    @GetMapping("/like/{fashionNumber}")
+    public ResponseEntity<? super GetFashionLikeResponeDto> getLike(
+            @PathVariable("fashionNumber") Integer fashionNumber){
+        ResponseEntity<? super GetFashionLikeResponeDto> response = fashionService.getLike(fashionNumber);
+        return response;
+    }
     @PutMapping("/like/{fashionNumber}")
     public ResponseEntity<ResponseDto> putLike(
             @PathVariable("fashionNumber") Integer fashionNumber,
             @AuthenticationPrincipal String userId) {
         ResponseEntity<ResponseDto> response = fashionService.putLike(fashionNumber, userId);
+        return response;
+    }
+    
+    @GetMapping("/save/{fashionNumber}")
+    public ResponseEntity<? super GetFashionSaveResponseDto> getSave(
+            @PathVariable("fashionNumber") Integer fashionNumber){
+        ResponseEntity<? super GetFashionSaveResponseDto> response = fashionService.getSave(fashionNumber);
         return response;
     }
 
