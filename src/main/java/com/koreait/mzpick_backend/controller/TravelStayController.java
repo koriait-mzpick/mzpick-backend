@@ -19,7 +19,9 @@ import com.koreait.mzpick_backend.dto.request.stay.PostTravelStayRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayListResponseDto;
+import com.koreait.mzpick_backend.dto.response.stay.GetTravelStaySaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.stay.GetTravelStayTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.stay.TravelStayCommentService;
 import com.koreait.mzpick_backend.service.stay.TravelStayService;
@@ -124,13 +126,25 @@ public class TravelStayController {
                 userId);
         return response;
     }
-
+    @GetMapping("/like/{travelStayNumber}")
+    public ResponseEntity<? super GetTravelStayLikeResponseDto> getTravelStayLike(
+            @PathVariable("travelStayNumber") Integer travelStayNumber) {
+        ResponseEntity<? super GetTravelStayLikeResponseDto> response = travelStayService.getTravelStayLike(travelStayNumber);
+        return response;
+    }
     // controller 해당 여행 게시판 좋아요 버튼 (클릭 / 클릭 해제) //
     @PutMapping("/like/{travelStayNumber}")
     public ResponseEntity<ResponseDto> putLike(
             @PathVariable("travelStayNumber") Integer travelStayNumber,
             @AuthenticationPrincipal String userId) {
         ResponseEntity<ResponseDto> response = travelStayService.putLike(travelStayNumber, userId);
+        return response;
+    }
+
+    @GetMapping("/save/{travelStayNumber}")
+    public ResponseEntity<? super GetTravelStaySaveResponseDto> getTravelStaySave(
+            @PathVariable("travelStayNumber") Integer travelStayNumber) {
+        ResponseEntity<? super GetTravelStaySaveResponseDto> response = travelStayService.getTravelStaySave(travelStayNumber);
         return response;
     }
 

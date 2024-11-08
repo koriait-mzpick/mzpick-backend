@@ -6,7 +6,9 @@ import com.koreait.mzpick_backend.dto.request.cafe.PatchTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.request.cafe.PostTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeListResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelCafeHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardCafeListResponseDto;
@@ -25,7 +27,11 @@ public interface TravelCafeService {
 
     ResponseEntity<ResponseDto> patchTravelCafe(PatchTravelCafeRequestDto dto, Integer travelCafeNumber, String userId);
 
+    ResponseEntity<? super GetTravelCafeLikeResponseDto> getTravelCafeLike(Integer travelCafeNumber);
+
     ResponseEntity<ResponseDto> putSave(Integer travelNumber, String userId);
+
+    ResponseEntity<? super GetTravelCafeSaveResponseDto> getTravelCafeSave(Integer travelCafeNumber);
 
     ResponseEntity<ResponseDto> putLike(Integer travelNumber, String userId);
 

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.koreait.mzpick_backend.entity.travel.TravelSaveEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelSavePK;
 
+import jakarta.transaction.Transactional;
+
 // Repository 여행지 저장 레포지토리 //
 @Repository
 public interface TravelSaveRepository extends JpaRepository<TravelSaveEntity, TravelSavePK> {
@@ -16,4 +18,6 @@ public interface TravelSaveRepository extends JpaRepository<TravelSaveEntity, Tr
     List<TravelSaveEntity> findByTravelNumber(Integer travelNumber);
     List<TravelSaveEntity> findByUserId(String userId);
 
+    @Transactional
+    void deleteByTravelNumber(Integer travelNumber);
 }

@@ -10,7 +10,9 @@ import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardTravel
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelListResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelTotalCountResponsDto;
 
 //service 여행지 서비스 //
@@ -27,7 +29,11 @@ public interface TravelService {
 
     ResponseEntity<ResponseDto> deleteTravel(Integer travelNumber, String userId);
 
+    ResponseEntity<? super GetTravelLikeResponseDto> getTravelLike(Integer travelNumber);
+
     ResponseEntity<ResponseDto> putLike(Integer travelNumber, String userId);
+
+    ResponseEntity<? super GetTravelSaveResponseDto> getTravelSave(Integer travelNumber);
 
     ResponseEntity<ResponseDto> putSave(Integer travelNumber, String userId);
 

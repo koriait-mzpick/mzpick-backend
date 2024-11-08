@@ -9,13 +9,13 @@ import lombok.Getter;
 
 @Getter
 public class FashionComment {
-    private Integer fashionCommentNumeber;
+    private Integer fashionCommentNumber;
     private Integer fashionNumber;
     private String userId;
     private String fashionComment;
 
     private FashionComment(FashionCommentEntity fashionCommentEntity) {
-        this.fashionCommentNumeber = fashionCommentEntity.getFashionCommentNumber();
+        this.fashionCommentNumber = fashionCommentEntity.getFashionCommentNumber();
         this.fashionNumber = fashionCommentEntity.getFashionNumber();
         this.userId = fashionCommentEntity.getUserId();
         this.fashionComment = fashionCommentEntity.getFashionComment();

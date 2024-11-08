@@ -8,8 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.koreait.mzpick_backend.entity.cafe.TravelCafeLikeEntity;
 import com.koreait.mzpick_backend.entity.cafe.TravelCafeLikepk;
 
+import jakarta.transaction.Transactional;
+
 @Repository
 public interface TravelCafeLikeRepository extends JpaRepository<TravelCafeLikeEntity, TravelCafeLikepk> {
+    @Transactional
+    void deleteByTravelCafeNumber(Integer travelCafeNumber);
     boolean existsByUserIdAndTravelCafeNumber(String userId, Integer travelCafeNumber);
 
     List<TravelCafeLikeEntity> findByTravelCafeNumber(Integer travelCafeNumber);

@@ -8,8 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.koreait.mzpick_backend.entity.fashion.FashionLikeEntity;
 import com.koreait.mzpick_backend.entity.fashion.FashionLikepk;
 
+import jakarta.transaction.Transactional;
+
 @Repository
 public interface FashionLikeRepository extends JpaRepository<FashionLikeEntity, FashionLikepk> {
+    @Transactional
+    void deleteByFashionNumber(Integer fashionNumber);
     boolean existsByUserIdAndFashionNumber(String userId, Integer fashionNumber);
     List<FashionLikeEntity> findByFashionNumber(Integer fashionNumber);
     List<FashionLikeEntity> findByUserId(String userId);

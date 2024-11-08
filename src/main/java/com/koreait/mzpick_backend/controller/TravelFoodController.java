@@ -19,7 +19,9 @@ import com.koreait.mzpick_backend.dto.request.food.PostTravelFoodRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodListResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.food.TravelFoodCommentService;
 import com.koreait.mzpick_backend.service.food.TravelFoodService;
@@ -100,12 +102,24 @@ public class TravelFoodController {
         ResponseEntity<ResponseDto> response = travelFoodService.upTravelFoodViewCount(travelFoodNumber);
         return response;
     }
-
+    @GetMapping("/save/{travelFoodNumber}")
+    public ResponseEntity<? super GetTravelFoodSaveResponseDto> getTravelFoodSave(
+            @PathVariable("travelFoodNumber") Integer travelFoodNumber) {
+        ResponseEntity<? super GetTravelFoodSaveResponseDto> response = travelFoodService.getTravelFoodSave(travelFoodNumber);
+        return response;
+    }
     @PutMapping("/save/{travelFoodNumber}")
     public ResponseEntity<ResponseDto> putSave(
             @PathVariable("travelFoodNumber") Integer travelFoodNumber,
             @AuthenticationPrincipal String userId) {
         ResponseEntity<ResponseDto> response = travelFoodService.putSave(travelFoodNumber, userId);
+        return response;
+    }
+
+    @GetMapping("/like/{travelFoodNumber}")
+    public ResponseEntity<? super GetTravelFoodLikeResponseDto> getTravelFoodLike(
+            @PathVariable("travelFoodNumber") Integer travelFoodNumber) {
+        ResponseEntity<? super GetTravelFoodLikeResponseDto> response = travelFoodService.getTravelFoodLike(travelFoodNumber);
         return response;
     }
 
@@ -117,6 +131,7 @@ public class TravelFoodController {
         ResponseEntity<ResponseDto> response = travelFoodService.putLike(travelFoodNumber, userId);
         return response;
     }
+
     @GetMapping("/comment/{travelFoodNumber}")
     public ResponseEntity<? super GetTravelFoodCommentListResponseDto> getTravelFoodCommentList(
         @PathVariable("travelFoodNumber")Integer travelFoodNumber
