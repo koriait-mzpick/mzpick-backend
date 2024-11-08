@@ -15,20 +15,25 @@ import com.koreait.mzpick_backend.service.keyword.KeywordService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
+// REST API 컨트롤러 지정 //
 @RestController
+// API 경로 지정 //
 @RequestMapping("/api/v1/keyword")
+// 의존성 주입을 위한 어노테이션 //
 @RequiredArgsConstructor
 public class KeywordController {
     
+    // KeywordService 의존성 주입 //
     private final KeywordService keywordService;
 
+    // 키워드 목록 조회 메서드 //
     @GetMapping(value={"", "/"})
     public ResponseEntity<? super GetKeywordListResponseDto> getKeyword() {
         ResponseEntity<? super GetKeywordListResponseDto> response = keywordService.getKeyword();
         return response;
     }
 
+    // 키워드 작성 메서드 //
     @PostMapping("/write")
     public ResponseEntity<ResponseDto> postKeyword(
         @RequestBody @Valid PostKeywordWriteRequestDto dto,

@@ -126,16 +126,19 @@ public class TravelVoteServiceImplement implements TravelVoteService {
                 return ResponseDto.noExistUserId();
             String travelVoteResultChoice = selectNumber == 1 ? travelVoteEntity.getTravelVoteChoice1() : travelVoteEntity.getTravelVoteChoice2();
 
-            TravelVoteResultEntity travelVoteResultEntity = new TravelVoteResultEntity(travelVoteNumber, userId, travelVoteResultChoice);
+            TravelVoteResultEntity travelVoteResultEntity = travelVoteResultRepository.findByUserIdAndTravelVoteNumber(userId, travelVoteNumber);
+            // if(travelVoteResultEntity != null) {
+            //     if(travelVoteResultEntity.getTravelVoteResultChoice().equals(travelVoteResultChoice)) {
+            //         travelVoteResultRepository.delete(travelVoteResultEntity);
+            //         return ResponseDto.success();
+            //     }
+            //     travelVoteResultRepository.delete(travelVoteResultEntity);
+            // }
 
-            boolean isClick = travelVoteResultRepository.existsByUserIdAndTravelVoteNumber(userId, travelVoteNumber);
-
-            if (isClick) {
-                travelVoteResultRepository.delete(travelVoteResultEntity);
-            } else {
-                travelVoteResultRepository.save(travelVoteResultEntity);
-            }
-
+            // 투표 결과 엔티티 생성 //
+            travelVoteResultEntity = new TravelVoteResultEntity(travelVoteNumber, userId, travelVoteResultChoice);
+            travelVoteResultRepository.save(travelVoteResultEntity);
+            
         } catch (Exception exception) {
             exception.printStackTrace();
             ResponseDto.databaseError();

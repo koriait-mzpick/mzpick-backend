@@ -36,20 +36,31 @@ import com.koreait.mzpick_backend.service.vote.FashionVoteService;
 import com.koreait.mzpick_backend.service.vote.TravelVoteService;
 
 import lombok.RequiredArgsConstructor;
-
+// REST API 컨트롤러 지정 //
 @RestController
+// API 경로 지정 //
 @RequestMapping("/api/v1/mypage")
+// 의존성 주입을 위한 어노테이션 //
 @RequiredArgsConstructor
 public class mypageController {
+        // UserService 의존성 주입 //
         private final UserService userService;
+        // TravelService 의존성 주입 //
         private final TravelService travelService;
+        // TravelCafeService 의존성 주입 //
         private final TravelCafeService travelCafeService;
+        // TravelStayService 의존성 주입 //
         private final TravelStayService travelStayService;
+        // TravelFoodService 의존성 주입 //
         private final TravelFoodService travelFoodService;
+        // FashionService 의존성 주입 //
         private final FashionService fashionService;
+        // FashionVoteService 의존성 주입 //
         private final FashionVoteService fashionVoteService;
+        // TravelVoteService 의존성 주입 //
         private final TravelVoteService travelVoteService;
 
+        // 회원 탈퇴 메서드 //
         @DeleteMapping("/user")
         public ResponseEntity<ResponseDto> userDelete(
                         @AuthenticationPrincipal String userId) {
@@ -57,6 +68,7 @@ public class mypageController {
                 return response;
         }
 
+        // 회원 상세정보 조회 메서드 //
         @GetMapping(value = { "/user", "/user/" })
         public ResponseEntity<? super GetUserDetailResponseDto> userDetail(
                         @AuthenticationPrincipal String userId) {
@@ -64,6 +76,7 @@ public class mypageController {
                 return response;
         }
 
+        // 저장한 여행 게시글 목록 조회 메서드 //
         @GetMapping("/save-travel")
         public ResponseEntity<? super GetMyPageSaveTravelListResponseDto> myPageTravelSaveList(
                         @AuthenticationPrincipal String userId) {
@@ -72,6 +85,7 @@ public class mypageController {
                 return response;
         }
 
+        // 저장한 카페 게시글 목록 조회 메서드 //
         @GetMapping("/save-cafe")
         public ResponseEntity<? super GetMyPageSaveCafeListResponseDto> myPageCafeSaveList(
                         @AuthenticationPrincipal String userId) {
@@ -80,6 +94,7 @@ public class mypageController {
                 return response;
         }
 
+        // 저장한 음식점 게시글 목록 조회 메서드 //
         @GetMapping("/save-food")
         public ResponseEntity<? super GetMyPageSaveFoodListResponseDto> myPageFoodSaveList(
                         @AuthenticationPrincipal String userId) {
@@ -88,6 +103,7 @@ public class mypageController {
                 return response;
         }
 
+        // 저장한 숙소 게시글 목록 조회 메서드 //
         @GetMapping("/save-stay")
         public ResponseEntity<? super GetMyPageSaveStayListResponseDto> myPageStaySaveList(
                         @AuthenticationPrincipal String userId) {
@@ -96,6 +112,7 @@ public class mypageController {
                 return response;
         }
 
+        // 저장한 패션 게시글 목록 조회 메서드 //
         @GetMapping("/save-fashion")
         public ResponseEntity<? super GetMyPageSaveFashionListResponseDto> myPageFashionSaveList(
                         @AuthenticationPrincipal String userId) {
@@ -104,8 +121,8 @@ public class mypageController {
                 return response;
         }
 
+        // 작성한 여행 게시글 목록 조회 메서드 //
         @GetMapping("/write-travel")
-
         public ResponseEntity<? super GetMyPageBoardTravelListResponseDto> myPageBoardTravelList(
                         @AuthenticationPrincipal String userId
 
@@ -115,6 +132,7 @@ public class mypageController {
                 return response;
         }
 
+        // 작성한 패션 게시글 목록 조회 메서드 //
         @GetMapping("/write-fashion")
         public ResponseEntity<? super GetMyPageBoardFashionListResponseDto> myPageBoardFashionList(
                         @AuthenticationPrincipal String userId
@@ -125,6 +143,7 @@ public class mypageController {
                 return response;
         }
 
+        // 작성한 음식점 게시글 목록 조회 메서드 //
         @GetMapping("/write-food")
         public ResponseEntity<? super GetMyPageBoardFoodListResponseDto> myPageBoardFoodList(
                         @AuthenticationPrincipal String userId
@@ -135,7 +154,7 @@ public class mypageController {
                 return response;
         }
 
-
+        // 작성한 카페 게시글 목록 조회 메서드 //
         @GetMapping("/write-cafe")
         public ResponseEntity<? super GetMyPageBoardCafeListResponseDto> myPageBoardCafeList(
                         @AuthenticationPrincipal String userId
@@ -145,6 +164,7 @@ public class mypageController {
                 return response;
         }
 
+        // 작성한 숙소 게시글 목록 조회 메서드 //
         @GetMapping("/write-stay")
         public ResponseEntity<? super GetMyPageBoardStayListResponseDto> myPageBoardStayList(
                         @AuthenticationPrincipal String userId
@@ -155,7 +175,7 @@ public class mypageController {
                 return response;
         }
 
-        // 좋아요 가져오기
+        // 좋아요한 여행 게시글 목록 조회 메서드 //
         @GetMapping("/like-travel")
         public ResponseEntity<? super GetMyPageLikeTravelListResponseDto> myPageLikeTravelList(
                         @AuthenticationPrincipal String userId
@@ -166,6 +186,7 @@ public class mypageController {
                 return response;
         }
 
+        // 좋아요한 패션 게시글 목록 조회 메서드 //
         @GetMapping("/like-fashion")
         public ResponseEntity<? super GetMyPageLikeFashionListResponseDto> myPageLikeFashionList(
                         @AuthenticationPrincipal String userId
@@ -176,6 +197,7 @@ public class mypageController {
                 return response;
         }
 
+        // 좋아요한 음식점 게시글 목록 조회 메서드 //
         @GetMapping("/like-food")
         public ResponseEntity<? super GetMyPageLikeFoodListResponseDto> myPageLikeFoodList(
                         @AuthenticationPrincipal String userId
@@ -186,6 +208,7 @@ public class mypageController {
                 return response;
         }
 
+        // 좋아요한 숙소 게시글 목록 조회 메서드 //
         @GetMapping("/like-stay")
         public ResponseEntity<? super GetMyPageLikeStayListResponseDto> myPageLikeStayList(
                         @AuthenticationPrincipal String userId
@@ -196,6 +219,7 @@ public class mypageController {
                 return response;
         }
 
+        // 좋아요한 카페 게시글 목록 조회 메서드 //
         @GetMapping("/like-cafe")
         public ResponseEntity<? super GetMyPageLikeCafeListResponseDto> myPageLikeCafeList(
                         @AuthenticationPrincipal String userId
@@ -206,6 +230,7 @@ public class mypageController {
                 return response;
         }
 
+        // 투표한 패션 게시글 목록 조회 메서드 //
         @GetMapping("/vote-fashion")
         public ResponseEntity<? super GetMyPageVoteFashionListResponseDto> myPageVoteFashionList(
                         @AuthenticationPrincipal String userId
@@ -216,6 +241,7 @@ public class mypageController {
                 return response;
         }
 
+        // 투표한 여행 게시글 목록 조회 메서드 //
         @GetMapping("/vote-travel")
         public ResponseEntity<? super GetMyPageVoteTravelListResponseDto> myPageVoteTravelList(
                         @AuthenticationPrincipal String userId
