@@ -20,7 +20,6 @@ import com.koreait.mzpick_backend.entity.vote.FashionVoteResultEntity;
 import com.koreait.mzpick_backend.repository.user.UserRepository;
 import com.koreait.mzpick_backend.repository.vote.FashionVoteRepository;
 import com.koreait.mzpick_backend.repository.vote.FashionVoteResultRepository;
-import com.koreait.mzpick_backend.repository.vote.TravelVoteRepository;
 import com.koreait.mzpick_backend.service.vote.FashionVoteService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 public class FashionVoteServiceImplement implements FashionVoteService {
     private final UserRepository userRepository;
     private final FashionVoteRepository fashionVoteRepository;
-    private final TravelVoteRepository travelVoteRepository;
     private final FashionVoteResultRepository fashionVoteResultRepository;
 
     @Override
@@ -119,16 +117,15 @@ public class FashionVoteServiceImplement implements FashionVoteService {
             if (!existedUser)
                 return ResponseDto.noExistUserId();
 
-            String fashionVoteResultChoice = selectNumber == 1 ? fashionVoteEntity.getFashionVoteChoice1()
-                    : fashionVoteEntity.getFashionVoteChoice2();
-            FashionVoteResultEntity fashionVoteResultEntity = new FashionVoteResultEntity(userId, fashionVoteNumber,
-                    fashionVoteResultChoice);
-            boolean isClick = fashionVoteResultRepository.existsByUserIdAndFashionVoteNumber(userId, fashionVoteNumber);
-            if (isClick) {
-                fashionVoteResultRepository.delete(fashionVoteResultEntity);
+            String fashionVoteResultChoice = selectNumber == 1 ? fashionVoteEntity.getFashionVoteChoice1() : fashionVoteEntity.getFashionVoteChoice2();
+            FashionVoteResultEntity fashionVoteResultEntity = fashionVoteResultRepository.findByUserIdAndFashionVoteNumber(userId, fashionVoteNumber);
+
+            if (fashionVoteResultEntity == null) {
+                fashionVoteResultEntity = new FashionVoteResultEntity(userId, fashionVoteNumber, fashionVoteResultChoice);
             } else {
-                fashionVoteResultRepository.save(fashionVoteResultEntity);
+                fashionVoteResultEntity.setFashionVoteResultChoice(fashionVoteResultChoice);
             }
+            fashionVoteResultRepository.save(fashionVoteResultEntity);
 
         } catch (Exception exception) {
             exception.printStackTrace();
