@@ -125,15 +125,21 @@ public class TravelVoteServiceImplement implements TravelVoteService {
             if (!existedUser)
                 return ResponseDto.noExistUserId();
             String travelVoteResultChoice = selectNumber == 1 ? travelVoteEntity.getTravelVoteChoice1() : travelVoteEntity.getTravelVoteChoice2();
-          
+        
             TravelVoteResultEntity travelVoteResultEntity = travelVoteResultRepository.findByUserIdAndTravelVoteNumber(userId, travelVoteNumber);
 
+            
             if (travelVoteResultEntity == null) {
                 travelVoteResultEntity = new TravelVoteResultEntity(travelVoteNumber, userId, travelVoteResultChoice);
-            } else {
-                travelVoteResultEntity.setTravelVoteResultChoice(travelVoteResultChoice);
+                travelVoteResultRepository.save(travelVoteResultEntity);
             }
-            travelVoteResultRepository.save(travelVoteResultEntity);
+            else if (travelVoteResultEntity.getTravelVoteResultChoice().equals(travelVoteResultChoice)) {
+                travelVoteResultRepository.delete(travelVoteResultEntity);
+            }
+            else {
+                travelVoteResultEntity.setTravelVoteResultChoice(travelVoteResultChoice);
+                travelVoteResultRepository.save(travelVoteResultEntity);
+            }
 
         } catch (Exception exception) {
             exception.printStackTrace();

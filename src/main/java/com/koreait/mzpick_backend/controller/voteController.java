@@ -119,7 +119,7 @@ public class voteController {
 
     @PutMapping("/fashion/vote-click/{fashionVoteNumber}/{selectNumber}")
     public ResponseEntity<ResponseDto> putclickVote(
-            @PathVariable("fashoinVoteNumber") Integer fashionVoteNumber,
+            @PathVariable("fashionVoteNumber") Integer fashionVoteNumber,
             @PathVariable("selectNumber") Integer selectNumber,
             @AuthenticationPrincipal String userId) {
         ResponseEntity<ResponseDto> response = fashionVoteService.clickVote(fashionVoteNumber,selectNumber, userId);
