@@ -16,6 +16,7 @@ import com.koreait.mzpick_backend.entity.travel.resultSet.GetTravelVoteResultSet
 public interface TravelVoteResultRepository extends JpaRepository<TravelVoteResultEntity, TravelVoteResultPK> {
     List<TravelVoteResultEntity> findByTravelVoteNumber(Integer travelVoteNumber);
     boolean existsByUserIdAndTravelVoteNumber(String userId, Integer travelVoteNumber);
+    TravelVoteResultEntity findByUserIdAndTravelVoteNumber(String userId, Integer travelVoteNumber);
 
     @Query(value = 
     "SELECT travel_vote_result_choice as choice, count(*) as count " +
