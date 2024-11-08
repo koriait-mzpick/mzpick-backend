@@ -7,14 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.koreait.mzpick_backend.entity.fashion.resultSet.GetFashionVoteResultSet;
 import com.koreait.mzpick_backend.entity.vote.FashionVoteResultEntity;
 import com.koreait.mzpick_backend.entity.vote.FashionVoteResultpk;
-import com.koreait.mzpick_backend.entity.fashion.resultSet.GetFashionVoteResultSet;
 
 @Repository
 public interface FashionVoteResultRepository extends JpaRepository<FashionVoteResultEntity, FashionVoteResultpk> {
     List<FashionVoteResultEntity> findByFashionVoteNumber(Integer FashionVoteNumber);
     boolean existsByUserIdAndFashionVoteNumber(String userId, Integer FashionVoteNumber);
+    FashionVoteResultEntity findByUserIdAndFashionVoteNumber(String userId, Integer fashionVoteNumber);
+
 
     @Query(value = 
     "SELECT fashion_vote_result_choice as choice, count(*) as count " +
