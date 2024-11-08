@@ -19,7 +19,9 @@ import com.koreait.mzpick_backend.dto.request.travel.PostTravelRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelListResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.travel.TravelCommentService;
 import com.koreait.mzpick_backend.service.travel.TravelService;
@@ -125,6 +127,13 @@ public class TravelController {
         return response;
     }
 
+    @GetMapping("/like/{travelNumber}")
+    public ResponseEntity<? super GetTravelLikeResponseDto> getTravelLike(
+            @PathVariable("travelNumber") Integer travelNumber) {
+        ResponseEntity<? super GetTravelLikeResponseDto> response = travelService.getTravelLike(travelNumber);
+        return response;
+    }
+
     // controller 해당 여행 게시판 좋아요 버튼 (클릭 / 클릭 해제) //
     @PutMapping("/like/{travelNumber}")
     public ResponseEntity<ResponseDto> putLike(
@@ -134,6 +143,12 @@ public class TravelController {
         return response;
     }
 
+    @GetMapping("/save/{travelNumber}")
+    public ResponseEntity<? super GetTravelSaveResponseDto> getTravelSave(
+            @PathVariable("travelNumber") Integer travelNumber) {
+        ResponseEntity<? super GetTravelSaveResponseDto> response = travelService.getTravelSave(travelNumber);
+        return response;
+    }
     // controller 여행 게시판 저장 (저장 / 저장 취소) //
     @PutMapping("/save/{travelNumber}")
     public ResponseEntity<ResponseDto> putSave(
@@ -142,6 +157,7 @@ public class TravelController {
         ResponseEntity<ResponseDto> response = travelService.putSave(travelNumber, userId);
         return response;
     }
+
 
 
 }

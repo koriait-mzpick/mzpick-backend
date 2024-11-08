@@ -6,7 +6,9 @@ import com.koreait.mzpick_backend.dto.request.food.PatchTravelFoodRequestDto;
 import com.koreait.mzpick_backend.dto.request.food.PostTravelFoodRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodListResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelFoodHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFoodListResponseDto;
@@ -27,7 +29,11 @@ public interface TravelFoodService {
 
     ResponseEntity<ResponseDto> deleteTravelFood(Integer travelNumber, String userId);
 
+    ResponseEntity<? super GetTravelFoodLikeResponseDto> getTravelFoodLike(Integer travelNumber);
+
     ResponseEntity<ResponseDto> putLike(Integer travelNumber, String userId);
+
+    ResponseEntity<? super GetTravelFoodSaveResponseDto> getTravelFoodSave(Integer travelNumber);
 
     ResponseEntity<ResponseDto> putSave(Integer travelNumber, String userId);
 

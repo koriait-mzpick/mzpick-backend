@@ -149,6 +149,8 @@ public class FashionServiceImplement implements FashionService {
             fashionHashtagRepository.deleteByFashionNumber(fashionNumber);
             fashionPhotoRepository.deleteByFashionNumber(fashionNumber);
             fashionCommentRepository.deleteByFashionNumber(fashionNumber);
+            fashionLikeRepository.deleteByFashionNumber(fashionNumber);
+            fashionSaveRepository.deleteByFashionNumber(fashionNumber);
             fashionRepository.delete(fashionEntity);
 
         } catch (Exception exception) {

@@ -17,7 +17,9 @@ import com.koreait.mzpick_backend.dto.request.cafe.PatchTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.request.cafe.PostTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeListResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelCafeHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardCafeListResponseDto;
@@ -173,9 +175,11 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             if (!isUser)
                 return ResponseDto.noPermission();
 
-            // travelHashtagRepository.deleteByTravelNumber(travelNumber);
-            // travelPhotoRepository.deleteByTravelNumber(travelNumber);
-            // travelCommentRepository.deleteByTravelNumber(travelNumber);
+            travelCafeHashtagRepository.deleteByTravelCafeNumber(travelCafeNumber);
+            travelCafePhotoRepository.deleteByTravelCafeNumber(travelCafeNumber);
+            travelCafeCommentRepository.deleteByTravelCafeNumber(travelCafeNumber);
+            travelCafeLikeRepository.deleteByTravelCafeNumber(travelCafeNumber);
+            travelCafeSaveRepository.deleteByTravelCafeNumber(travelCafeNumber);
             travelCafeRepository.delete(travelCafeEntity);
 
         } catch (Exception exception) {
@@ -446,5 +450,39 @@ public class TravelCafeServiceImplement implements TravelCafeService {
         long count = travelCafeRepository.count();
 
         return GetTravelCafeTotalCountResponsDto.success(count);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelCafeLikeResponseDto> getTravelCafeLike(Integer travelCafeNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            TravelCafeEntity isBoard = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<TravelCafeLikeEntity> travelCafeLikeEntities = travelCafeLikeRepository.findByTravelCafeNumber(travelCafeNumber);
+            for(TravelCafeLikeEntity travelCafeLikeEntity : travelCafeLikeEntities){
+                userIdList.add(travelCafeLikeEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTravelCafeLikeResponseDto.success(travelCafeNumber, userIdList);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelCafeSaveResponseDto> getTravelCafeSave(Integer travelCafeNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            TravelCafeEntity isBoard = travelCafeRepository.findByTravelCafeNumber(travelCafeNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<TravelCafeSaveEntity> travelCafeSaveEntities = travelCafeSaveRepository.findByTravelCafeNumber(travelCafeNumber);
+            for(TravelCafeSaveEntity travelCafeSaveEntity : travelCafeSaveEntities){
+                userIdList.add(travelCafeSaveEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTravelCafeSaveResponseDto.success(travelCafeNumber, userIdList);
     }
 }

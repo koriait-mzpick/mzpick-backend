@@ -19,7 +19,9 @@ import com.koreait.mzpick_backend.dto.request.cafe.PostTravelCafeRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeCommentListResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeListResponseDto;
+import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.cafe.GetTravelCafeTotalCountResponsDto;
 import com.koreait.mzpick_backend.service.cafe.TravelCafeCommentService;
 import com.koreait.mzpick_backend.service.cafe.TravelCafeService;
@@ -124,7 +126,12 @@ public class TravelCafeController {
         ResponseEntity<ResponseDto> response = travelCafeCommentService.deleteTravelCafeComment(travelCafeCommentNumber, userId);
         return response;
     }
-
+    @GetMapping("/like/{travelCafeNumber}")
+    public ResponseEntity<? super GetTravelCafeLikeResponseDto> getTravelCafeLike(
+            @PathVariable("travelCafeNumber") Integer travelCafeNumber) {
+        ResponseEntity<? super GetTravelCafeLikeResponseDto> response = travelCafeService.getTravelCafeLike(travelCafeNumber);
+        return response;
+    }
     // controller 해당 여행 게시판 좋아요 버튼 (클릭 / 클릭 해제) //
     @PutMapping("/like/{travelCafeNumber}")
     public ResponseEntity<ResponseDto> putLike(
@@ -132,6 +139,13 @@ public class TravelCafeController {
         @AuthenticationPrincipal String userId
     ) {
         ResponseEntity<ResponseDto> response = travelCafeService.putLike(travelCafeNumber, userId);
+        return response;
+    }
+
+    @GetMapping("/save/{travelCafeNumber}")
+    public ResponseEntity<? super GetTravelCafeSaveResponseDto> getTravelCafeSave(
+            @PathVariable("travelCafeNumber") Integer travelCafeNumber) {
+        ResponseEntity<? super GetTravelCafeSaveResponseDto> response = travelCafeService.getTravelCafeSave(travelCafeNumber);
         return response;
     }
 

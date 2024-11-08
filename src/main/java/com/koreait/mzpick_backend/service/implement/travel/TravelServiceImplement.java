@@ -21,7 +21,9 @@ import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardTravel
 import com.koreait.mzpick_backend.dto.response.mypage.like.GetMyPageLikeTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.save.GetMyPageSaveTravelListResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelListResponseDto;
+import com.koreait.mzpick_backend.dto.response.travel.GetTravelSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.travel.GetTravelTotalCountResponsDto;
 import com.koreait.mzpick_backend.entity.travel.TravelEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelHashtagEntity;
@@ -29,6 +31,7 @@ import com.koreait.mzpick_backend.entity.travel.TravelLikeEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelPhotoEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelSaveEntity;
 import com.koreait.mzpick_backend.entity.travel.resultSet.GetTravelHallOfFamePhotoListResultSet;
+import com.koreait.mzpick_backend.repository.travel.TravelCommentRepository;
 import com.koreait.mzpick_backend.repository.travel.TravelHashtagRepository;
 import com.koreait.mzpick_backend.repository.travel.TravelLikeRepository;
 import com.koreait.mzpick_backend.repository.travel.TravelPhotoRepository;
@@ -49,6 +52,7 @@ public class TravelServiceImplement implements TravelService {
     private final TravelPhotoRepository travelPhotoRepository;
     private final TravelLikeRepository travelLikeRepository;
     private final TravelSaveRepository travelSaveRepository;
+    private final TravelCommentRepository travelCommentRepository;
     private final UserRepository userRepository;
 
     //Get 여행지 게시글 리스트 불러오기 //
@@ -138,9 +142,11 @@ public class TravelServiceImplement implements TravelService {
             boolean isUser = user.equals(userId);
             if (!isUser) return ResponseDto.noPermission();
 
-            // travelHashtagRepository.deleteByTravelNumber(travelNumber);
-            // travelPhotoRepository.deleteByTravelNumber(travelNumber);
-            // travelCommentRepository.deleteByTravelNumber(travelNumber);
+            travelHashtagRepository.deleteByTravelNumber(travelNumber);
+            travelPhotoRepository.deleteByTravelNumber(travelNumber);
+            travelCommentRepository.deleteByTravelNumber(travelNumber);
+            travelLikeRepository.deleteByTravelNumber(travelNumber);
+            travelSaveRepository.deleteByTravelNumber(travelNumber);
             travelRepository.delete(travelEntity);
 
         } catch (Exception exception) {
@@ -384,5 +390,39 @@ public class TravelServiceImplement implements TravelService {
     public ResponseEntity<? super GetTravelTotalCountResponsDto> travelTotalCount() {
         long count = travelRepository.count();
         return GetTravelTotalCountResponsDto.success(count);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelLikeResponseDto> getTravelLike(Integer travelNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            TravelEntity isBoard = travelRepository.findByTravelNumber(travelNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<TravelLikeEntity> travelLikeEntities = travelLikeRepository.findByTravelNumber(travelNumber);
+            for(TravelLikeEntity travelLikeEntity : travelLikeEntities){
+                userIdList.add(travelLikeEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTravelLikeResponseDto.success(travelNumber, userIdList);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelSaveResponseDto> getTravelSave(Integer travelNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            TravelEntity isBoard = travelRepository.findByTravelNumber(travelNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<TravelSaveEntity> travelSaveEntities = travelSaveRepository.findByTravelNumber(travelNumber);
+            for(TravelSaveEntity travelSaveEntity : travelSaveEntities){
+                userIdList.add(travelSaveEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTravelSaveResponseDto.success(travelNumber, userIdList);
     }
 }

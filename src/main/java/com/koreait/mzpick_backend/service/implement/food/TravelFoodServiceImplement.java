@@ -17,7 +17,9 @@ import com.koreait.mzpick_backend.dto.request.food.PatchTravelFoodRequestDto;
 import com.koreait.mzpick_backend.dto.request.food.PostTravelFoodRequestDto;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodDetailResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodLikeResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodListResponseDto;
+import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodSaveResponseDto;
 import com.koreait.mzpick_backend.dto.response.food.GetTravelFoodTotalCountResponsDto;
 import com.koreait.mzpick_backend.dto.response.hallOfFame.GetTravelFoodHallOfFameResponseDto;
 import com.koreait.mzpick_backend.dto.response.mypage.board.GetMyPageBoardFoodListResponseDto;
@@ -155,9 +157,11 @@ public class TravelFoodServiceImplement implements TravelFoodService {
             if (!isUser)
                 return ResponseDto.noPermission();
 
-            // travelHashtagRepository.deleteByTravelNumber(travelNumber);
-            // travelPhotoRepository.deleteByTravelNumber(travelNumber);
-            // travelCommentRepository.deleteByTravelNumber(travelNumber);
+            travelFoodHashtagRepository.deleteByTravelFoodNumber(travelFoodNumber);
+            travelFoodPhotoRepository.deleteByTravelFoodNumber(travelFoodNumber);
+            travelFoodCommentRepository.deleteByTravelFoodNumber(travelFoodNumber);
+            travelFoodLikeRepository.deleteByTravelFoodNumber(travelFoodNumber);
+            travelFoodSaveRepository.deleteByTravelFoodNumber(travelFoodNumber);
             travelFoodRepository.delete(travelFoodEntity);
 
         } catch (Exception exception) {
@@ -419,6 +423,40 @@ public class TravelFoodServiceImplement implements TravelFoodService {
         long count = travelFoodRepository.count();
 
         return GetTravelFoodTotalCountResponsDto.success(count);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelFoodLikeResponseDto> getTravelFoodLike(Integer travelFoodNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            TravelFoodEntity isBoard = travelFoodRepository.findByTravelFoodNumber(travelFoodNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<TravelFoodLikeEntity> travelFoodLikeEntities = travelFoodLikeRepository.findByTravelFoodNumber(travelFoodNumber);
+            for(TravelFoodLikeEntity travelFoodLikeEntity : travelFoodLikeEntities){
+                userIdList.add(travelFoodLikeEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTravelFoodLikeResponseDto.success(travelFoodNumber, userIdList);
+    }
+
+    @Override
+    public ResponseEntity<? super GetTravelFoodSaveResponseDto> getTravelFoodSave(Integer travelFoodNumber) {
+        List<String> userIdList = new ArrayList<>();
+        try {
+            TravelFoodEntity isBoard = travelFoodRepository.findByTravelFoodNumber(travelFoodNumber);
+            if(isBoard == null) return ResponseDto.noExistBoard();
+            List<TravelFoodSaveEntity> travelFoodSaveEntities = travelFoodSaveRepository.findByTravelFoodNumber(travelFoodNumber);
+            for(TravelFoodSaveEntity travelFoodSaveEntity : travelFoodSaveEntities){
+                userIdList.add(travelFoodSaveEntity.getUserId());
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetTravelFoodSaveResponseDto.success(travelFoodNumber, userIdList);
     }
 
     
