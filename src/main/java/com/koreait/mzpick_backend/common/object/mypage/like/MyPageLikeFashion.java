@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.mypage.like;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,7 @@ public class MyPageLikeFashion {
         this.mypageBoardNumber = fashionEntity.getFashionNumber();
         this.mypagePhotoList = myPagePhotoList.get(0);
         this.mypageHashTagList = myPageHashtagList;
-        this.mypageBoardDate = fashionEntity.getFashionDate();
+        this.mypageBoardDate = fashionEntity.getFashionDate().minusHours(9);;
     }
 
     public static List<MyPageLikeFashion> getMyPageLikeFashionList(List<FashionEntity> fashionEntities, List<FashionPhotoEntity> fashionPhotoEntities, List<FashionHashtagEntity> fashionHashtagEntities) {

@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.mypage.board;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public class MyPageBoardFashion {
         this.userId = fashionEntity.getUserId();
         this.mypageBoardNumber = fashionEntity.getFashionNumber();
         this.mypageBoardTitle = fashionEntity.getFashionTitle();
-        this.mypageBoardDate = fashionEntity.getFashionDate();
+        this.mypageBoardDate = fashionEntity.getFashionDate().minusHours(9);
     }
 
     public static List<MyPageBoardFashion> getMyPageBoardFashionList(List<FashionEntity> fashionEntities) {

@@ -29,7 +29,7 @@ public class MyPageSaveStay {
         this.travelStayNumber = travelStayEntity.getTravelStayNumber();
         this.travelStayPhoto = travelStayPhotoList.get(0);
         this.travelStayHashtagList = travelStayHashtagList;
-        this.travelStayDate = travelStayEntity.getTravelStayDate();
+        this.travelStayDate = travelStayEntity.getTravelStayDate().minusHours(9);;
     }
 
     public static List<MyPageSaveStay> getList(List<TravelStayEntity> travelStayEntities, List<TravelStayPhotoEntity> travelStayPhotoEntities, List<TravelStayHashtagEntity> travelStayHashtagEntities){

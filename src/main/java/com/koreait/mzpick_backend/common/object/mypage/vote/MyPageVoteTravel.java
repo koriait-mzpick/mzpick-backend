@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.mypage.vote;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class MyPageVoteTravel {
         this.mypageVoteNumber = travelVoteEntity.getTravelVoteNumber();
         this.mypageVoteTitle = travelVoteEntity.getTravelVoteTitle();
         this.userId = travelVoteEntity.getUserId();
-        this.mypageVoteDate = travelVoteEntity.getTravelVoteDate();
+        this.mypageVoteDate = travelVoteEntity.getTravelVoteDate().minusHours(9);;
     }
 
     public static List<MyPageVoteTravel> getMyPageVoteTravleList(List<TravelVoteEntity> travelVoteEntities) {

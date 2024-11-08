@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.travel;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,7 @@ public class TravelDetail {
         this.travelSaveCount = travelSaveUserList.size();
         this.travelLikeCount = travelLikeUserList.size();
         this.travelViewCount = travelEntity.getTravelViewCount();
-        this.travelDate = travelEntity.getTravelDate();
+        this.travelDate = travelEntity.getTravelDate().minusHours(9);;
         this.travelContent = travelEntity.getTravelContent();
     }
 }

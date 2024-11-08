@@ -39,6 +39,7 @@ public class TravelVoteEntity {
     @Column(name="travel_vote_choice_2")
     private String travelVoteChoice2;
     private LocalDateTime travelVoteDate;
+    private LocalDateTime travelVoteExpireDate;
 
 
     public TravelVoteEntity(PostTravelVoteRequestDto dto, String userId){
@@ -49,5 +50,6 @@ public class TravelVoteEntity {
         this.travelVoteChoice1 = dto.getTravelVoteChoice1();
         this.travelVoteChoice2 = dto.getTravelVoteChoice2();
         this.travelVoteDate = CustomDatetime.getLocalDatetime();
+        this.travelVoteExpireDate= CustomDatetime.getExpireDatetime();
     }
 }

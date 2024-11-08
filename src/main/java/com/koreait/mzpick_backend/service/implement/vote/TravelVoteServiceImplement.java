@@ -1,5 +1,6 @@
 package com.koreait.mzpick_backend.service.implement.vote;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +36,9 @@ public class TravelVoteServiceImplement implements TravelVoteService {
     @Override
     public ResponseEntity<? super GetTravelVoteListResponseDto> getTravelVoteList() {
         List<TravelVote> travelVotes = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
         try {
-            List<TravelVoteEntity> travelVoteEntitys = travelVoteRepository.findAll();
+            List<TravelVoteEntity> travelVoteEntitys = travelVoteRepository.findByTravelVoteExpireDateGreaterThanEqual(now);
             for (TravelVoteEntity travelVoteEntity : travelVoteEntitys) {
                 Integer travelVoteNumber = travelVoteEntity.getTravelVoteNumber();
                 List<TravelVoteResultEntity> travelVoteResultEntitys = travelVoteResultRepository

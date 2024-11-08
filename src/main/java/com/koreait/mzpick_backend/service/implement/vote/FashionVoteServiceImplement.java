@@ -1,5 +1,6 @@
 package com.koreait.mzpick_backend.service.implement.vote;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +35,10 @@ public class FashionVoteServiceImplement implements FashionVoteService {
 
     @Override
     public ResponseEntity<? super GetFashionVoteListResponseDto> getFashionVoteList() {
+        LocalDateTime now = LocalDateTime.now();
         List<FashionVote> fashionVotes = new ArrayList<>();
         try {
-            List<FashionVoteEntity> fashionVoteEntitys = fashionVoteRepository.findAll();
+            List<FashionVoteEntity> fashionVoteEntitys = fashionVoteRepository.findByFashionVoteExpireDateGreaterThanEqual(now);
             for (FashionVoteEntity fashionVoteEntity : fashionVoteEntitys) {
                 Integer fashionVoteNumber = fashionVoteEntity.getFashionVoteNumber();
                 List<FashionVoteResultEntity> fashionVoteResultEntitys = fashionVoteResultRepository

@@ -53,7 +53,7 @@ public class TravelFoodDetail {
         this.travelFoodLikeCount = travelFoodLikeUserList.size();
         this.travelFoodSaveCount = travelFoodSaveUserList.size();
         this.travelFoodViewCount = travelFoodEntity.getTravelFoodViewCount();
-        this.travelFoodDate = travelFoodEntity.getTravelFoodDate();
+        this.travelFoodDate = travelFoodEntity.getTravelFoodDate().minusHours(9);;
         this.travelFoodContent = travelFoodEntity.getTravelFoodContent();
 
     }

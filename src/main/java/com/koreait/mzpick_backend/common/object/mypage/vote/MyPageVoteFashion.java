@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.mypage.vote;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class MyPageVoteFashion {
         this.mypageVoteNumber = fashionVoteEntity.getFashionVoteNumber();
         this.mypageVoteTitle = fashionVoteEntity.getFashionVoteTitle();
         this.userId = fashionVoteEntity.getUserId();
-        this.mypageVoteDate = fashionVoteEntity.getFashionVoteDate();
+        this.mypageVoteDate = fashionVoteEntity.getFashionVoteDate().minusHours(9);;
 
     }
 

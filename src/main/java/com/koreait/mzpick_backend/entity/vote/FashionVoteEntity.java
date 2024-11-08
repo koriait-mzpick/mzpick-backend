@@ -37,6 +37,7 @@ public class FashionVoteEntity {
     @Column(name="fashion_vote_choice_2")
     private String fashionVoteChoice2;
     private LocalDateTime fashionVoteDate;
+    private LocalDateTime fashionVoteExpireDate;
 
     public FashionVoteEntity(PostFashionlVoteRequestDto dto, String userId){
         this.userId = userId;
@@ -46,5 +47,6 @@ public class FashionVoteEntity {
         this.fashionVoteChoice1 = dto.getFashionVoteChoice1();
         this.fashionVoteChoice2 = dto.getFashionVoteChoice2();
         this.fashionVoteDate = CustomDatetime.getLocalDatetime();
+        this.fashionVoteExpireDate = CustomDatetime.getExpireDatetime();
     }
 }
