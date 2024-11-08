@@ -1,3 +1,4 @@
+
 package com.koreait.mzpick_backend.dto.response.cafe;
 
 import java.util.List;
@@ -9,6 +10,9 @@ import com.koreait.mzpick_backend.dto.response.ResponseCode;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.ResponseMessage;
 
+import lombok.Getter;
+
+@Getter
 public class GetTravelCafeSaveResponseDto extends ResponseDto {
     private Integer cafeNumber;
     private List<String> userIdList;
