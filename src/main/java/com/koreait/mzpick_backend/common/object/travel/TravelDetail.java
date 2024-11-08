@@ -11,37 +11,56 @@ import com.koreait.mzpick_backend.entity.travel.TravelPhotoEntity;
 import com.koreait.mzpick_backend.entity.travel.TravelSaveEntity;
 
 import lombok.Getter;
-
+// 여행 게시글의 상세 정보를 담는 클래스
 @Getter
 public class TravelDetail {
+    // 게시글 번호
     private Integer travelNumber;
+    // 작성자 ID
     private String userId;
+    // 여행 위치
     private String travelLocation;
+    // 게시글 제목
     private String travelTitle;
+    // 게시글 사진 URL 목록
     private List<String> travelPhotoList;
+    // 해시태그 목록
     private List<String> travelHashtagList;
+    // 좋아요한 사용자 ID 목록
     private List<String> travelLikeUserList;
+    // 저장한 사용자 ID 목록
     private List<String> travelSaveUserList;
+    // 조회수
     private Integer travelViewCount;
+    // 좋아요 수
     private Integer travelLikeCount;
+    // 저장 수
     private Integer travelSaveCount;
+    // 게시글 내용
     private String travelContent;
+    // 작성일시
     private LocalDateTime travelDate;
 
+    // Entity들을 TravelDetail로 변환하는 생성자
     public TravelDetail(TravelEntity travelEntity, List<TravelPhotoEntity> travelPhotoEntities, List<TravelHashtagEntity> travelHashtagEntities, List<TravelLikeEntity> travelLikeEntities, List<TravelSaveEntity> travelSaveEntities){
 
+        // 사진 URL 목록 변환
         List<String> travelPhotoList = new ArrayList<>();
         for (TravelPhotoEntity travelPhotoEntity: travelPhotoEntities) travelPhotoList.add(travelPhotoEntity.getTravelPhotoLink());
         
+        // 해시태그 목록 변환
         List<String> travelHashtagList = new ArrayList<>();
         for (TravelHashtagEntity travelHashtagEntitiy: travelHashtagEntities) travelHashtagList.add(travelHashtagEntitiy.getTravelHashtagContent());
         
+        // 좋아요한 사용자 목록 변환
         List<String> travelLikeUserList = new ArrayList<>();
         for (TravelLikeEntity travelLikeEntity: travelLikeEntities) travelLikeUserList.add(travelLikeEntity.getUserId());
 
+        // 저장한 사용자 목록 변환
         List<String> travelSaveUserList = new ArrayList<>();
         for (TravelSaveEntity travelSaveEntity: travelSaveEntities) travelSaveUserList.add(travelSaveEntity.getUserId());
 
+        // DTO 필드 초기화
         this.travelNumber = travelEntity.getTravelNumber();
         this.travelTitle = travelEntity.getTravelTitle();
         this.travelLocation = travelEntity.getTravelLocation();
@@ -53,6 +72,7 @@ public class TravelDetail {
         this.travelSaveCount = travelSaveUserList.size();
         this.travelLikeCount = travelLikeUserList.size();
         this.travelViewCount = travelEntity.getTravelViewCount();
+        // 서버 시간과 클라이언트 시간의 차이를 보정하기 위해 9시간 차감
         this.travelDate = travelEntity.getTravelDate().minusHours(9);;
         this.travelContent = travelEntity.getTravelContent();
     }
