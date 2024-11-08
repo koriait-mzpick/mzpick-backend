@@ -9,6 +9,9 @@ import com.koreait.mzpick_backend.dto.response.ResponseCode;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.ResponseMessage;
 
+import lombok.Getter;
+
+@Getter
 public class GetTravelFoodLikeResponseDto extends ResponseDto {
     private Integer foodNumber;
     private List<String> userIdList;

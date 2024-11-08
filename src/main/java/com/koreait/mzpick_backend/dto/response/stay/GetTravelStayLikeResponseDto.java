@@ -9,6 +9,9 @@ import com.koreait.mzpick_backend.dto.response.ResponseCode;
 import com.koreait.mzpick_backend.dto.response.ResponseDto;
 import com.koreait.mzpick_backend.dto.response.ResponseMessage;
 
+import lombok.Getter;
+
+@Getter
 public class GetTravelStayLikeResponseDto extends ResponseDto {
     private Integer stayNumber;
     private List<String> userIdList;
