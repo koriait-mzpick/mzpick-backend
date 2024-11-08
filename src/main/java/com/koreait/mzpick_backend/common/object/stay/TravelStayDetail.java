@@ -60,7 +60,7 @@ public class TravelStayDetail {
         this.travelStaySaveCount = travelStaySaveUserList.size();
         this.travelStayViewCount = travelStayEntity.getTravelStayViewCount();
         this.travelStayContent = travelStayEntity.getTravelStayContent();
-        this.travelStayDate = travelStayEntity.getTravelStayDate();
+        this.travelStayDate = travelStayEntity.getTravelStayDate().minusHours(9);;
         this.travelStayContent = travelStayEntity.getTravelStayContent();
     }
 }

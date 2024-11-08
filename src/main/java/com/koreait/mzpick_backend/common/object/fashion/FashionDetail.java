@@ -52,7 +52,7 @@ public class FashionDetail {
         this.fashionLikeCount = fashionLikeUserList.size();
         this.fashionSaveCount = fashionSaveUserList.size();
         this.fashionViewCount = fashionEntity.getFashionViewCount();
-        this.fashionDate = fashionEntity.getFashionDate();
+        this.fashionDate = fashionEntity.getFashionDate().minusHours(9);;
         this.fashionContent = fashionEntity.getFashionContent();
 
     }

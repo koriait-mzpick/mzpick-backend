@@ -59,7 +59,7 @@ public class TravelCafeDetail {
         this.travelCafeLikeCount = travelCafeLikeUserList.size();
         this.travelCafeSaveCount = travelCafeSaveUserList.size();
         this.travelCafeView = travelCafeEntity.getTravelCafeViewCount();
-        this.travelCafeDate = travelCafeEntity.getTravelCafeDate();
+        this.travelCafeDate = travelCafeEntity.getTravelCafeDate().minusHours(9);;
         this.travelCafeContent = travelCafeEntity.getTravelCafeContent();
     }
 }

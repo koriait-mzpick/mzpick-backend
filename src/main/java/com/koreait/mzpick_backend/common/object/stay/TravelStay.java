@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.stay;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +63,7 @@ public class TravelStay {
         this.travelStayLikeCount = travelStayEntity.getTravelStayLikeCount();
         this.travelStaySaveCount = travelStayEntity.getTravelStaySaveCount();
         this.travelStayViewCount = travelStayEntity.getTravelStayViewCount();
-        this.travelStayDate = travelStayEntity.getTravelStayDate();
+        this.travelStayDate = travelStayEntity.getTravelStayDate().minusHours(9);;
 
     }
 

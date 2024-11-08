@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.mypage.save;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class MyPageSaveTravel {
         this.travelNumber = travelEntity.getTravelNumber();
         this.travelPhoto = travelPhotoList.get(0);
         this.travelHashtagList = travelHashtagList;
-        this.travelDate = travelEntity.getTravelDate();
+        this.travelDate = travelEntity.getTravelDate().minusHours(9);;
     }
 
     public static List<MyPageSaveTravel> getList(List<TravelEntity> travelEntities, List<TravelPhotoEntity> travelPhotoEntities, List<TravelHashtagEntity> travelHashtagEntities){

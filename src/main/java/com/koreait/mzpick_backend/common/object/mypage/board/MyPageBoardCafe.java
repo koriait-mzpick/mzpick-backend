@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.mypage.board;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class MyPageBoardCafe {
         this.userId = travelCafeEntity.getUserId();
         this.mypageBoardNumber = travelCafeEntity.getTravelCafeNumber();
         this.mypageBoardTitle = travelCafeEntity.getTravelCafeTitle();
-        this.mypageBoardDate = travelCafeEntity.getTravelCafeDate();
+        this.mypageBoardDate = travelCafeEntity.getTravelCafeDate().minusHours(9);;
     }
 
     public static List<MyPageBoardCafe> getMyPageBoardCafeList(List<TravelCafeEntity> travelCafeEntities) {

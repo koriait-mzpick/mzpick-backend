@@ -1,6 +1,5 @@
 package com.koreait.mzpick_backend.common.object.mypage.like;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class MyPageLikeCafe {
         this.mypageBoardNumber = travelCafeEntity.getTravelCafeNumber();
         this.mypagePhotoList = myPagePhotoList.get(0);
         this.mypageHashTagList = myPageHashtagList;
-        this.mypageBoardDate = travelCafeEntity.getTravelCafeDate();
+        this.mypageBoardDate = travelCafeEntity.getTravelCafeDate().minusHours(9);;
     }
 
     public static List<MyPageLikeCafe> getMyPageLikeCafeList(List<TravelCafeEntity> travelCafeEntities, List<TravelCafePhotoEntity> travelCafePhotoEntities, List<TravelCafeHashtagEntity> travelCafeHashtagEntities) {

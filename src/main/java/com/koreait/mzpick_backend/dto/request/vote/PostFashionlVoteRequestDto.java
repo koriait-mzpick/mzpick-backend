@@ -11,11 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostFashionlVoteRequestDto {
     @NotBlank
-    private String FashionVoteTitle;
-    private String FashionVotePhoto1;
-    private String FashionVotePhoto2;
+    private String fashionVoteTitle;
+    private String fashionVotePhoto1;
+    private String fashionVotePhoto2;
     @NotNull
-    private String FashionVoteChoice1;
+    private String fashionVoteChoice1;
     @NotNull
-    private String FashionVoteChoice2;
+    private String fashionVoteChoice2;
 }
