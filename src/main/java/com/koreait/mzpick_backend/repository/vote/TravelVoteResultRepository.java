@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.koreait.mzpick_backend.entity.travel.resultSet.GetTravelVoteResultSet;
 import com.koreait.mzpick_backend.entity.vote.TravelVoteResultEntity;
 import com.koreait.mzpick_backend.entity.vote.TravelVoteResultPK;
-import com.koreait.mzpick_backend.entity.travel.resultSet.GetTravelVoteResultSet;
 
 // Repository 여행지 투표 결과 //
 @Repository

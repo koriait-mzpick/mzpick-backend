@@ -125,8 +125,7 @@ public class TravelVoteServiceImplement implements TravelVoteService {
             if (!existedUser)
                 return ResponseDto.noExistUserId();
             String travelVoteResultChoice = selectNumber == 1 ? travelVoteEntity.getTravelVoteChoice1() : travelVoteEntity.getTravelVoteChoice2();
-
-        
+          
             TravelVoteResultEntity travelVoteResultEntity = travelVoteResultRepository.findByUserIdAndTravelVoteNumber(userId, travelVoteNumber);
 
             if (travelVoteResultEntity == null) {
