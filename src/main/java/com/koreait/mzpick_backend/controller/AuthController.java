@@ -17,14 +17,18 @@ import com.koreait.mzpick_backend.service.auth.AuthService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
+// REST API 컨트롤러 지정 //
 @RestController
+// API 경로 지정 //
 @RequestMapping("/api/v1/auth")
+// 의존성 주입을 위한 어노테이션 //
 @RequiredArgsConstructor
 public class AuthController {
 
+    // AuthService 의존성 주입 //
     private final AuthService authService;
 
+    // 아이디 중복 체크 메서드 //
     @PostMapping("/id-check")
     public ResponseEntity<ResponseDto> idCheck(
         @RequestBody @Valid IdCheckRequestDto requestBody
@@ -33,6 +37,7 @@ public class AuthController {
         return response;
     }
     
+    // 전화번호 인증 요청 메서드 //
     @PostMapping("/tel-auth")
     public ResponseEntity<ResponseDto> telAuth(
         @RequestBody @Valid TelAuthRequestDto requestBody
@@ -41,6 +46,7 @@ public class AuthController {
         return response;
     }
 
+    // 전화번호 인증 확인 메서드 //
     @PostMapping("/tel-auth-check")
     public ResponseEntity<ResponseDto> telAuthCheck(
         @RequestBody @Valid TelAuthCheckRequestDto requestBody
@@ -49,6 +55,7 @@ public class AuthController {
         return response;
     }
 
+    // 회원가입 메서드 //
     @PostMapping("/sign-up")
     public ResponseEntity<ResponseDto> signUp(
         @RequestBody @Valid SignUpRequestDto requestbody
@@ -56,6 +63,8 @@ public class AuthController {
         ResponseEntity<ResponseDto> response = authService.signUp(requestbody);
         return response;
     }
+
+    // 로그인 메서드 //
     @PostMapping("/sign-in")
     public ResponseEntity<? super SignInResponseDto> signin(
         @RequestBody @Valid SignInRequestDto requestBody

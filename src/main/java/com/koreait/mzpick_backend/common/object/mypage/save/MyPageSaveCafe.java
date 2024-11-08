@@ -9,32 +9,42 @@ import com.koreait.mzpick_backend.entity.cafe.TravelCafeHashtagEntity;
 import com.koreait.mzpick_backend.entity.cafe.TravelCafePhotoEntity;
 
 import lombok.Getter;
-
+// 마이페이지의 카페 저장 정보를 담는 클래스
 @Getter
 public class MyPageSaveCafe {
 
+    // 게시글 번호
     private Integer travelCafeNumber;
+    // 게시글 대표 사진 링크
     private String travelCafePhoto;
+    // 게시글 해시태그 목록
     private List<String> travelCafeHashtagList;
+    // 게시글 작성 날짜
     private LocalDateTime travelCafeDate;
 
+    // TravelCafeEntity와 관련 엔티티들을 MyPageSaveCafe로 변환하는 생성자
     public MyPageSaveCafe(TravelCafeEntity travelCafeEntity, List<TravelCafePhotoEntity> travelCafePhotoEntities, List<TravelCafeHashtagEntity> travelCafeHashtagEntities) {
+        // 사진 링크 목록 생성
         List<String> travelCafePhotoList = new ArrayList<>();
         for (TravelCafePhotoEntity travelCafePhotoEntity: travelCafePhotoEntities) travelCafePhotoList.add(travelCafePhotoEntity.getTravelCafePhotoLink());
 
+        // 해시태그 목록 생성
         List<String> travelCafeHashtagList = new ArrayList<>();
         for (TravelCafeHashtagEntity travelCafeHashtagEntity: travelCafeHashtagEntities) travelCafeHashtagList.add(travelCafeHashtagEntity.getTravelCafeHashtagContent());
 
         this.travelCafeNumber = travelCafeEntity.getTravelCafeNumber();
         this.travelCafePhoto = travelCafePhotoList.get(0);
         this.travelCafeHashtagList = travelCafeHashtagList;
-        this.travelCafeDate = travelCafeEntity.getTravelCafeDate().minusHours(9);;
+        // 시간대 보정을 위해 9시간을 뺌
+        this.travelCafeDate = travelCafeEntity.getTravelCafeDate().minusHours(9);
     }
 
+    // TravelCafeEntity 리스트와 관련 엔티티들을 MyPageSaveCafe 리스트로 변환하는 정적 메소드
     public static List<MyPageSaveCafe> getList(List<TravelCafeEntity> travelCafeEntities,
             List<TravelCafePhotoEntity> travelCafePhotoEntities,
             List<TravelCafeHashtagEntity> travelCafeHashtagEntities) {
         List<MyPageSaveCafe> myPageSaveCafes = new ArrayList<>();
+        // 각 TravelCafeEntity를 MyPageSaveCafe로 변환하여 리스트에 추가
         for (TravelCafeEntity travelCafeEntity : travelCafeEntities) {
             MyPageSaveCafe myPageSaveCafe = new MyPageSaveCafe(travelCafeEntity, travelCafePhotoEntities,
                     travelCafeHashtagEntities);
