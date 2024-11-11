@@ -151,14 +151,14 @@ public class TravelVoteServiceImplement implements TravelVoteService {
     @Override
     public ResponseEntity<? super GetTravelVoteTotalCountResponseDto>
     totalVote(Integer travelVoteNumber) {
-    List<GetTravelVoteResultSet> resultSets = new ArrayList<>();
+    List<TravelVoteResultEntity> travelVoteResultEntities = new ArrayList<>();
     try {
-        resultSets = travelVoteResultRepository.totalVoteResultCount(travelVoteNumber);
+        travelVoteResultEntities = travelVoteResultRepository.findByTravelVoteNumber(travelVoteNumber);
     } catch (Exception exception) {
         exception.printStackTrace();
         return ResponseDto.databaseError();
     }
-    return GetTravelVoteTotalCountResponseDto.success(resultSets);
+    return GetTravelVoteTotalCountResponseDto.success(travelVoteResultEntities);
     }
 
     @Override
