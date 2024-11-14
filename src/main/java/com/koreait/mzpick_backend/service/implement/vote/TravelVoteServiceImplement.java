@@ -14,7 +14,6 @@ import com.koreait.mzpick_backend.dto.response.mypage.vote.GetMyPageVoteTravelLi
 import com.koreait.mzpick_backend.dto.response.vote.GetTravelVoteDetailResponseDto;
 import com.koreait.mzpick_backend.dto.response.vote.GetTravelVoteListResponseDto;
 import com.koreait.mzpick_backend.dto.response.vote.GetTravelVoteTotalCountResponseDto;
-import com.koreait.mzpick_backend.entity.travel.resultSet.GetTravelVoteResultSet;
 import com.koreait.mzpick_backend.entity.vote.TravelVoteEntity;
 import com.koreait.mzpick_backend.entity.vote.TravelVoteResultEntity;
 import com.koreait.mzpick_backend.repository.user.UserRepository;
@@ -143,7 +142,7 @@ public class TravelVoteServiceImplement implements TravelVoteService {
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            ResponseDto.databaseError();
+            return ResponseDto.databaseError();
         }
         return ResponseDto.success();
     }
