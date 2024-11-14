@@ -17,6 +17,7 @@ import com.koreait.mzpick_backend.dto.response.vote.GetFashionVoteTotalCountResp
 import com.koreait.mzpick_backend.entity.fashion.resultSet.GetFashionVoteResultSet;
 import com.koreait.mzpick_backend.entity.vote.FashionVoteEntity;
 import com.koreait.mzpick_backend.entity.vote.FashionVoteResultEntity;
+import com.koreait.mzpick_backend.entity.vote.TravelVoteResultEntity;
 import com.koreait.mzpick_backend.repository.user.UserRepository;
 import com.koreait.mzpick_backend.repository.vote.FashionVoteRepository;
 import com.koreait.mzpick_backend.repository.vote.FashionVoteResultRepository;
@@ -123,7 +124,7 @@ public class FashionVoteServiceImplement implements FashionVoteService {
 
 
             if (fashionVoteResultEntity == null) {
-                fashionVoteResultEntity = new FashionVoteResultEntity(userId, fashionVoteNumber, fashionVoteResultChoice);
+                fashionVoteResultEntity = new FashionVoteResultEntity(fashionVoteNumber,userId, fashionVoteResultChoice);
                 fashionVoteResultRepository.save(fashionVoteResultEntity);
             } else if (fashionVoteResultEntity.getFashionVoteResultChoice().equals(fashionVoteResultChoice)) {
                 fashionVoteResultRepository.delete(fashionVoteResultEntity);
@@ -142,15 +143,14 @@ public class FashionVoteServiceImplement implements FashionVoteService {
 
     @Override
     public ResponseEntity<? super GetFashionVoteTotalCountResponseDto> totalVote(Integer fashionVoteNumber) {
-        List<GetFashionVoteResultSet> resultSets = new ArrayList<>();
+            List<FashionVoteResultEntity> fashionVoteResultEntities = new ArrayList<>();
         try {
-            resultSets = fashionVoteResultRepository.totalVoteResultCount(fashionVoteNumber);
+            fashionVoteResultEntities = fashionVoteResultRepository.findByFashionVoteNumber(fashionVoteNumber);
         } catch (Exception exception) {
             exception.printStackTrace();
-            ;
             return ResponseDto.databaseError();
         }
-        return GetFashionVoteTotalCountResponseDto.success(resultSets);
+        return GetFashionVoteTotalCountResponseDto.success(fashionVoteResultEntities);
     }
 
     // 마이페이지 투표 리스트 가져오기 로직

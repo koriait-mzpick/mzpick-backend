@@ -18,8 +18,8 @@ import lombok.Setter;
 @IdClass(FashionVoteResultpk.class)
 public class FashionVoteResultEntity {
     @Id
-    private String userId;
-    @Id
     private Integer fashionVoteNumber;
+    @Id
+    private String userId;
     private String fashionVoteResultChoice;
 }
