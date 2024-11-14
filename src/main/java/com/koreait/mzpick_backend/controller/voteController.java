@@ -122,7 +122,7 @@ public class voteController {
             @PathVariable("fashionVoteNumber") Integer fashionVoteNumber,
             @PathVariable("selectNumber") Integer selectNumber,
             @AuthenticationPrincipal String userId) {
-        ResponseEntity<ResponseDto> response = fashionVoteService.clickVote(fashionVoteNumber,selectNumber, userId);
+        ResponseEntity<ResponseDto> response = fashionVoteService.clickVote(selectNumber,fashionVoteNumber, userId);
         return response;
     }
 

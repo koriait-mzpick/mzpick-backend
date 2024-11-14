@@ -90,6 +90,7 @@ public class FashionVoteServiceImplement implements FashionVoteService {
     public ResponseEntity<ResponseDto> deleteFashionVote(Integer fashionVoteNumber, String userId) {
         try {
             FashionVoteEntity fashionVoteEntity = fashionVoteRepository.findByFashionVoteNumber(fashionVoteNumber);
+
             if (fashionVoteEntity == null)
                 return ResponseDto.noExistBoard();
 
@@ -112,7 +113,7 @@ public class FashionVoteServiceImplement implements FashionVoteService {
         try {
             FashionVoteEntity fashionVoteEntity = fashionVoteRepository.findByFashionVoteNumber(fashionVoteNumber);
             if (fashionVoteEntity == null)
-                ResponseDto.noExistBoard();
+                return ResponseDto.noExistBoard();
 
             boolean existedUser = userRepository.existsByUserId(userId);
             if (!existedUser)
@@ -121,8 +122,9 @@ public class FashionVoteServiceImplement implements FashionVoteService {
             String fashionVoteResultChoice = selectNumber == 1 ? fashionVoteEntity.getFashionVoteChoice1() : fashionVoteEntity.getFashionVoteChoice2();
             FashionVoteResultEntity fashionVoteResultEntity = fashionVoteResultRepository.findByUserIdAndFashionVoteNumber(userId, fashionVoteNumber);
 
+
             if (fashionVoteResultEntity == null) {
-                fashionVoteResultEntity = new FashionVoteResultEntity(fashionVoteNumber, userId, fashionVoteResultChoice);
+                fashionVoteResultEntity = new FashionVoteResultEntity(fashionVoteNumber,userId, fashionVoteResultChoice);
                 fashionVoteResultRepository.save(fashionVoteResultEntity);
             } else if (fashionVoteResultEntity.getFashionVoteResultChoice().equals(fashionVoteResultChoice)) {
                 fashionVoteResultRepository.delete(fashionVoteResultEntity);
@@ -134,7 +136,7 @@ public class FashionVoteServiceImplement implements FashionVoteService {
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            ResponseDto.databaseError();
+            return ResponseDto.databaseError();
         }
         return ResponseDto.success();
     }
