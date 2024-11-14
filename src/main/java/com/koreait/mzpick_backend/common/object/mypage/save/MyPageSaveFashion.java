@@ -13,31 +13,31 @@ import lombok.Getter;
 @Getter
 public class MyPageSaveFashion {
     // 게시글 번호
-    private Integer FashionNumber;
+    private Integer fashionNumber;
     // 게시글 대표 사진 링크
-    private String FashionPhoto;
+    private String fashionPhoto;
     // 게시글 해시태그 목록
-    private List<String> FashionHashtagList;
+    private List<String> fashionHashtagList;
     // 게시글 작성 날짜
-    private LocalDateTime FashionDate;
+    private LocalDateTime fashionDate;
 
     // FashionEntity와 관련 엔티티들을 MyPageSaveFashion으로 변환하는 생성자
-    public MyPageSaveFashion(FashionEntity FashionEntity, List<FashionPhotoEntity> FashionPhotoEntities, List<FashionHashtagEntity> FashionHashtagEntities) {
+    public MyPageSaveFashion(FashionEntity fashionEntity, List<FashionPhotoEntity> fashionPhotoEntities, List<FashionHashtagEntity> fashionHashtagEntities) {
         // 사진 링크 목록 생성
-        List<String> FashionPhotoList = new ArrayList<>();
-        for (FashionPhotoEntity FashionPhotoEntity : FashionPhotoEntities)
-            FashionPhotoList.add(FashionPhotoEntity.getFashionPhotoLink());
+        List<String> fashionPhotoList = new ArrayList<>();
+        for (FashionPhotoEntity fashionPhotoEntity : fashionPhotoEntities)
+            fashionPhotoList.add(fashionPhotoEntity.getFashionPhotoLink());
 
         // 해시태그 목록 생성
-        List<String> FashionHashtagList = new ArrayList<>();
-        for (FashionHashtagEntity FashionHashtagEntity : FashionHashtagEntities)
-            FashionHashtagList.add(FashionHashtagEntity.getFashionHashtagContent());
+        List<String> fashionHashtagList = new ArrayList<>();
+        for (FashionHashtagEntity fashionHashtagEntity : fashionHashtagEntities)
+            fashionHashtagList.add(fashionHashtagEntity.getFashionHashtagContent());
 
-        this.FashionNumber = FashionEntity.getFashionNumber();
-        this.FashionPhoto = FashionPhotoList.get(0);
-        this.FashionHashtagList = FashionHashtagList;
+        this.fashionNumber = fashionEntity.getFashionNumber();
+        this.fashionPhoto = fashionPhotoList.get(0);
+        this.fashionHashtagList = fashionHashtagList;
         // 시간대 보정을 위해 9시간을 뺌
-        this.FashionDate = FashionEntity.getFashionDate().minusHours(9);
+        this.fashionDate = fashionEntity.getFashionDate().minusHours(9);
     }
 
     // FashionEntity 리스트와 관련 엔티티들을 MyPageSaveFashion 리스트로 변환하는 정적 메소드

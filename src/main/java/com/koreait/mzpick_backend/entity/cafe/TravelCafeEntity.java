@@ -49,7 +49,7 @@ public class TravelCafeEntity {
     public void patch(PatchTravelCafeRequestDto dto, String userId){
         this.userId = userId;
         this.travelCafeTitle = dto.getTravelCafeTitle();
-        this.travelLocation = dto.getTraveLocation();
+        this.travelLocation = dto.getTravelLocation();
         this.travelCafeContent = dto.getTravelCafeContent();
         this.travelCafeDate = CustomDatetime.getLocalDatetime();
     }

@@ -18,7 +18,7 @@ public class PatchTravelCafeRequestDto {
     @NotNull
     private List<String> travelCafeHashtagContentList;
     @NotBlank
-    private String traveLocation;
+    private String travelLocation;
     @NotNull
     private List<String> travelCafePhotoList;
     @NotNull
