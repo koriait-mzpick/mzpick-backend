@@ -338,10 +338,6 @@ public class TravelCafeServiceImplement implements TravelCafeService {
 
             // 현재 날짜
             Date now = Calendar.getInstance().getTime();
-            SimpleDateFormat nowDateFormat = new SimpleDateFormat(pattern);
-            String nowDate = nowDateFormat.format(now);
-
-            // Date nowLocalDate = new SimpleDateFormat(pattern).parse(nowDate);
 
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
             SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern);
@@ -352,7 +348,6 @@ public class TravelCafeServiceImplement implements TravelCafeService {
             calendar.add(Calendar.DATE, -7);
 
             Date lastWeek = calendar.getTime();
-            String lastWeekDate = nowDateFormat.format(lastWeek);
 
             // 만료 주차 구하기 코드
             calendar.setTime(lastWeek);
