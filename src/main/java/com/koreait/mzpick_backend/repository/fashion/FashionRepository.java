@@ -25,7 +25,7 @@ public interface FashionRepository extends JpaRepository<FashionEntity, Integer>
 
     @Query(
     value=
-        "SELECT tp.fashion_number AS travelNumber, tp.fashion_photo_link  AS photoLink " +
+        "SELECT tp.fashion_number AS fashionNumber, tp.fashion_photo_link  AS photoLink " +
         "FROM fashion_photo tp " +
         "INNER JOIN " +
         "(SELECT fashion_number, (fashion_like_count + fashion_save_count) AS total " +
